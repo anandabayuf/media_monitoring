@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:web_media_monitoring/LoginScreen.dart';
+import 'package:web_media_monitoring/modules/login/pages/LoginPages.dart';
 
 void main() {
   runApp(MyApp());
