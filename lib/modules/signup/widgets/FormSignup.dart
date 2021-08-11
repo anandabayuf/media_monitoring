@@ -1,28 +1,33 @@
 import 'package:flutter/material.dart';
 
-class formLogin extends StatefulWidget {
+class FormSignup extends StatefulWidget {
   @override
-  formLoginState createState() => formLoginState();
+  FormSignupState createState() => FormSignupState();
 }
 
-class formLoginState extends State<formLogin> {
+class FormSignupState extends State<FormSignup> {
+  late TextEditingController _nama;
   late TextEditingController _email;
   late TextEditingController _password;
-  bool isIngatSaya = false;
+  late TextEditingController _konfirmasi_password;
   late bool _passwordVisible;
 
   @override
   void initState() {
     super.initState();
+    _nama = TextEditingController();
     _email = TextEditingController();
     _password = TextEditingController();
+    _konfirmasi_password = TextEditingController();
     _passwordVisible = false;
   }
 
   @override
   void dispose() {
+    _nama.dispose();
     _email.dispose();
     _password.dispose();
+    _konfirmasi_password.dispose();
     super.dispose();
   }
 
@@ -40,11 +45,37 @@ class formLoginState extends State<formLogin> {
               alignment: Alignment.centerLeft,
               width: 400,
               child: Text(
+                "Nama",
+                style: TextStyle(fontSize: 15.0),
+              ),
+            ),
+            SizedBox(height: screenSize.width < 1920 ? 5 : 5*2),
+            Container(
+              width: 400,
+              child: TextFormField(
+                controller: _nama,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Masukkan Nama Anda...'
+                ),
+                validator: (String? value) {
+                  if (value == '') {
+                    return 'Nama Harus diisi';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
+            Container(
+              alignment: Alignment.centerLeft,
+              width: 400,
+              child: Text(
                 "Email",
                 style: TextStyle(fontSize: 15.0),
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
+            SizedBox(height: screenSize.width < 1920 ? 5 : 5*2),
             Container(
               width: 400,
               child: TextFormField(
@@ -54,14 +85,16 @@ class formLoginState extends State<formLogin> {
                     hintText: 'Masukkan Email Anda...'
                 ),
                 validator: (String? value) {
-                  if (value != null && !value.contains('@')) {
+                  if(value == null) {
+                    return 'Email harus diisi';
+                  } else if (value != null && !value.contains('@')) {
                     return 'Masukkan alamat email yang valid';
                   }
                   return null;
                 },
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 15 : 20*2),
+            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
             Container(
               alignment: Alignment.centerLeft,
               width: 400,
@@ -70,7 +103,7 @@ class formLoginState extends State<formLogin> {
                 style: TextStyle(fontSize: 15.0),
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
+            SizedBox(height: screenSize.width < 1920 ? 5 : 5*2),
             Container(
               width: 400,
               child: TextFormField(
@@ -80,47 +113,42 @@ class formLoginState extends State<formLogin> {
                   border: OutlineInputBorder(),
                   hintText: 'Masukkan Password Anda...',
                 ),
+                validator: (String? value) {
+                  if (value == '') {
+                    return 'Password Harus diisi';
+                  }
+                  return null;
+                },
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 15 : 15*2),
+            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
+            Container(
+              alignment: Alignment.centerLeft,
+              width: 400,
+              child: Text(
+                "Konfirmasi Password",
+                style: TextStyle(fontSize: 15.0),
+              ),
+            ),
+            SizedBox(height: screenSize.width < 1920 ? 5 : 5*2),
             Container(
               width: 400,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: isIngatSaya,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            isIngatSaya = value!;
-                          });
-                        },
-                      ),
-                      Text(
-                        "Ingat Saya",
-                        style: TextStyle(fontSize: 15.0),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                        style: TextButton.styleFrom(
-                          textStyle: const TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontSize: 15
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: const Text('Lupa Password ?')
-                    ),
-                  ),
-                ],
+              child: TextFormField(
+                controller: _konfirmasi_password,
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Masukkan Kembali Password Anda...',
+                ),
+                validator: (String? value) {
+                  if(value != _password.text) {
+                    return 'Password tidak sama';
+                  }
+                  return null;
+                },
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 15 : 15*2),
+            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
             Container(
               width: 400,
               child: ElevatedButton(
@@ -138,7 +166,7 @@ class formLoginState extends State<formLogin> {
                   }
                 },
                 child: const Text(
-                  'Log in',
+                  'Sign up',
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.black
