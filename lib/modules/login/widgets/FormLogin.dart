@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class formLogin extends StatefulWidget {
+class FormLogin extends StatefulWidget {
   @override
-  formLoginState createState() => formLoginState();
+  FormLoginState createState() => FormLoginState();
 }
 
-class formLoginState extends State<formLogin> {
+class FormLoginState extends State<FormLogin> {
   late TextEditingController _email;
   late TextEditingController _password;
-  bool isIngatSaya = false;
-  late bool _passwordVisible;
 
   @override
   void initState() {
     super.initState();
     _email = TextEditingController();
     _password = TextEditingController();
-    _passwordVisible = false;
   }
 
   @override

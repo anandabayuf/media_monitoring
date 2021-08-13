@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_svg/parser.dart';
 import 'package:web_media_monitoring/modules/login/widgets/FormLogin.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -27,7 +26,7 @@ class leftSideWidget extends StatelessWidget {
           Expanded(
             flex: 5,
             child: Center(
-              child: formLogin(),
+              child: FormLogin(),
             ),
           ),
           Expanded(
