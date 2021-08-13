@@ -5,7 +5,6 @@ import 'package:hexcolor/hexcolor.dart';
 class BottomSideWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: EdgeInsets.only(top: 10, bottom: 10, left: 40, right: 40),
       child: Column(
@@ -13,13 +12,8 @@ class BottomSideWidget extends StatelessWidget {
         children: [
           Expanded(
             flex: 1,
-            child: Text(
-                'Sign up',
-                style: TextStyle(
-                    fontSize: 32.0,
-                    color: HexColor("#F5EAEA")
-                )
-            ),
+            child: Text('Sign up',
+                style: TextStyle(fontSize: 32.0, color: HexColor("#F5EAEA"))),
           ),
           Expanded(
             flex: 8,
@@ -29,31 +23,26 @@ class BottomSideWidget extends StatelessWidget {
           ),
           Center(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Sudah punya akun ?",
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.white
-                    ),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Sudah punya akun ?",
+                style: TextStyle(fontSize: 15, color: Colors.white),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(
+                        decoration: TextDecoration.underline, fontSize: 15),
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  TextButton(
-                      style: TextButton.styleFrom(
-                        textStyle: const TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontSize: 15
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: const Text('Log in')
-                  ),
-                ],
-              )
-          ),
+                  onPressed: () {
+                    Navigator.of(context).pushReplacementNamed('/');
+                  },
+                  child: const Text('Log in')),
+            ],
+          )),
         ],
       ),
     );
