@@ -9,6 +9,7 @@ class FormLogin extends StatefulWidget {
 class FormLoginState extends State<FormLogin> {
   late TextEditingController _email;
   late TextEditingController _password;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -26,7 +27,6 @@ class FormLoginState extends State<FormLogin> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     Size screenSize = MediaQuery.of(context).size;
 
     return Form(
@@ -40,23 +40,23 @@ class FormLoginState extends State<FormLogin> {
               child: Text(
                 "Email",
                 style: TextStyle(
-                  fontSize: 15.0,
-                  color: HexColor("#F5EAEA")
+                    fontSize: 15.0,
+                    color: HexColor("#F5EAEA")
                 ),
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 5 : 5*2),
             Container(
               width: 400,
               child: TextFormField(
                 controller: _email,
+                textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  hintText: 'Masukkan Email Anda...',
-                  fillColor: Colors.white,
-                  filled: true
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    hintText: 'Masukkan Email Anda...',
+                    fillColor: Colors.white,
+                    filled: true
                 ),
                 validator: (String? value) {
                   if (value != null && !value.contains('@')) {
@@ -66,35 +66,35 @@ class FormLoginState extends State<FormLogin> {
                 },
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
+            SizedBox(height: 10),
             Container(
               alignment: Alignment.centerLeft,
               width: 400,
               child: Text(
                 "Password",
                 style: TextStyle(
-                  fontSize: 15.0,
-                  color: HexColor("#F5EAEA")
+                    fontSize: 15.0,
+                    color: HexColor("#F5EAEA")
                 ),
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 5 : 5*2),
             Container(
               width: 400,
               child: TextFormField(
                 controller: _password,
+                textInputAction: TextInputAction.done,
                 obscureText: true,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  hintText: 'Masukkan Password Anda...',
-                  fillColor: Colors.white,
-                  filled: true
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    hintText: 'Masukkan Password Anda...',
+                    fillColor: Colors.white,
+                    filled: true
                 ),
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 30 : 30),
+            SizedBox(height: 30),
             Container(
               width: 400,
               height: 35,

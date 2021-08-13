@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:web_media_monitoring/modules/login/widgets/ContainerWidget.dart';
+import 'package:web_media_monitoring/modules/login/widgets/web/ContainerWidget.dart';
+import 'package:web_media_monitoring/modules/login/widgets/mobile/ContainerWidget.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+        resizeToAvoidBottomInset: false,
+        body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -18,7 +20,15 @@ class LoginScreen extends StatelessWidget {
             ]
           )
         ),
-        child: containerWidget(),
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            if (constraints.maxWidth > 800) {
+              return ContainerWidgetWeb();
+            } else {
+              return ContainerWidgetMobile();
+            }
+          },
+        ),
       )
     );
   }

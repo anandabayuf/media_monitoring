@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:web_media_monitoring/modules/signup/widgets/ContainerWidget.dart';
+import 'package:web_media_monitoring/modules/signup/widgets/web/ContainerWidget.dart';
+import 'package:web_media_monitoring/modules/signup/widgets/mobile/ContainerWidget.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -17,7 +18,15 @@ class SignupScreen extends StatelessWidget {
                   ]
               )
           ),
-          child: containerWidget(),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              if (constraints.maxWidth > 800) {
+                return ContainerWidgetWeb();
+              } else {
+                return ContainerWidgetMobile();
+              }
+            },
+          ),
         )
     );
   }

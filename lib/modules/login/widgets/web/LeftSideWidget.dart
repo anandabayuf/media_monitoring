@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:web_media_monitoring/modules/login/widgets/FormLogin.dart';
+import 'package:web_media_monitoring/modules/login/widgets/web/FormLogin.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class leftSideWidget extends StatelessWidget {
@@ -16,7 +16,7 @@ class leftSideWidget extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Text(
-              'Log in ${screenSize.width.toStringAsFixed(2)} - ${screenSize.height.toStringAsFixed(2)}',
+              'Log in',
               style: TextStyle(
                 fontSize: 32.0,
                 color: HexColor("#F5EAEA")

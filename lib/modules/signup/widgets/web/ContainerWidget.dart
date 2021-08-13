@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:web_media_monitoring/modules/signup/widgets/LeftSideWidget.dart';
-import 'package:web_media_monitoring/modules/signup/widgets/RightSideWidget.dart';
+import 'package:web_media_monitoring/modules/signup/widgets/web/LeftSideWidget.dart';
+import 'package:web_media_monitoring/modules/signup/widgets/web/RightSideWidget.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class containerWidget extends StatelessWidget {
+class ContainerWidgetWeb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(

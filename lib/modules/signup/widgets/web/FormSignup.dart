@@ -11,6 +11,7 @@ class FormSignupState extends State<FormSignup> {
   late TextEditingController _email;
   late TextEditingController _password;
   late TextEditingController _konfirmasi_password;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -32,7 +33,6 @@ class FormSignupState extends State<FormSignup> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     Size screenSize = MediaQuery.of(context).size;
 
     return Form(

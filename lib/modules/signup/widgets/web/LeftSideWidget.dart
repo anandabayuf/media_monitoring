@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:web_media_monitoring/modules/signup/widgets/FormSignup.dart';
+import 'package:web_media_monitoring/modules/signup/widgets/web/FormSignup.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class leftSideWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
 
     return Padding(
       padding: EdgeInsets.only(left: 50.0, right: 50.0, top: 30.0, bottom: 30.0),
@@ -15,7 +14,7 @@ class leftSideWidget extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Text(
-              'Sign up ${screenSize.width.toStringAsFixed(2)} - ${screenSize.height.toStringAsFixed(2)}',
+              'Sign up',
               style: TextStyle(
                   fontSize: 32.0,
                   color: HexColor("#F5EAEA")
@@ -23,12 +22,12 @@ class leftSideWidget extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 8,
+            flex: 12,
             child: Center(
               child: FormSignup(),
             ),
           ),
-          SizedBox(height: screenSize.width < 1920 ? 60 : 100),
+          SizedBox(height: 60),
           Flexible(
             child: Center(
                 child: Row(
