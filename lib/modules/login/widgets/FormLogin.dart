@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class formLogin extends StatefulWidget {
   @override
@@ -41,17 +42,24 @@ class formLoginState extends State<formLogin> {
               width: 400,
               child: Text(
                 "Email",
-                style: TextStyle(fontSize: 15.0),
+                style: TextStyle(
+                  fontSize: 15.0,
+                  color: HexColor("#F5EAEA")
+                ),
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
+            SizedBox(height: screenSize.width < 1920 ? 5 : 5*2),
             Container(
               width: 400,
               child: TextFormField(
                 controller: _email,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Masukkan Email Anda...'
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  hintText: 'Masukkan Email Anda...',
+                  fillColor: Colors.white,
+                  filled: true
                 ),
                 validator: (String? value) {
                   if (value != null && !value.contains('@')) {
@@ -61,76 +69,45 @@ class formLoginState extends State<formLogin> {
                 },
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 15 : 20*2),
+            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
             Container(
               alignment: Alignment.centerLeft,
               width: 400,
               child: Text(
                 "Password",
-                style: TextStyle(fontSize: 15.0),
+                style: TextStyle(
+                  fontSize: 15.0,
+                  color: HexColor("#F5EAEA")
+                ),
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
+            SizedBox(height: screenSize.width < 1920 ? 5 : 5*2),
             Container(
               width: 400,
               child: TextFormField(
                 controller: _password,
                 obscureText: true,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
                   hintText: 'Masukkan Password Anda...',
+                  fillColor: Colors.white,
+                  filled: true
                 ),
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 15 : 15*2),
+            SizedBox(height: screenSize.width < 1920 ? 30 : 30),
             Container(
               width: 400,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: isIngatSaya,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            isIngatSaya = value!;
-                          });
-                        },
-                      ),
-                      Text(
-                        "Ingat Saya",
-                        style: TextStyle(fontSize: 15.0),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                        style: TextButton.styleFrom(
-                          textStyle: const TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontSize: 15
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: const Text('Lupa Password ?')
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: screenSize.width < 1920 ? 15 : 15*2),
-            Container(
-              width: 400,
+              height: 35,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    textStyle: const TextStyle(
-                        fontSize: 15
-                    ),
-                    elevation: 10,
-                    primary: Colors.white,
-
+                  textStyle: const TextStyle(
+                      fontSize: 15
+                  ),
+                  elevation: 10,
+                  primary: HexColor("#76767A"),
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -141,7 +118,7 @@ class formLoginState extends State<formLogin> {
                   'Log in',
                   style: TextStyle(
                       fontSize: 15,
-                      color: Colors.black
+                      color: Colors.white
                   ),
                 ),
               ),

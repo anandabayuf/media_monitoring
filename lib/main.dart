@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Comfortaa',
         ),
-        home: SignupScreen()
+        home: LoginScreen()
     );
   }
 }

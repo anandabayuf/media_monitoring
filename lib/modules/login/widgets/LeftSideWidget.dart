@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/parser.dart';
 import 'package:web_media_monitoring/modules/login/widgets/FormLogin.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class leftSideWidget extends StatelessWidget {
   @override
@@ -11,125 +14,138 @@ class leftSideWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Log in ${screenSize.width.toStringAsFixed(2)}',
-            style: TextStyle(fontSize: 32.0),
+          Expanded(
+            flex: 1,
+            child: Text(
+              'Log in ${screenSize.width.toStringAsFixed(2)} - ${screenSize.height.toStringAsFixed(2)}',
+              style: TextStyle(
+                fontSize: 32.0,
+                color: HexColor("#F5EAEA")
+              )
+            ),
           ),
-          SizedBox(height: screenSize.width < 1920 ? 60 : 100),
-          Center(
-            child: formLogin(),
+          Expanded(
+            flex: 5,
+            child: Center(
+              child: formLogin(),
+            ),
           ),
-          SizedBox(height: screenSize.width < 1920 ? 60 : 100),
+          Expanded(
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Divider(
+                      color: HexColor("#707070"),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 5, right: 5),
+                    child: Text(
+                      "atau",
+                      style: TextStyle(
+                        color: Colors.white
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Divider(
+                      color: HexColor("#707070"),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Center(
+              child: Container(
+                width: 210,
+                child: InkWell(
+                  onTap: () {},
+                  borderRadius: BorderRadius.circular(5.0),
+                  child: Card(
+                      elevation: 0,
+                      color: HexColor("#2E2B2B"),
+                      child: Padding(
+                        padding: EdgeInsets.all(3.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Tab(
+                              icon: Container(
+                                child: SvgPicture.asset("assets/icons/google-icon.svg"),
+                                height: 32.0,
+                                width: 32.0,
+                              ),
+                            ),
+                            // Icon(
+                            //   Icons.facebook,
+                            //   color: Colors.black,
+                            //   size: 32.0,
+                            // ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Log in dengan Google",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Flexible(
+            child: Container(
+              alignment: Alignment.center,
+              child: TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontSize: 15
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: const Text('Lupa Password ?')
+              ),
+            ),
+          ),
+          SizedBox(height: screenSize.width < 1920 ? 15 : 15*2),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: Divider(
-                    color: Colors.black,
+                Text(
+                  "Belum punya Akun ?",
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 5, right: 5),
-                  child: Text("atau"),
+                SizedBox(
+                  width: 10,
                 ),
-                Expanded(
-                  child: Divider(
-                    color: Colors.black,
-                  ),
-                )
-              ],
-            ),
-          ),
-          SizedBox(height: screenSize.width < 1920 ? 30 : 30*2),
-          Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    borderRadius: BorderRadius.circular(5.0),
-                    child: Card(
-                        elevation: 0,
-                        child: Padding(
-                          padding: EdgeInsets.all(3.0),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.facebook,
-                                color: Colors.black,
-                                size: 32.0,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Log in dengan Google",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    borderRadius: BorderRadius.circular(5.0),
-                    child: Card(
-                        elevation: 0,
-                        child: Padding(
-                          padding: EdgeInsets.all(3.0),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.facebook,
-                                color: Colors.black,
-                                size: 32.0,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Log in dengan Facebook",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                    ),
-                  )
-                ],
-              )
-          ),
-          SizedBox(height: screenSize.width < 1920 ? 60 : 100),
-          Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Belum punya Akun ?",
-                    style: TextStyle(
-                        fontSize: 15
-                    ),
-                  ),
-                  TextButton(
-                      style: TextButton.styleFrom(
-                        textStyle: const TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontSize: 15
-                        ),
+                TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(
+                          decoration: TextDecoration.underline,
+                          fontSize: 15
                       ),
-                      onPressed: () {},
-                      child: const Text('Sign Up')
-                  ),
-                ],
-              )
+                    ),
+                    onPressed: () {},
+                    child: const Text('Sign Up')
+                ),
+              ],
+            )
           )
         ],
       ),
