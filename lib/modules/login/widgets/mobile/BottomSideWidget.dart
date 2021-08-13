@@ -13,13 +13,8 @@ class BottomSideWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-              'Log in',
-              style: TextStyle(
-                  fontSize: 32.0,
-                  color: HexColor("#F5EAEA")
-              )
-          ),
+          Text('Log in',
+              style: TextStyle(fontSize: 32.0, color: HexColor("#F5EAEA"))),
           Expanded(
             flex: 8,
             child: Center(
@@ -39,9 +34,7 @@ class BottomSideWidget extends StatelessWidget {
                   margin: EdgeInsets.only(left: 5, right: 5),
                   child: Text(
                     "atau",
-                    style: TextStyle(
-                        color: Colors.white
-                    ),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
                 Expanded(
@@ -69,7 +62,8 @@ class BottomSideWidget extends StatelessWidget {
                         children: [
                           Tab(
                             icon: Container(
-                              child: SvgPicture.asset("assets/icons/google-icon.svg"),
+                              child: SvgPicture.asset(
+                                  "assets/icons/google-icon.svg"),
                               height: 32.0,
                               width: 32.0,
                             ),
@@ -79,15 +73,11 @@ class BottomSideWidget extends StatelessWidget {
                           ),
                           Text(
                             "Log in dengan Google",
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white
-                            ),
+                            style: TextStyle(fontSize: 15, color: Colors.white),
                           ),
                         ],
                       ),
-                    )
-                ),
+                    )),
               ),
             ),
           ),
@@ -96,42 +86,34 @@ class BottomSideWidget extends StatelessWidget {
             child: TextButton(
                 style: TextButton.styleFrom(
                   textStyle: const TextStyle(
-                      decoration: TextDecoration.underline,
-                      fontSize: 15
-                  ),
+                      decoration: TextDecoration.underline, fontSize: 15),
                 ),
                 onPressed: () {},
-                child: const Text('Lupa Password ?')
-            ),
+                child: const Text('Lupa Password ?')),
           ),
           SizedBox(height: 5),
           Center(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Belum punya Akun ?",
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.white
-                    ),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Belum punya Akun ?",
+                style: TextStyle(fontSize: 15, color: Colors.white),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(
+                        decoration: TextDecoration.underline, fontSize: 15),
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  TextButton(
-                      style: TextButton.styleFrom(
-                        textStyle: const TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontSize: 15
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: const Text('Sign Up')
-                  ),
-                ],
-              )
-          )
+                  onPressed: () {
+                    Navigator.of(context).pushReplacementNamed('/signupPage');
+                  },
+                  child: const Text('Sign Up')),
+            ],
+          ))
         ],
       ),
     );
