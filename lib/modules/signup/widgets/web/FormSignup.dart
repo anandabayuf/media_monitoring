@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class FormSignup extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class FormSignupState extends State<FormSignup> {
   late TextEditingController _email;
   late TextEditingController _password;
   late TextEditingController _konfirmasi_password;
-  late bool _passwordVisible;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -19,7 +20,6 @@ class FormSignupState extends State<FormSignup> {
     _email = TextEditingController();
     _password = TextEditingController();
     _konfirmasi_password = TextEditingController();
-    _passwordVisible = false;
   }
 
   @override
@@ -33,7 +33,6 @@ class FormSignupState extends State<FormSignup> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     Size screenSize = MediaQuery.of(context).size;
 
     return Form(
@@ -46,43 +45,57 @@ class FormSignupState extends State<FormSignup> {
               width: 400,
               child: Text(
                 "Nama",
-                style: TextStyle(fontSize: 15.0),
+                style: TextStyle(
+                    fontSize: 15.0,
+                    color: HexColor("#F5EAEA")
+                ),
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 5 : 5*2),
+            SizedBox(height: screenSize.width < 1920 ? 5 : 5),
             Container(
               width: 400,
               child: TextFormField(
                 controller: _nama,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Masukkan Nama Anda...'
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    hintText: 'Masukkan Nama Anda...',
+                    fillColor: Colors.white,
+                    filled: true
                 ),
                 validator: (String? value) {
                   if (value == '') {
-                    return 'Nama Harus diisi';
+                    return 'Nama harus diisi';
                   }
                   return null;
                 },
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
+            SizedBox(height: screenSize.width < 1920 ? 10 : 10),
             Container(
               alignment: Alignment.centerLeft,
               width: 400,
               child: Text(
                 "Email",
-                style: TextStyle(fontSize: 15.0),
+                style: TextStyle(
+                    fontSize: 15.0,
+                    color: HexColor("#F5EAEA")
+                ),
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 5 : 5*2),
+            SizedBox(height: screenSize.width < 1920 ? 5 : 5),
             Container(
               width: 400,
               child: TextFormField(
                 controller: _email,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Masukkan Email Anda...'
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    hintText: 'Masukkan Email Anda...',
+                    fillColor: Colors.white,
+                    filled: true
                 ),
                 validator: (String? value) {
                   if(value == null) {
@@ -94,24 +107,31 @@ class FormSignupState extends State<FormSignup> {
                 },
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
+            SizedBox(height: screenSize.width < 1920 ? 10 : 10),
             Container(
               alignment: Alignment.centerLeft,
               width: 400,
               child: Text(
                 "Password",
-                style: TextStyle(fontSize: 15.0),
+                style: TextStyle(
+                    fontSize: 15.0,
+                    color: HexColor("#F5EAEA")
+                ),
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 5 : 5*2),
+            SizedBox(height: screenSize.width < 1920 ? 5 : 5),
             Container(
               width: 400,
               child: TextFormField(
                 controller: _password,
                 obscureText: true,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
                   hintText: 'Masukkan Password Anda...',
+                  fillColor: Colors.white,
+                  filled: true
                 ),
                 validator: (String? value) {
                   if (value == '') {
@@ -121,24 +141,31 @@ class FormSignupState extends State<FormSignup> {
                 },
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
+            SizedBox(height: screenSize.width < 1920 ? 10 : 10),
             Container(
               alignment: Alignment.centerLeft,
               width: 400,
               child: Text(
                 "Konfirmasi Password",
-                style: TextStyle(fontSize: 15.0),
+                style: TextStyle(
+                    fontSize: 15.0,
+                    color: HexColor("#F5EAEA")
+                ),
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 5 : 5*2),
+            SizedBox(height: screenSize.width < 1920 ? 5 : 5),
             Container(
               width: 400,
               child: TextFormField(
                 controller: _konfirmasi_password,
                 obscureText: true,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
                   hintText: 'Masukkan Kembali Password Anda...',
+                  fillColor: Colors.white,
+                  filled: true
                 ),
                 validator: (String? value) {
                   if(value != _password.text) {
@@ -148,17 +175,17 @@ class FormSignupState extends State<FormSignup> {
                 },
               ),
             ),
-            SizedBox(height: screenSize.width < 1920 ? 10 : 10*2),
+            SizedBox(height: screenSize.width < 1920 ? 30 : 30),
             Container(
               width: 400,
+              height: 35,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    textStyle: const TextStyle(
-                        fontSize: 15
-                    ),
-                    elevation: 10,
-                    primary: Colors.white,
-
+                  textStyle: const TextStyle(
+                      fontSize: 15
+                  ),
+                  elevation: 10,
+                  primary: HexColor("#76767A"),
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -169,7 +196,7 @@ class FormSignupState extends State<FormSignup> {
                   'Sign up',
                   style: TextStyle(
                       fontSize: 15,
-                      color: Colors.black
+                      color: Colors.white
                   ),
                 ),
               ),

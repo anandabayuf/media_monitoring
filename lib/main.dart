@@ -10,11 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          fontFamily: 'Comfortaa',
-        ),
-        home: SignupScreen()
+      title: 'Media Monitoring',
+      home: LoginScreen(),
     );
   }
 }
