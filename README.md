@@ -1,6 +1,6 @@
-# web_media_monitoring
+# media_monitoring
 
-project media monitoring versi web
+project media monitoring versi web dan mobile
 
 ## Getting Started
 
