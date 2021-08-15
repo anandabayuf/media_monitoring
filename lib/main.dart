@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:web_media_monitoring/modules/Search/pages/SearchPages.dart';
-import 'package:web_media_monitoring/modules/login/pages/LoginPages.dart';
-import 'package:web_media_monitoring/modules/signup/pages/SignupPages.dart';
+import 'package:web_media_monitoring/views/Search/pages/SearchPages.dart';
+import 'package:web_media_monitoring/views/login/pages/LoginPages.dart';
+import 'package:web_media_monitoring/views/signup/pages/SignupPages.dart';
 
 void main() {
   runApp(MyApp());

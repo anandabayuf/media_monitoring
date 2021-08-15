@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:web_media_monitoring/modules/signup/widgets/mobile/FormSignup.dart';
+import 'package:web_media_monitoring/views/signup/widgets/mobile/FormSignup.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class BottomSideWidget extends StatelessWidget {

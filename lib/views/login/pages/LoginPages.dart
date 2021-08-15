@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:web_media_monitoring/modules/login/widgets/web/ContainerWidget.dart';
-import 'package:web_media_monitoring/modules/login/widgets/mobile/ContainerWidget.dart';
+import 'package:web_media_monitoring/views/login/widgets/web/ContainerWidget.dart';
+import 'package:web_media_monitoring/views/login/widgets/mobile/ContainerWidget.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class LoginScreen extends StatelessWidget {

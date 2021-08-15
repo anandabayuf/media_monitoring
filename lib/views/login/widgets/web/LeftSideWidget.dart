@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:web_media_monitoring/modules/login/widgets/web/FormLogin.dart';
+import 'package:web_media_monitoring/res/CustomColors.dart';
+import 'package:web_media_monitoring/utils/google-sign-in/Authentication.dart';
+import 'package:web_media_monitoring/views/login/widgets/web/FormLogin.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class leftSideWidget extends StatelessWidget {
+class LeftSideWidget extends StatefulWidget {
+  @override
+  _LeftSideWidgetState createState() => _LeftSideWidgetState();
+}
+
+class _LeftSideWidgetState extends State<LeftSideWidget> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;

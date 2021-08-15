@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:web_media_monitoring/modules/signup/widgets/web/ContainerWidget.dart';
-import 'package:web_media_monitoring/modules/signup/widgets/mobile/ContainerWidget.dart';
+import 'package:web_media_monitoring/views/signup/widgets/web/ContainerWidget.dart';
+import 'package:web_media_monitoring/views/signup/widgets/mobile/ContainerWidget.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class SignupScreen extends StatelessWidget {

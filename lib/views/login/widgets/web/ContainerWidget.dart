@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:web_media_monitoring/modules/signup/widgets/web/LeftSideWidget.dart';
-import 'package:web_media_monitoring/modules/signup/widgets/web/RightSideWidget.dart';
+import 'package:web_media_monitoring/views/login/widgets/web/LeftSideWidget.dart';
+import 'package:web_media_monitoring/views/login/widgets/web/RightSideWidget.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class ContainerWidgetWeb extends StatelessWidget {
@@ -20,7 +20,7 @@ class ContainerWidgetWeb extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: leftSideWidget(),
+                  child: LeftSideWidget(),
                 ),
                 Expanded(
                   child: rightSideWidget(),
