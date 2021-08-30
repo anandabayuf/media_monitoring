@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:web_media_monitoring/Services/loginApiResponse.dart';
-import 'package:web_media_monitoring/Services/signupApiResponse.dart';
+
+import 'apiResponse.dart';
+import 'loginApiResponse.dart';
+import 'signupApiResponse.dart';
 
 part 'apiService.g.dart';
 
@@ -24,6 +26,11 @@ abstract class RestClient {
       @Field("email") String email,
       @Field("password") String password,
       @Header("DeviceID") String deviceID);
+
+  @FormUrlEncoded()
+  @POST("search")
+  Future<ApiResponse> search(@Field("keyword") String keyword,
+      @Field("token") String token, @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
   @POST("authentication")

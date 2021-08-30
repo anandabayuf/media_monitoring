@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:web_media_monitoring/modules/login/widgets/mobile/FormLogin.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:web_media_monitoring/modules/login/pages/FormLogin.dart';
 
 class BottomSideWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
+    // Size screenSize = MediaQuery.of(context).size;
 
     return Padding(
       padding: EdgeInsets.only(top: 10, bottom: 10, left: 40, right: 40),

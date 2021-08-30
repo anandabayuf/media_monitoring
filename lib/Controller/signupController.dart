@@ -12,7 +12,7 @@ class SignupController implements SignupModel {
   void success(String token, String deviceID) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString("api_token", token);
-    await prefs.setString("api_token", deviceID);
+    await prefs.setString("device_id", deviceID);
   }
 
   @override
@@ -21,8 +21,12 @@ class SignupController implements SignupModel {
   @override
   void signup(
       String name, String email, String password, String deviceID) async {
-    await api.signup(name, email, password, deviceID).then((it) {
-      if (it.status == 1) {
+    print('nama: $name');
+    print('email: $email');
+    print('Password: $password');
+    print('deviceID: $deviceID');
+    await api.signup(name, email, password, deviceID).then((response) {
+      if (response.status == 1) {
         view.finish();
       } else {
         view.toast("Register gagal. Mungkin email sudah digunakan");
