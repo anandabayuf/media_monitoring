@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:web_media_monitoring/modules/login/pages/FormLogin.dart';
+import 'package:web_media_monitoring/views/login/pages/FormLogin.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class LeftSideWidget extends StatelessWidget {

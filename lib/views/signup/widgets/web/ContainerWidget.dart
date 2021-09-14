@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:web_media_monitoring/modules/login/widgets/web/LeftSideWidget.dart';
-import 'package:web_media_monitoring/modules/login/widgets/web/RightSideWidget.dart';
+import 'package:web_media_monitoring/views/signup/widgets/web/LeftSideWidget.dart';
+import 'package:web_media_monitoring/views/signup/widgets/web/RightSideWidget.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class ContainerWidgetWeb extends StatelessWidget {

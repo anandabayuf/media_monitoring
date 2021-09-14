@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:web_media_monitoring/modules/signup/pages/FormSignup.dart';
+import 'package:web_media_monitoring/views/signup/pages/FormSignup.dart';
 
 class BottomSideWidget extends StatelessWidget {
   @override
