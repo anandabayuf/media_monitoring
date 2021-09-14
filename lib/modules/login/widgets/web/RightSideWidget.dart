@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class rightSideWidget extends StatelessWidget {
+class RightSideWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -20,16 +20,15 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = {'email': email, 'password': password};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LoginApiResponse>(Options(
-                method: 'POST',
-                headers: <String, dynamic>{r'DeviceID': deviceID},
-                extra: _extra,
-                contentType: 'application/x-www-form-urlencoded')
-            .compose(_dio.options, 'login',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = LoginApiResponse.fromJson(_result.data!);
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+            method: 'POST',
+            headers: <String, dynamic>{r'DeviceID': deviceID},
+            extra: _extra,
+            contentType: 'application/x-www-form-urlencoded')
+        .compose(_dio.options, 'login',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
     return value;
   }
 
@@ -38,16 +37,33 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = {'nama': name, 'email': email, 'password': password};
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+            method: 'POST',
+            headers: <String, dynamic>{r'DeviceID': deviceID},
+            extra: _extra,
+            contentType: 'application/x-www-form-urlencoded')
+        .compose(_dio.options, 'signup',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<ApiResponse> search(keyword, token, deviceID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = {'keyword': keyword, 'token': token};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SignupApiResponse>(Options(
+        _setStreamType<ApiResponse>(Options(
                 method: 'POST',
                 headers: <String, dynamic>{r'DeviceID': deviceID},
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
-            .compose(_dio.options, 'signup',
+            .compose(_dio.options, 'search',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = SignupApiResponse.fromJson(_result.data!);
+    final value = ApiResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -56,19 +72,18 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LoginApiResponse>(Options(
-                method: 'POST',
-                headers: <String, dynamic>{
-                  r'Authorization': token,
-                  r'DeviceID': deviceID
-                },
-                extra: _extra,
-                contentType: 'application/x-www-form-urlencoded')
-            .compose(_dio.options, 'authentication',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = LoginApiResponse.fromJson(_result.data!);
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+            method: 'POST',
+            headers: <String, dynamic>{
+              r'Authorization': token,
+              r'DeviceID': deviceID
+            },
+            extra: _extra,
+            contentType: 'application/x-www-form-urlencoded')
+        .compose(_dio.options, 'authentication',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
     return value;
   }
 

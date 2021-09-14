@@ -1,12 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:nanoid/nanoid.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:web_media_monitoring/Controller/authentication.dart';
 import 'package:web_media_monitoring/Controller/loginController.dart';
 import 'package:web_media_monitoring/model/loginModel.dart';
-import 'package:web_media_monitoring/model/userModel.dart';
+import 'package:crypto/crypto.dart';
 
 class FormLogin extends StatefulWidget {
   @override
@@ -18,9 +21,10 @@ class FormLoginState extends State<FormLogin> implements LoginViewModel {
   late TextEditingController _email;
   late TextEditingController _password;
   final _formKey = GlobalKey<FormState>();
-  late Authentication authentication = new Authentication();
   late String deviceID;
-  UserModel user = new UserModel();
+  late String browserID;
+  var id = nanoid();
+  var customLengthId = nanoid(16);
 
   @override
   void initState() {
@@ -37,17 +41,10 @@ class FormLoginState extends State<FormLogin> implements LoginViewModel {
     super.dispose();
   }
 
-  void doLogin(String email, String password, String deviceID) {
-    if (password.length < 8) {
-      toast("Password berisi setidaknya 8 karakter");
-      return;
-    }
-    presenter.login(email, password, deviceID);
-  }
-
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+
     return Form(
       key: _formKey,
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -59,11 +56,11 @@ class FormLoginState extends State<FormLogin> implements LoginViewModel {
             style: TextStyle(fontSize: 15.0, color: HexColor("#F5EAEA")),
           ),
         ),
+        SizedBox(height: screenSize.width < 1920 ? 5 : 5 * 2),
         Container(
           width: 400,
           child: TextFormField(
             controller: _email,
-            textInputAction: TextInputAction.next,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
@@ -79,7 +76,7 @@ class FormLoginState extends State<FormLogin> implements LoginViewModel {
             },
           ),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: screenSize.width < 1920 ? 10 : 10 * 2),
         Container(
           alignment: Alignment.centerLeft,
           width: 400,
@@ -88,11 +85,11 @@ class FormLoginState extends State<FormLogin> implements LoginViewModel {
             style: TextStyle(fontSize: 15.0, color: HexColor("#F5EAEA")),
           ),
         ),
+        SizedBox(height: screenSize.width < 1920 ? 5 : 5 * 2),
         Container(
           width: 400,
           child: TextFormField(
             controller: _password,
-            textInputAction: TextInputAction.done,
             obscureText: true,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -103,7 +100,7 @@ class FormLoginState extends State<FormLogin> implements LoginViewModel {
                 filled: true),
           ),
         ),
-        SizedBox(height: 30),
+        SizedBox(height: screenSize.width < 1920 ? 30 : 30),
         Container(
           width: 400,
           height: 35,
@@ -114,9 +111,18 @@ class FormLoginState extends State<FormLogin> implements LoginViewModel {
               primary: HexColor("#76767A"),
             ),
             onPressed: () async {
+              late String _passwordEncode =
+                  md5.convert(utf8.encode(_password.text.trim())).toString();
               deviceID = (await PlatformDeviceId.getDeviceId)!;
+              if (deviceID.contains("Mozilla")) {
+                String now = DateTime.now().toString();
+                String hash = md5.convert(utf8.encode(now)).toString();
+                deviceID = _email.text.trim() + "$hash";
+              } else {
+                deviceID = (await PlatformDeviceId.getDeviceId)!;
+              }
               if (_formKey.currentState!.validate()) {
-                doLogin(_email.text.trim(), _password.text.trim(), deviceID);
+                presenter.login(_email.text.trim(), _passwordEncode, deviceID);
               }
             },
             child: const Text(
@@ -143,5 +149,5 @@ class FormLoginState extends State<FormLogin> implements LoginViewModel {
   }
 
   @override
-  void toast(String message) => Toast.values;
+  void toast(String message) => Fluttertoast.showToast(msg: message);
 }

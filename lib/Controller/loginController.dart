@@ -17,7 +17,14 @@ class LoginController implements LoginModel {
 
   @override
   void login(String email, String password, String deviceID) async {
+    print('email: $email');
+    print('Password: $password');
+    if (deviceID is String) {
+      print('deviceID: $deviceID');
+    }
     await api.login(email, password, deviceID).then((response) async {
+      int status = response.status;
+      print(status);
       if (response.status == 1) {
         UserModel user = UserModel.fromJson(response.data);
         this.success(user.token, deviceID, user.role);
