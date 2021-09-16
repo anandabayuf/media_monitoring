@@ -8,7 +8,7 @@ import 'package:nanoid/nanoid.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Controller/loginController.dart';
-import 'package:web_media_monitoring/model/loginModel.dart';
+import 'package:web_media_monitoring/Controller/loginInterface.dart';
 import 'package:crypto/crypto.dart';
 
 class FormLogin extends StatefulWidget {

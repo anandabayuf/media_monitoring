@@ -13,7 +13,7 @@ abstract class RestClient {
   factory RestClient(Dio dio) = _RestClient;
   static const header = "Access-Control-Allow-Origin: *";
   @FormUrlEncoded()
-  @POST("login")
+  @POST("user/login")
   Future<LoginApiResponse> login(
     @Field("email") String email,
     @Field("password") String password,
@@ -21,7 +21,7 @@ abstract class RestClient {
   );
 
   @FormUrlEncoded()
-  @POST("signup")
+  @POST("user/register")
   Future<SignupApiResponse> signup(
       @Field("nama") String name,
       @Field("email") String email,
@@ -29,17 +29,17 @@ abstract class RestClient {
       @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
-  @GET("search")
+  @GET("berita/search")
   Future<ApiResponse> search(@Query("q") String keyword,
       @Field("token") String token, @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
-  @GET("userRefreshToken")
+  @GET("user/refreshToken")
   Future<AuthResponse> auth(@Header("Authorization") String token,
       @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
-  @GET("search/publisher")
+  @GET("berita/search/publisher")
   Future<ApiResponse> publisher(@Query("q") String keyword,
       @Field("token") String token, @Header("DeviceID") String deviceID);
 }

@@ -8,7 +8,7 @@ part of 'apiService.dart';
 
 class _RestClient implements RestClient {
   _RestClient(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://resep-mau.herokuapp.com/api/';
+    baseUrl ??= 'http://127.0.0.1:8000/';
   }
 
   final Dio _dio;
@@ -26,7 +26,7 @@ class _RestClient implements RestClient {
                 headers: <String, dynamic>{r'DeviceID': deviceID},
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
-            .compose(_dio.options, 'login',
+            .compose(_dio.options, 'user/login',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = LoginApiResponse.fromJson(_result.data!);
@@ -44,7 +44,7 @@ class _RestClient implements RestClient {
                 headers: <String, dynamic>{r'DeviceID': deviceID},
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
-            .compose(_dio.options, 'signup',
+            .compose(_dio.options, 'user/register',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = SignupApiResponse.fromJson(_result.data!);
@@ -62,7 +62,7 @@ class _RestClient implements RestClient {
                 headers: <String, dynamic>{r'DeviceID': deviceID},
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
-            .compose(_dio.options, 'search',
+            .compose(_dio.options, 'berita/search',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ApiResponse.fromJson(_result.data!);
@@ -76,14 +76,14 @@ class _RestClient implements RestClient {
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AuthResponse>(Options(
-                method: 'POST',
+                method: 'GET',
                 headers: <String, dynamic>{
                   r'Authorization': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
-            .compose(_dio.options, 'refreshToken',
+            .compose(_dio.options, 'user/refreshToken',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = AuthResponse.fromJson(_result.data!);
@@ -101,7 +101,7 @@ class _RestClient implements RestClient {
                 headers: <String, dynamic>{r'DeviceID': deviceID},
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
-            .compose(_dio.options, 'search/publisher',
+            .compose(_dio.options, 'berita/search/publisher',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ApiResponse.fromJson(_result.data!);

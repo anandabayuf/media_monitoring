@@ -5,8 +5,6 @@ import 'package:web_media_monitoring/model/publisherListTile.dart';
 
 import 'package:web_media_monitoring/model/publisherModel.dart';
 
-import '../chart.dart';
-
 late String keyword = "";
 late String token = "";
 late String deviceId = "";
@@ -27,7 +25,6 @@ class _DashboardPageState extends State<DashboardPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(child: SimpleBarChart.withSampleData()),
           Expanded(
             child: FutureBuilder(
               future: _searchController.getPublisher(keyword, token, deviceId),
