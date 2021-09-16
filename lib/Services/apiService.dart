@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:web_media_monitoring/Services/authResponse.dart';
 
 import 'apiResponse.dart';
 import 'loginApiResponse.dart';
@@ -7,7 +8,7 @@ import 'signupApiResponse.dart';
 
 part 'apiService.g.dart';
 
-@RestApi(baseUrl: 'https://resep-mau.herokuapp.com/api/')
+@RestApi(baseUrl: 'http://127.0.0.1:8000/')
 abstract class RestClient {
   factory RestClient(Dio dio) = _RestClient;
   static const header = "Access-Control-Allow-Origin: *";
@@ -28,12 +29,17 @@ abstract class RestClient {
       @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
-  @POST("search")
-  Future<ApiResponse> search(@Field("keyword") String keyword,
+  @GET("search")
+  Future<ApiResponse> search(@Query("q") String keyword,
       @Field("token") String token, @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
-  @POST("authentication")
-  Future<LoginApiResponse> auth(@Header("Authorization") String token,
+  @GET("userRefreshToken")
+  Future<AuthResponse> auth(@Header("Authorization") String token,
       @Header("DeviceID") String deviceID);
+
+  @FormUrlEncoded()
+  @GET("search/publisher")
+  Future<ApiResponse> publisher(@Query("q") String keyword,
+      @Field("token") String token, @Header("DeviceID") String deviceID);
 }

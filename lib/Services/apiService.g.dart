@@ -20,15 +20,16 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = {'email': email, 'password': password};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-            method: 'POST',
-            headers: <String, dynamic>{r'DeviceID': deviceID},
-            extra: _extra,
-            contentType: 'application/x-www-form-urlencoded')
-        .compose(_dio.options, 'login',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<LoginApiResponse>(Options(
+                method: 'POST',
+                headers: <String, dynamic>{r'DeviceID': deviceID},
+                extra: _extra,
+                contentType: 'application/x-www-form-urlencoded')
+            .compose(_dio.options, 'login',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = LoginApiResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -37,26 +38,27 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = {'nama': name, 'email': email, 'password': password};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-            method: 'POST',
-            headers: <String, dynamic>{r'DeviceID': deviceID},
-            extra: _extra,
-            contentType: 'application/x-www-form-urlencoded')
-        .compose(_dio.options, 'signup',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SignupApiResponse>(Options(
+                method: 'POST',
+                headers: <String, dynamic>{r'DeviceID': deviceID},
+                extra: _extra,
+                contentType: 'application/x-www-form-urlencoded')
+            .compose(_dio.options, 'signup',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SignupApiResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<ApiResponse> search(keyword, token, deviceID) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _data = {'keyword': keyword, 'token': token};
+    final queryParameters = <String, dynamic>{r'q': keyword};
+    final _data = {'token': token};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ApiResponse>(Options(
-                method: 'POST',
+                method: 'GET',
                 headers: <String, dynamic>{r'DeviceID': deviceID},
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
@@ -68,22 +70,41 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<LoginApiResponse> auth(token, deviceID) async {
+  Future<AuthResponse> auth(token, deviceID) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-            method: 'POST',
-            headers: <String, dynamic>{
-              r'Authorization': token,
-              r'DeviceID': deviceID
-            },
-            extra: _extra,
-            contentType: 'application/x-www-form-urlencoded')
-        .compose(_dio.options, 'authentication',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AuthResponse>(Options(
+                method: 'POST',
+                headers: <String, dynamic>{
+                  r'Authorization': token,
+                  r'DeviceID': deviceID
+                },
+                extra: _extra,
+                contentType: 'application/x-www-form-urlencoded')
+            .compose(_dio.options, 'refreshToken',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AuthResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ApiResponse> publisher(keyword, token, deviceID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'q': keyword};
+    final _data = {'token': token};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse>(Options(
+                method: 'GET',
+                headers: <String, dynamic>{r'DeviceID': deviceID},
+                extra: _extra,
+                contentType: 'application/x-www-form-urlencoded')
+            .compose(_dio.options, 'search/publisher',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ApiResponse.fromJson(_result.data!);
     return value;
   }
 
