@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Services/apiService.dart';
-import 'package:web_media_monitoring/model/signupModel.dart';
+import 'package:web_media_monitoring/Controller/signupInterface.dart';
 
-class SignupController implements SignupModel {
+class SignupController implements SignupInterface {
   SignupViewModel view;
   SignupController(this.view);
   RestClient api = RestClient(Dio());

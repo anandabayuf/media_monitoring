@@ -21,34 +21,33 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  charts_flutter: ^0.11.0
+  cupertino_icons: ^1.0.2
+  dio: ^4.0.0
+  fl_chart: ^0.40.0
   flutter:
     sdk: flutter
-
-  dio: ^4.0.0
+  flutter_svg: ^0.22.0
+  fluttertoast: ^8.0.8
+  get: ^4.3.8
+  
+  hexcolor: ^2.0.5
+  intl: ^0.17.0
+  json_annotation: ^4.0.1
+  nanoid: null
+  platform_device_id: ^1.0.1
   retrofit: ^2.0.1
   shared_preferences: ^2.0.6
-  fluttertoast: ^8.0.8
-  platform_device_id: ^1.0.1
-  nanoid: 
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  flutter_svg: ^0.22.0
-  hexcolor: ^2.0.4
-  json_annotation: ^4.0.1
 
 dev_dependencies:
+  build_runner: ^1.10.0
   flutter_test:
     sdk: flutter
-  retrofit_generator: 
-  build_runner: ^1.10.0
-  json_serializable: 
+  json_serializable: null
+  retrofit_generator: null
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
 
@@ -62,18 +61,14 @@ flutter:
     - assets/images/login/
     - assets/images/signup/
     - assets/icons/
-
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:platform_device_id/platform_device_id.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Controller/signupController.dart';
-import 'package:web_media_monitoring/model/signupModel.dart';
+import 'package:web_media_monitoring/Controller/signupInterface.dart';
 import 'package:crypto/crypto.dart';
 
 class FormSignup extends StatefulWidget {
@@ -19,7 +18,7 @@ class FormSignupState extends State<FormSignup> implements SignupViewModel {
   late TextEditingController _nama;
   late TextEditingController _email;
   late TextEditingController _password;
-  late TextEditingController _konfirmasi_password;
+  late TextEditingController _konfirmasiPassword;
   final _formKey = GlobalKey<FormState>();
   late String deviceID;
 
@@ -29,7 +28,7 @@ class FormSignupState extends State<FormSignup> implements SignupViewModel {
     _nama = TextEditingController();
     _email = TextEditingController();
     _password = TextEditingController();
-    _konfirmasi_password = TextEditingController();
+    _konfirmasiPassword = TextEditingController();
     signupController = SignupController(this);
   }
 
@@ -38,7 +37,7 @@ class FormSignupState extends State<FormSignup> implements SignupViewModel {
     _nama.dispose();
     _email.dispose();
     _password.dispose();
-    _konfirmasi_password.dispose();
+    _konfirmasiPassword.dispose();
 
     super.dispose();
   }
@@ -102,7 +101,7 @@ class FormSignupState extends State<FormSignup> implements SignupViewModel {
             validator: (String? value) {
               if (value == null) {
                 return 'Email harus diisi';
-              } else if (value != null && !value.contains('@')) {
+              } else if (!value.contains('@')) {
                 return 'Masukkan alamat email yang valid';
               }
               return null;
@@ -152,7 +151,7 @@ class FormSignupState extends State<FormSignup> implements SignupViewModel {
         Container(
           width: 400,
           child: TextFormField(
-            controller: _konfirmasi_password,
+            controller: _konfirmasiPassword,
             obscureText: true,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -180,7 +179,7 @@ class FormSignupState extends State<FormSignup> implements SignupViewModel {
               primary: HexColor("#76767A"),
             ),
             onPressed: () async {
-              late String _konfirmasi_passwordEncode =
+              late String _konfirmasiPasswordEncode =
                   md5.convert(utf8.encode(_password.text.trim())).toString();
               deviceID = (await PlatformDeviceId.getDeviceId)!;
               if (deviceID.contains("Mozilla")) {
@@ -192,7 +191,7 @@ class FormSignupState extends State<FormSignup> implements SignupViewModel {
               }
               if (_formKey.currentState!.validate()) {
                 signupController.signup(_nama.text.trim(), _email.text.trim(),
-                    _konfirmasi_passwordEncode, deviceID);
+                    _konfirmasiPasswordEncode, deviceID);
               }
             },
             child: const Text(

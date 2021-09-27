@@ -17,6 +17,10 @@ class NewsModel {
   late String publisher;
   @JsonKey()
   late String urlToImage;
+  @JsonKey()
+  late String publishedAt;
+  @JsonKey()
+  late String category;
 
   NewsModel();
 

@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Services/apiService.dart';
-import 'package:web_media_monitoring/model/loginModel.dart';
+import 'package:web_media_monitoring/Controller/loginInterface.dart';
 import 'package:web_media_monitoring/model/userModel.dart';
 
-class LoginController implements LoginModel {
+class LoginController implements LoginInterface {
   LoginViewModel view;
   LoginController(this.view);
   RestClient api = RestClient(Dio());
