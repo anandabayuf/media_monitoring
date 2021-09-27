@@ -190,16 +190,17 @@ class AkunSayaScreen extends StatelessWidget {
                                       shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(Radius.circular(32.0)),
                                       ),
-                                      title: CircleAvatar(
-                                        backgroundImage: NetworkImage("https://picsum.photos/200"),
-                                        radius: 100,
-                                      ),
-                                      content: Column(
+                                      title: Column(
                                         children: [
+                                          CircleAvatar(
+                                            backgroundImage: NetworkImage("https://picsum.photos/200"),
+                                            radius: 100,
+                                          ),
+                                          SizedBox(height: 10),
                                           ElevatedButton(
                                             style: ElevatedButton.styleFrom(
                                                 elevation: 10.0,
-                                                primary: HexColor("#707070")
+                                                primary: Colors.blue
                                             ),
                                             onPressed: () => Navigator.pop(context, 'Unggah Foto'),
                                             child: const Text(
@@ -214,7 +215,7 @@ class AkunSayaScreen extends StatelessWidget {
                                           ElevatedButton(
                                             style: ElevatedButton.styleFrom(
                                                 elevation: 10.0,
-                                                primary: HexColor("#707070")
+                                                primary: Colors.red
                                             ),
                                             onPressed: () => Navigator.pop(context, 'Hapus Foto'),
                                             child: const Text(
@@ -234,7 +235,7 @@ class AkunSayaScreen extends StatelessWidget {
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
                                                   elevation: 10.0,
-                                                  primary: HexColor("#707070")
+                                                  primary: HexColor("#76767A")
                                               ),
                                               onPressed: () => Navigator.pop(context, 'Batal'),
                                               child: const Text(
@@ -249,7 +250,7 @@ class AkunSayaScreen extends StatelessWidget {
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
                                                   elevation: 10.0,
-                                                  primary: HexColor("#707070")
+                                                  primary: Colors.green
                                               ),
                                               onPressed: () => Navigator.pop(context, 'Simpan'),
                                               child: const Text(

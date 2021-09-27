@@ -115,7 +115,7 @@ class _ContainerProfileState extends State<ContainerProfile> {
                         style: ElevatedButton.styleFrom(
                           textStyle: const TextStyle(fontSize: 15),
                           elevation: 10,
-                          primary: HexColor("#76767A"),
+                          primary: Colors.red,
                         ),
                         onPressed: () {
                           setState((){
@@ -132,7 +132,7 @@ class _ContainerProfileState extends State<ContainerProfile> {
                         style: ElevatedButton.styleFrom(
                           textStyle: const TextStyle(fontSize: 15),
                           elevation: 10,
-                          primary: HexColor("#76767A"),
+                          primary: Colors.green,
                         ),
                         onPressed: () {
                           if (_formUsernameKey.currentState!.validate()) {
@@ -369,7 +369,7 @@ class _ContainerProfileState extends State<ContainerProfile> {
                               style: ElevatedButton.styleFrom(
                                 textStyle: const TextStyle(fontSize: 15),
                                 elevation: 10,
-                                primary: HexColor("#76767A"),
+                                primary: Colors.red,
                               ),
                               onPressed: () {
                                 setState((){
@@ -386,7 +386,7 @@ class _ContainerProfileState extends State<ContainerProfile> {
                               style: ElevatedButton.styleFrom(
                                 textStyle: const TextStyle(fontSize: 15),
                                 elevation: 10,
-                                primary: HexColor("#76767A"),
+                                primary: Colors.green,
                               ),
                               onPressed: () {
                                 if (_formPasswordKey.currentState!.validate()) {
@@ -470,6 +470,9 @@ class _ContainerProfileState extends State<ContainerProfile> {
                         this.isEditUsername = !this.isEditUsername;
                       }
                       this.isEditPassword = !this.isEditPassword;
+                      this._oldPassword.clear();
+                      this._newPassword.clear();
+                      this._confirmationPassword.clear();
                     });
                   },
                   child: const Text(
