@@ -52,17 +52,41 @@ class _RestClient implements RestClient {
   }
 
   @override
+  Future<SignupApiResponse> deleteUser(id, password, token, deviceID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = {'id': id, 'password': password};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SignupApiResponse>(Options(
+                method: 'DELETE',
+                headers: <String, dynamic>{
+                  r'token': token,
+                  r'DeviceID': deviceID
+                },
+                extra: _extra,
+                contentType: 'application/x-www-form-urlencoded')
+            .compose(_dio.options, 'user/delete',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SignupApiResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<ApiResponse> search(keyword, token, deviceID) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'q': keyword};
-    final _data = {'token': token};
+    final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ApiResponse>(Options(
                 method: 'GET',
-                headers: <String, dynamic>{r'DeviceID': deviceID},
+                headers: <String, dynamic>{
+                  r'token': token,
+                  r'DeviceID': deviceID
+                },
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
-            .compose(_dio.options, 'berita/search',
+            .compose(_dio.options, 'news/search',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ApiResponse.fromJson(_result.data!);
@@ -78,7 +102,7 @@ class _RestClient implements RestClient {
         _setStreamType<AuthResponse>(Options(
                 method: 'GET',
                 headers: <String, dynamic>{
-                  r'Authorization': token,
+                  r'token': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -101,7 +125,7 @@ class _RestClient implements RestClient {
                 headers: <String, dynamic>{r'DeviceID': deviceID},
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
-            .compose(_dio.options, 'berita/search/publisher',
+            .compose(_dio.options, 'news/search/publisherNews',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ApiResponse.fromJson(_result.data!);
@@ -110,12 +134,12 @@ class _RestClient implements RestClient {
 
   @override
   Future<ApiResponse> getDataChart(
-      keyword, tanggalAwal, tanggalAkhir, token, deviceID) async {
+      keyword, firstDate, lastDate, token, deviceID) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'q': keyword};
     final _data = {
-      'tanggalAwal': tanggalAwal,
-      'tanggalAkhir': tanggalAkhir,
+      'firstDate': firstDate,
+      'lastDate': lastDate,
       'token': token
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -124,7 +148,7 @@ class _RestClient implements RestClient {
                 headers: <String, dynamic>{r'DeviceID': deviceID},
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
-            .compose(_dio.options, 'berita/search/totalBerita',
+            .compose(_dio.options, 'news/search/rangeNews',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ApiResponse.fromJson(_result.data!);

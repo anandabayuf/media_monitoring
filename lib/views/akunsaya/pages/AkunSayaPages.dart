@@ -4,7 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:web_media_monitoring/views/akunsaya/widgets/web/ContainerProfile.dart';
 import 'package:web_media_monitoring/views/akunsaya/widgets/web/ContainerDeleteAcc.dart';
 
-class AkunSayaScreen extends StatelessWidget {
+class MyAccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;

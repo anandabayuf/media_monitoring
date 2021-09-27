@@ -4,11 +4,11 @@ part 'newsChartModel.g.dart';
 @JsonSerializable()
 class NewsChartModel {
   @JsonKey()
-  late String tanggal;
+  late String date;
   @JsonKey()
   late int total;
 
-  NewsChartModel(this.tanggal, this.total);
+  NewsChartModel(this.date, this.total);
 
   factory NewsChartModel.fromJson(Map<String, dynamic> json) =>
       _$NewsChartModelFromJson(json);

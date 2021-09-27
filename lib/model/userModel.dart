@@ -7,6 +7,12 @@ class UserModel {
   late String token;
   @JsonKey()
   late String role;
+  @JsonKey()
+  late String name;
+  @JsonKey()
+  late int id;
+  @JsonKey()
+  late String email;
 
   UserModel();
 

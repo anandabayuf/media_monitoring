@@ -13,8 +13,8 @@ import 'package:web_media_monitoring/newsChart.dart';
 String keyword = "";
 String token = "";
 String deviceId = "";
-String tanggalAwal = "";
-String tanggalAkhir = "";
+String firstDate = "";
+String lastDate = "";
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -29,8 +29,8 @@ class _DashboardPageState extends State<DashboardPage> {
     DateTime now = DateTime.now();
     DateTime sevenDaysAgo = now.subtract(Duration(days: 7));
 
-    tanggalAwal = DateFormat('yyyy-mm-dd').format(now);
-    tanggalAkhir = DateFormat('yyyy-mm-dd').format(sevenDaysAgo);
+    firstDate = DateFormat('yyyy-mm-dd').format(now);
+    lastDate = DateFormat('yyyy-mm-dd').format(sevenDaysAgo);
     fill();
     return Container(
       child: Column(
@@ -40,7 +40,7 @@ class _DashboardPageState extends State<DashboardPage> {
           Expanded(
               child: FutureBuilder(
                   future: _searchController.getNewsChartData(
-                      keyword, tanggalAwal, tanggalAkhir, token, deviceId),
+                      keyword, firstDate, lastDate, token, deviceId),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<NewsChartModel>> snapshot) {
                     if (snapshot.hasData) {
@@ -61,11 +61,11 @@ class _DashboardPageState extends State<DashboardPage> {
               builder: (BuildContext context,
                   AsyncSnapshot<List<PublisherModel>> snapshot) {
                 if (snapshot.hasData) {
-                  List<PublisherModel>? articles = snapshot.data;
+                  List<PublisherModel>? news = snapshot.data;
                   return ListView.builder(
-                      itemCount: articles!.length,
+                      itemCount: news!.length,
                       itemBuilder: (context, index) {
-                        return publisherListTile(articles[index], context);
+                        return publisherListTile(news[index], context);
                       });
                 }
                 return Center(
@@ -82,7 +82,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
 Future<void> fill() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  token = (prefs.getString("api_token"))!;
+  token = prefs.getString("api_token")!;
   // token = "bisa";
   deviceId = prefs.getString("deviceID")!;
   // deviceId = "jadi";

@@ -11,7 +11,6 @@ part 'apiService.g.dart';
 @RestApi(baseUrl: 'http://127.0.0.1:8000/')
 abstract class RestClient {
   factory RestClient(Dio dio) = _RestClient;
-  static const header = "Access-Control-Allow-Origin: *";
   @FormUrlEncoded()
   @POST("user/login")
   Future<LoginApiResponse> login(
@@ -29,26 +28,34 @@ abstract class RestClient {
       @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
-  @GET("berita/search")
-  Future<ApiResponse> search(@Query("q") String keyword,
-      @Field("token") String token, @Header("DeviceID") String deviceID);
-
-  @FormUrlEncoded()
-  @GET("user/refreshToken")
-  Future<AuthResponse> auth(@Header("Authorization") String token,
+  @DELETE("user/delete")
+  Future<SignupApiResponse> deleteUser(
+      @Field("id") int id,
+      @Field("password") String password,
+      @Header("token") String token,
       @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
-  @GET("berita/search/publisher")
+  @GET("news/search")
+  Future<ApiResponse> search(@Query("q") String keyword,
+      @Header("token") String token, @Header("DeviceID") String deviceID);
+
+  @FormUrlEncoded()
+  @GET("user/refreshToken")
+  Future<AuthResponse> auth(
+      @Header("token") String token, @Header("DeviceID") String deviceID);
+
+  @FormUrlEncoded()
+  @GET("news/search/publisherNews")
   Future<ApiResponse> publisher(@Query("q") String keyword,
       @Field("token") String token, @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
-  @GET("berita/search/totalBerita")
+  @GET("news/search/rangeNews")
   Future<ApiResponse> getDataChart(
       @Query("q") String keyword,
-      @Field("tanggalAwal") String tanggalAwal,
-      @Field("tanggalAkhir") String tanggalAkhir,
+      @Field("firstDate") String firstDate,
+      @Field("lastDate") String lastDate,
       @Field("token") String token,
       @Header("DeviceID") String deviceID);
 }

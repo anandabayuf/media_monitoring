@@ -8,13 +8,13 @@ part of 'newsChartModel.dart';
 
 NewsChartModel _$NewsChartModelFromJson(Map<String, dynamic> json) {
   return NewsChartModel(
-    json['tanggal'] as String,
+    json['date'] as String,
     json['total'] as int,
   );
 }
 
 Map<String, dynamic> _$NewsChartModelToJson(NewsChartModel instance) =>
     <String, dynamic>{
-      'tanggal': instance.tanggal,
+      'date': instance.date,
       'total': instance.total,
     };

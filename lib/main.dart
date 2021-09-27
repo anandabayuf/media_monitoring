@@ -14,13 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/akunsaya',
+      initialRoute: '/myAccount',
       routes: {
         '/loginPage': (context) => LoginScreen(),
         '/signupPage': (context) => SignupScreen(),
         '/search': (context) => SearchScreen(),
         '/dashboardPage': (context) => DashboardPage(),
-        '/akunsaya': (context) => AkunSayaScreen()
+        '/myAccount': (context) => MyAccountScreen()
       },
       title: 'Media Monitoring',
     );

@@ -1,9 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:web_media_monitoring/Services/apiService.dart';
 
 class ContainerDeleteAcc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    RestClient api = RestClient(Dio());
 
     return Container(
       padding: EdgeInsets.all(10.0),
@@ -13,7 +17,8 @@ class ContainerDeleteAcc extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
+        padding: const EdgeInsets.only(
+            left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -37,8 +42,7 @@ class ContainerDeleteAcc extends StatelessWidget {
                   builder: (BuildContext context) => AlertDialog(
                     backgroundColor: Colors.white.withOpacity(0.70),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(32.0))
-                    ),
+                        borderRadius: BorderRadius.all(Radius.circular(32.0))),
                     title: Icon(
                       Icons.warning,
                       color: Colors.black,
@@ -58,23 +62,25 @@ class ContainerDeleteAcc extends StatelessWidget {
                         children: [
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                elevation: 10.0,
-                                primary: Colors.red
-                            ),
+                                elevation: 10.0, primary: Colors.red),
                             //onPressed: () => Navigator.pop(context, 'Ya, Hapus'),
-                            onPressed: () {
+                            onPressed: () async {
                               //logika hapus akun
                               //...
+
+                              // api.deleteUser(2, "notYet", token, deviceID);
                               Navigator.pop(context, 'Ya, Hapus');
+
                               //dialog sukses hapus akun
                               showDialog<String>(
                                 barrierDismissible: false,
                                 context: context,
                                 builder: (BuildContext context) => AlertDialog(
-                                  backgroundColor: Colors.white.withOpacity(0.70),
+                                  backgroundColor:
+                                      Colors.white.withOpacity(0.70),
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(32.0))
-                                  ),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(32.0))),
                                   title: Icon(
                                     Icons.check,
                                     color: Colors.black,
@@ -93,15 +99,14 @@ class ContainerDeleteAcc extends StatelessWidget {
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                             elevation: 10.0,
-                                            primary: HexColor("#707070")
-                                        ),
-                                        onPressed: () => Navigator.pop(context, 'OK'),
+                                            primary: HexColor("#707070")),
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'OK'),
                                         child: const Text(
                                           'OK',
                                           style: TextStyle(
                                               fontSize: 15.0,
-                                              color: Colors.white
-                                          ),
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),
@@ -115,24 +120,19 @@ class ContainerDeleteAcc extends StatelessWidget {
                             child: const Text(
                               'Ya, Hapus',
                               style: TextStyle(
-                                  fontSize: 15.0,
-                                  color: Colors.white
-                              ),
+                                  fontSize: 15.0, color: Colors.white),
                             ),
                           ),
                           SizedBox(width: 10),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                elevation: 10.0,
-                                primary: HexColor("#707070")
-                            ),
-                            onPressed: () => Navigator.pop(context, 'Tidak, Kembali'),
+                                elevation: 10.0, primary: HexColor("#707070")),
+                            onPressed: () =>
+                                Navigator.pop(context, 'Tidak, Kembali'),
                             child: const Text(
                               'Tidak, Kembali',
                               style: TextStyle(
-                                  fontSize: 15.0,
-                                  color: Colors.white
-                              ),
+                                  fontSize: 15.0, color: Colors.white),
                             ),
                           ),
                         ],
@@ -152,3 +152,10 @@ class ContainerDeleteAcc extends StatelessWidget {
     );
   }
 }
+
+// void Success() async {
+//   SharedPreferences preferences = await SharedPreferences.getInstance();
+
+//   String deviceID;
+//   deviceID = await preferences.getString("deviceID");
+// }

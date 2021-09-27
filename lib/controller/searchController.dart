@@ -37,12 +37,12 @@ class SearchController extends GetxController {
 
   Future<List<NewsChartModel>> getNewsChartData(
       String keyword,
-      String tanggalAwal,
-      String tanggalAkhir,
+      String firstDate,
+      String lastDate,
       String token,
       String deviceID) async {
     await api
-        .getDataChart(keyword, tanggalAwal, tanggalAkhir, token, deviceID)
+        .getDataChart(keyword, firstDate, lastDate, token, deviceID)
         .then((response) {
       int status = response.status;
       if (status == 1) {
@@ -57,7 +57,7 @@ class SearchController extends GetxController {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setString("api_token", newToken);
           getNewsChartData(
-              keyword, tanggalAwal, tanggalAkhir, newToken, deviceID);
+              keyword, firstDate, lastDate, newToken, deviceID);
         });
       }
     });
