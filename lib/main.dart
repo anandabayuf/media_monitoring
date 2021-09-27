@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/clientPage',
+      initialRoute: '/akunsaya',
       routes: {
         '/loginPage': (context) => LoginScreen(),
         '/signupPage': (context) => SignupScreen(),

@@ -204,6 +204,38 @@ class _SearchScreenState extends State<SearchScreen> {
                             textStyle: const TextStyle(fontSize: 15),
                             elevation: 10,
                             primary: HexColor("#76767A"),
+                    ),
+                  )
+                ],
+              ),
+            )
+        ),
+        body: Center(
+          child: Container(
+            width: screenSize.width,
+            color: HexColor("#101010"),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Cari Berita atau Tweets",
+                      style: TextStyle(
+                          fontSize: 32,
+                          color: Colors.white
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    Container(
+                      width: 600,
+                      child: TextFormField(
+                        controller: _keyword,
+                        decoration: InputDecoration(
+                          icon: Icon(
+                            Icons.search,
+                            color: Colors.white,
+                            size: 32.0,
                           ),
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
@@ -225,6 +257,40 @@ class _SearchScreenState extends State<SearchScreen> {
                       )
                     ]),
               )),
+                        validator: (String? value) {
+                          if (value == '' || value == ' ') {
+                            return 'Keyword tidak sesuai';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    Container(
+                      width: 200,
+                      height: 35,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          textStyle: const TextStyle(fontSize: 15),
+                          elevation: 10,
+                          primary: HexColor("#76767A"),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            //buat test masuk atau engga
+                            print("Cari " + this._keyword.text);
+                          }
+                        },
+                        child: const Text(
+                          'Cari',
+                          style: TextStyle(fontSize: 15, color: Colors.white),
+                        ),
+                      ),
+                    )
+                  ]
+              ),
+            )
+          ),
         ));
   }
 }
