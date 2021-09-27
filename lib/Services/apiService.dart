@@ -42,4 +42,13 @@ abstract class RestClient {
   @GET("berita/search/publisher")
   Future<ApiResponse> publisher(@Query("q") String keyword,
       @Field("token") String token, @Header("DeviceID") String deviceID);
+
+  @FormUrlEncoded()
+  @GET("berita/search/totalBerita")
+  Future<ApiResponse> getDataChart(
+      @Query("q") String keyword,
+      @Field("tanggalAwal") String tanggalAwal,
+      @Field("tanggalAkhir") String tanggalAkhir,
+      @Field("token") String token,
+      @Header("DeviceID") String deviceID);
 }

@@ -75,7 +75,7 @@ class AkunSayaScreen extends StatelessWidget {
                     ),
                     onTap: () {
                       // Update the state of the app
-                      Navigator.of(context).pushReplacementNamed('/search');
+                      Navigator.of(context).pushReplacementNamed('/clientPage');
                       // Then close the drawer
                       //Navigator.pop(context);
                     },

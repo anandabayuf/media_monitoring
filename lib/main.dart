@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:web_media_monitoring/views/akunsaya/pages/AkunSayaPages.dart';
 
 import 'views/dashboard/dashboardPage.dart';
 import 'views/login/pages/LoginPages.dart';
@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
         '/loginPage': (context) => LoginScreen(),
         '/signupPage': (context) => SignupScreen(),
         '/clientPage': (context) => SearchScreen(),
-        '/dashboardPage': (context) => DashboardPage()
+        '/dashboardPage': (context) => DashboardPage(),
+        '/akunSaya': (context) => AkunSayaScreen()
       },
       title: 'Media Monitoring',
     );

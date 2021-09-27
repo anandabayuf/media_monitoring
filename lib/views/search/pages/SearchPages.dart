@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:web_media_monitoring/views/akunsaya/pages/AkunSayaPages.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:web_media_monitoring/controller/authentication.dart';
 // import 'package:web_media_monitoring/controller/searchController.dart';
@@ -123,7 +122,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   onTap: () {
                     // Update the state of the app
-                    Navigator.of(context).pushReplacementNamed('/akunsaya');
+                    Navigator.of(context).pushReplacementNamed('/akunSaya');
                     // Then close the drawer
                     //Navigator.pop(context);
                   },

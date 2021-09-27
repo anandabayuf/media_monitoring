@@ -30,7 +30,9 @@ dependencies:
   flutter_svg: ^0.22.0
   fluttertoast: ^8.0.8
   get: ^4.3.8
-  hexcolor: ^2.0.4
+  
+  hexcolor: ^2.0.5
+  intl: ^0.17.0
   json_annotation: ^4.0.1
   nanoid: null
   platform_device_id: ^1.0.1

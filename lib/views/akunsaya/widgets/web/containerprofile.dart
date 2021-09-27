@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:web_media_monitoring/views/login/widgets/web/LeftSideWidget.dart';
-import 'package:web_media_monitoring/views/login/widgets/web/RightSideWidget.dart';
 import 'package:hexcolor/hexcolor.dart';
-
-
-
-
 
 class ContainerProfileWeb extends StatelessWidget {
   String username = "John Doe";
@@ -52,8 +46,7 @@ class ContainerProfileWeb extends StatelessWidget {
                   elevation: 10,
                   primary: HexColor("#76767A"),
                 ),
-                onPressed: () async {
-                },
+                onPressed: () {},
                 child: const Text(
                   'Ubah',
                   style: TextStyle(fontSize: 15, color: Colors.white),
@@ -67,7 +60,8 @@ class ContainerProfileWeb extends StatelessWidget {
               color: HexColor("#999999"),
               fontSize: 15.0,
             ),
-          ),Text(
+          ),
+          Text(
             "Password",
             style: TextStyle(
               color: HexColor("#999999"),

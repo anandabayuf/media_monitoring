@@ -1,13 +1,20 @@
+import 'package:charts_flutter/flutter.dart';
+import 'package:intl/intl.dart';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Controller/searchController.dart';
+import 'package:web_media_monitoring/model/newsChartModel.dart';
 import 'package:web_media_monitoring/model/publisherListTile.dart';
 
 import 'package:web_media_monitoring/model/publisherModel.dart';
+import 'package:web_media_monitoring/newsChart.dart';
 
-late String keyword = "";
-late String token = "";
-late String deviceId = "";
+String keyword = "";
+String token = "";
+String deviceId = "";
+String tanggalAwal = "";
+String tanggalAkhir = "";
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -19,12 +26,35 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    DateTime sevenDaysAgo = now.subtract(Duration(days: 7));
+
+    tanggalAwal = DateFormat('yyyy-mm-dd').format(now);
+    tanggalAkhir = DateFormat('yyyy-mm-dd').format(sevenDaysAgo);
     fill();
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Expanded(
+              child: FutureBuilder(
+                  future: _searchController.getNewsChartData(
+                      keyword, tanggalAwal, tanggalAkhir, token, deviceId),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<NewsChartModel>> snapshot) {
+                    if (snapshot.hasData) {
+                      List<NewsChartModel>? articles = snapshot.data;
+                      return ListView.builder(
+                          itemCount: articles!.length,
+                          itemBuilder: (context, index) {
+                            return NewsChart(articles);
+                          });
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  })),
           Expanded(
             child: FutureBuilder(
               future: _searchController.getPublisher(keyword, token, deviceId),
@@ -52,9 +82,9 @@ class _DashboardPageState extends State<DashboardPage> {
 
 Future<void> fill() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  // token = (prefs.getString("api_token"))!;
-  token = "bisa";
-  // deviceId = prefs.getString("deviceID")!;
-  deviceId = "jadi";
+  token = (prefs.getString("api_token"))!;
+  // token = "bisa";
+  deviceId = prefs.getString("deviceID")!;
+  // deviceId = "jadi";
   keyword = prefs.getString("keyword")!;
 }
