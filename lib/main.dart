@@ -18,9 +18,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/loginPage': (context) => LoginScreen(),
         '/signupPage': (context) => SignupScreen(),
-        '/clientPage': (context) => SearchScreen(),
+        '/search': (context) => SearchScreen(),
         '/dashboardPage': (context) => DashboardPage(),
-        '/akunSaya': (context) => AkunSayaScreen()
+        '/akunsaya': (context) => AkunSayaScreen()
       },
       title: 'Media Monitoring',
     );
