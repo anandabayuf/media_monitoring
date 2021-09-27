@@ -185,7 +185,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           color: Colors.white
                       ),
                     ),
-                    SizedBox(height: screenSize.width < 1920 ? 30 : 5 * 2),
+                    SizedBox(height: 30),
                     Container(
                       width: 600,
                       child: TextFormField(
@@ -211,7 +211,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         },
                       ),
                     ),
-                    SizedBox(height: screenSize.width < 1920 ? 30 : 5 * 2),
+                    SizedBox(height: 30),
                     Container(
                       width: 200,
                       height: 35,

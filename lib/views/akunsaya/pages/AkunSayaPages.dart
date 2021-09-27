@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:web_media_monitoring/views/akunsaya/widgets/web/containerprofile.dart';
+import 'package:web_media_monitoring/views/akunsaya/widgets/web/ContainerProfile.dart';
+import 'package:web_media_monitoring/views/akunsaya/widgets/web/ContainerDeleteAcc.dart';
 
 class AkunSayaScreen extends StatelessWidget {
   @override
@@ -137,41 +138,147 @@ class AkunSayaScreen extends StatelessWidget {
           )
       ),
       body: Container(
+        width: screenSize.width,
+        height: screenSize.height,
         color: HexColor("#101010"),
-        child: Center(
-          child: Container(
-            margin: EdgeInsets.only(top: 30.0),
-            width: 600,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Akun Saya",
-                  style: TextStyle(
-                    fontSize: 32.0,
-                    color: Colors.white
+        child: SingleChildScrollView(
+          child: Center(
+            child: Container(
+              margin: EdgeInsets.only(top: 30.0, bottom: 30.0),
+              width: 600,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Akun Saya",
+                    style: TextStyle(
+                      fontSize: 32.0,
+                      color: Colors.white
+                    ),
                   ),
-                ),
-                SizedBox(height: screenSize.width < 1920 ? 30 : 5 * 2),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage("https://picsum.photos/200"),
-                      radius: 70,
+                  SizedBox(height: 30),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: 170,
+                      height: 150,
+                      child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: CircleAvatar(
+                              backgroundImage: NetworkImage("https://picsum.photos/200"),
+                              radius: 70,
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: HexColor("#76767A"),
+                                shape: BoxShape.circle,
+                              ),
+                              child: IconButton(
+                                icon: const Icon(Icons.edit),
+                                color: Colors.white,
+                                onPressed: () {
+                                  showDialog<String>(
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (BuildContext context) => AlertDialog(
+                                      backgroundColor: Colors.white.withOpacity(0.70),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                                      ),
+                                      title: CircleAvatar(
+                                        backgroundImage: NetworkImage("https://picsum.photos/200"),
+                                        radius: 100,
+                                      ),
+                                      content: Column(
+                                        children: [
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                elevation: 10.0,
+                                                primary: HexColor("#707070")
+                                            ),
+                                            onPressed: () => Navigator.pop(context, 'Unggah Foto'),
+                                            child: const Text(
+                                              'Unggah Foto',
+                                              style: TextStyle(
+                                                  fontSize: 15.0,
+                                                  color: Colors.white
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                elevation: 10.0,
+                                                primary: HexColor("#707070")
+                                            ),
+                                            onPressed: () => Navigator.pop(context, 'Hapus Foto'),
+                                            child: const Text(
+                                              'Hapus Foto',
+                                              style: TextStyle(
+                                                  fontSize: 15.0,
+                                                  color: Colors.white
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      actions: <Widget>[
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                  elevation: 10.0,
+                                                  primary: HexColor("#707070")
+                                              ),
+                                              onPressed: () => Navigator.pop(context, 'Batal'),
+                                              child: const Text(
+                                                'Batal',
+                                                style: TextStyle(
+                                                    fontSize: 15.0,
+                                                    color: Colors.white
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 10),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                  elevation: 10.0,
+                                                  primary: HexColor("#707070")
+                                              ),
+                                              onPressed: () => Navigator.pop(context, 'Simpan'),
+                                              child: const Text(
+                                                'Simpan',
+                                                style: TextStyle(
+                                                    fontSize: 15.0,
+                                                    color: Colors.white
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                }
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      color: Colors.white,
-                      onPressed: () {
-                        print("EDIT");
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(height: screenSize.width < 1920 ? 30 : 5 * 2),
-                ContainerProfileWeb()
-              ],
+                  ),
+                  SizedBox(height: 30),
+                  ContainerProfile(),
+                  SizedBox(height: 30),
+                  ContainerDeleteAcc()
+                ],
+              ),
             ),
           ),
         )
