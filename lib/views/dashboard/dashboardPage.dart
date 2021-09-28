@@ -15,6 +15,14 @@ String token = "";
 String deviceId = "";
 String firstDate = "";
 String lastDate = "";
+Future<void> fill() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  token = prefs.getString("api_token")!;
+  // token = "bisa";
+  deviceId = prefs.getString("deviceID")!;
+  // deviceId = "jadi";
+  keyword = prefs.getString("keyword")!;
+}
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -44,12 +52,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   builder: (BuildContext context,
                       AsyncSnapshot<List<NewsChartModel>> snapshot) {
                     if (snapshot.hasData) {
-                      List<NewsChartModel>? articles = snapshot.data;
-                      return ListView.builder(
-                          itemCount: articles!.length,
-                          itemBuilder: (context, index) {
-                            return NewsChart(articles);
-                          });
+                      return newsChartTile(context, snapshot);
                     }
                     return Center(
                       child: CircularProgressIndicator(),
@@ -61,12 +64,7 @@ class _DashboardPageState extends State<DashboardPage> {
               builder: (BuildContext context,
                   AsyncSnapshot<List<PublisherModel>> snapshot) {
                 if (snapshot.hasData) {
-                  List<PublisherModel>? news = snapshot.data;
-                  return ListView.builder(
-                      itemCount: news!.length,
-                      itemBuilder: (context, index) {
-                        return publisherListTile(news[index], context);
-                      });
+                  return publisherListTile(snapshot, context);
                 }
                 return Center(
                   child: CircularProgressIndicator(),
@@ -78,13 +76,4 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
     );
   }
-}
-
-Future<void> fill() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  token = prefs.getString("api_token")!;
-  // token = "bisa";
-  deviceId = prefs.getString("deviceID")!;
-  // deviceId = "jadi";
-  keyword = prefs.getString("keyword")!;
 }

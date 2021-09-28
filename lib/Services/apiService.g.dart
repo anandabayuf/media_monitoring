@@ -118,11 +118,14 @@ class _RestClient implements RestClient {
   Future<ApiResponse> publisher(keyword, token, deviceID) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'q': keyword};
-    final _data = {'token': token};
+    final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ApiResponse>(Options(
                 method: 'GET',
-                headers: <String, dynamic>{r'DeviceID': deviceID},
+                headers: <String, dynamic>{
+                  r'token': token,
+                  r'DeviceID': deviceID
+                },
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
             .compose(_dio.options, 'news/search/publisherNews',
@@ -137,21 +140,67 @@ class _RestClient implements RestClient {
       keyword, firstDate, lastDate, token, deviceID) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'q': keyword};
-    final _data = {
-      'firstDate': firstDate,
-      'lastDate': lastDate,
-      'token': token
-    };
+    final _data = {'firstDate': firstDate, 'lastDate': lastDate};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ApiResponse>(Options(
                 method: 'GET',
-                headers: <String, dynamic>{r'DeviceID': deviceID},
+                headers: <String, dynamic>{
+                  r'token': token,
+                  r'DeviceID': deviceID
+                },
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
             .compose(_dio.options, 'news/search/rangeNews',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ApiResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SignupApiResponse> updateName(id, name, token, deviceID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = {'id': id, 'name': name};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SignupApiResponse>(Options(
+                method: 'PUT',
+                headers: <String, dynamic>{
+                  r'token': token,
+                  r'DeviceID': deviceID
+                },
+                extra: _extra,
+                contentType: 'application/x-www-form-urlencoded')
+            .compose(_dio.options, 'user/update/name',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SignupApiResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SignupApiResponse> updatePassword(
+      id, oldPassword, newPassword, token, deviceID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = {
+      'id': id,
+      'oldPassword': oldPassword,
+      'newPassword': newPassword
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SignupApiResponse>(Options(
+                method: 'PUT',
+                headers: <String, dynamic>{
+                  r'token': token,
+                  r'DeviceID': deviceID
+                },
+                extra: _extra,
+                contentType: 'application/x-www-form-urlencoded')
+            .compose(_dio.options, 'user/update/password',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SignupApiResponse.fromJson(_result.data!);
     return value;
   }
 

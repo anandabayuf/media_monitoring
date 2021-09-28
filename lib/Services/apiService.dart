@@ -48,7 +48,7 @@ abstract class RestClient {
   @FormUrlEncoded()
   @GET("news/search/publisherNews")
   Future<ApiResponse> publisher(@Query("q") String keyword,
-      @Field("token") String token, @Header("DeviceID") String deviceID);
+      @Header("token") String token, @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
   @GET("news/search/rangeNews")
@@ -56,6 +56,23 @@ abstract class RestClient {
       @Query("q") String keyword,
       @Field("firstDate") String firstDate,
       @Field("lastDate") String lastDate,
-      @Field("token") String token,
+      @Header("token") String token,
+      @Header("DeviceID") String deviceID);
+
+  @FormUrlEncoded()
+  @PUT("user/update/name")
+  Future<SignupApiResponse> updateName(
+      @Field("id") int id,
+      @Field("name") String name,
+      @Header("token") String token,
+      @Header("DeviceID") String deviceID);
+
+  @FormUrlEncoded()
+  @PUT("user/update/password")
+  Future<SignupApiResponse> updatePassword(
+      @Field("id") int id,
+      @Field("oldPassword") String oldPassword,
+      @Field("newPassword") String newPassword,
+      @Header("token") String token,
       @Header("DeviceID") String deviceID);
 }

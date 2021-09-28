@@ -27,7 +27,7 @@ class LoginController implements LoginInterface {
       print(status);
       if (response.status == 1) {
         UserModel user = UserModel.fromJson(response.data);
-        this.success(user.token, deviceID, user.role);
+        this.success(user.token, deviceID, user.role, user.id);
         view.finish();
       } else {
         view.toast("Login Gagal, Silahkan Ulangi");
@@ -39,10 +39,11 @@ class LoginController implements LoginInterface {
   }
 
   @override
-  void success(String token, String deviceID, String role) async {
+  void success(String token, String deviceID, String role, int id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString("api_token", token);
     await prefs.setString("deviceID", deviceID);
     await prefs.setString("role", role);
+    await prefs.setInt("id", id);
   }
 }

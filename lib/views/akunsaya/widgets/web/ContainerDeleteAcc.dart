@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Services/apiService.dart';
+import 'package:web_media_monitoring/views/dashboard/dashboardPage.dart';
 
 class ContainerDeleteAcc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     RestClient api = RestClient(Dio());
+    String token = "";
+    String deviceId = "";
 
     return Container(
       padding: EdgeInsets.all(10.0),
@@ -67,8 +70,12 @@ class ContainerDeleteAcc extends StatelessWidget {
                             onPressed: () async {
                               //logika hapus akun
                               //...
+                              SharedPreferences pref =
+                                  await SharedPreferences.getInstance();
+                              token = (await pref.getString("api_token"))!;
+                              deviceId = (await pref.getString("DeviceID"))!;
 
-                              // api.deleteUser(2, "notYet", token, deviceID);
+                              api.deleteUser(2, "notYet", token, deviceId);
                               Navigator.pop(context, 'Ya, Hapus');
 
                               //dialog sukses hapus akun
