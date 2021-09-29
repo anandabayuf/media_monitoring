@@ -15,6 +15,7 @@ String token = "";
 String deviceId = "";
 String firstDate = "";
 String lastDate = "";
+late SearchController _searchController = new SearchController();
 Future<void> fill() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   token = prefs.getString("api_token")!;
@@ -24,21 +25,28 @@ Future<void> fill() async {
   keyword = prefs.getString("keyword")!;
 }
 
+Future<List<NewsChartModel>> getChart() async {
+  DateTime now = DateTime.now();
+  DateTime sevenDaysAgo = now.subtract(Duration(days: 7));
+  firstDate = DateFormat('yyyy-mm-dd').format(now);
+  lastDate = DateFormat('yyyy-mm-dd').format(sevenDaysAgo);
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  token = await prefs.getString("api_token") ?? "undifined";
+  deviceId = prefs.getString("DeviceID") ?? "undifined";
+
+  return _searchController.getNewsChartData(
+      keyword, firstDate, lastDate, token, deviceId);
+}
+
 class DashboardPage extends StatefulWidget {
   @override
   _DashboardPageState createState() => _DashboardPageState();
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  late SearchController _searchController = new SearchController();
-
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    DateTime sevenDaysAgo = now.subtract(Duration(days: 7));
-
-    firstDate = DateFormat('yyyy-mm-dd').format(now);
-    lastDate = DateFormat('yyyy-mm-dd').format(sevenDaysAgo);
     fill();
     return Container(
       child: Column(
@@ -47,8 +55,7 @@ class _DashboardPageState extends State<DashboardPage> {
         children: [
           Expanded(
               child: FutureBuilder(
-                  future: _searchController.getNewsChartData(
-                      keyword, firstDate, lastDate, token, deviceId),
+                  future: getChart(),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<NewsChartModel>> snapshot) {
                     if (snapshot.hasData) {

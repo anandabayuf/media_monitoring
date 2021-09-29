@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:web_media_monitoring/Services/apiService.dart';
 import 'package:web_media_monitoring/views/akunsaya/widgets/web/ContainerProfile.dart';
 import 'package:web_media_monitoring/views/akunsaya/widgets/web/ContainerDeleteAcc.dart';
 
@@ -9,6 +11,7 @@ class MyAccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    RestClient api = RestClient(Dio());
 
     return Scaffold(
       appBar: AppBar(
@@ -247,9 +250,23 @@ class MyAccountScreen extends StatelessWidget {
                                                           elevation: 10.0,
                                                           primary:
                                                               Colors.green),
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          context, 'Simpan'),
+                                                  onPressed: () async {
+                                                    String token = "";
+                                                    String deviceId = "";
+                                                    int id = -1;
+                                                    SharedPreferences prefs =
+                                                        await SharedPreferences
+                                                            .getInstance();
+                                                    token = prefs.getString(
+                                                        "api_token")!;
+                                                    deviceId = prefs
+                                                        .getString("DeviceID")!;
+                                                    id = prefs.getInt("id")!;
+                                                    //API integration
+
+                                                    Navigator.pop(
+                                                        context, 'Simpan');
+                                                  },
                                                   child: const Text(
                                                     'Simpan',
                                                     style: TextStyle(

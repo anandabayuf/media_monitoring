@@ -22,26 +22,31 @@ class LoginController implements LoginInterface {
     if (deviceID is String) {
       print('deviceID: $deviceID');
     }
-    await api.login(email, password, deviceID).then((response) async {
-      int status = response.status;
-      print(status);
-      if (response.status == 1) {
-        UserModel user = UserModel.fromJson(response.data);
-        this.success(user.token, deviceID, user.role, user.id);
-        view.finish();
-      } else {
-        view.toast("Login Gagal, Silahkan Ulangi");
-      }
-    }).catchError((e) {
-      print("Exception $e");
-      view.toast("Terjadi Kesalahan");
-    });
+    String token = "masuk";
+    String role = "client";
+    int id = 1;
+    this.success(token, deviceID, role, id);
+    view.finish();
+    // await api.login(email, password, deviceID).then((response) async {
+    //   int status = response.status;
+    //   print(status);
+    //   if (response.status == 1) {
+    //     UserModel user = UserModel.fromJson(response.data);
+    //     this.success(user.token, deviceID, user.role, user.id);
+    //     view.finish();
+    //   } else {
+    //     view.toast("Login Gagal, Silahkan Ulangi");
+    //   }
+    // }).catchError((e) {
+    //   print("Exception $e");
+    //   view.toast("Terjadi Kesalahan");
+    // });
   }
 
   @override
   void success(String token, String deviceID, String role, int id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString("api_token", token);
+    await prefs.setString("api_token", "masuk");
     await prefs.setString("deviceID", deviceID);
     await prefs.setString("role", role);
     await prefs.setInt("id", id);

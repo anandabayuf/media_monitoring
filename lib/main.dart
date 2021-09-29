@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/loginPage': (context) => LoginScreen(),
         '/signupPage': (context) => SignupScreen(),
-        '/search': (context) => SearchScreen(),
+        '/clientPage': (context) => SearchScreen(),
         '/dashboardPage': (context) => DashboardPage(),
         '/myAccount': (context) => MyAccountScreen()
       },
