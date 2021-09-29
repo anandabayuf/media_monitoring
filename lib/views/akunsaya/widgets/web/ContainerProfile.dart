@@ -153,8 +153,11 @@ class _ContainerProfileState extends State<ContainerProfile> {
                                   SharedPreferences prefs =
                                       await SharedPreferences.getInstance();
                                   token = prefs.getString("api_token")!;
-                                  deviceId = prefs.getString("DeviceID")!;
+                                  deviceId = prefs.getString("deviceID")!;
                                   id = prefs.getInt("id")!;
+                                  print("token: $token");
+                                  print("deviceID: $deviceId");
+                                  print("id = $id");
                                   api.updateName(
                                       id, this.username, token, deviceId);
 
@@ -430,8 +433,12 @@ class _ContainerProfileState extends State<ContainerProfile> {
                                             await SharedPreferences
                                                 .getInstance();
                                         token = prefs.getString("api_token")!;
-                                        deviceId = prefs.getString("DeviceID")!;
+                                        deviceId = prefs.getString("deviceID")!;
                                         id = prefs.getInt("id")!;
+                                        print("token: $token");
+                                        print("deviceID: $deviceId");
+                                        print("id = $id");
+
                                         api.updatePassword(id, oldPassword,
                                             newPassword, token, deviceId);
                                         setState(() {

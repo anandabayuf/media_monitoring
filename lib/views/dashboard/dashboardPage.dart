@@ -13,41 +13,22 @@ import 'package:web_media_monitoring/newsChart.dart';
 String keyword = "";
 String token = "";
 String deviceId = "";
-String firstDate = "";
-String lastDate = "";
+
 late SearchController _searchController = new SearchController();
-Future<void> fill() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  token = prefs.getString("api_token")!;
-  // token = "bisa";
-  deviceId = prefs.getString("deviceID")!;
-  // deviceId = "jadi";
-  keyword = prefs.getString("keyword")!;
-}
-
-Future<List<NewsChartModel>> getChart() async {
-  DateTime now = DateTime.now();
-  DateTime sevenDaysAgo = now.subtract(Duration(days: 7));
-  firstDate = DateFormat('yyyy-mm-dd').format(now);
-  lastDate = DateFormat('yyyy-mm-dd').format(sevenDaysAgo);
-
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  token = await prefs.getString("api_token") ?? "undifined";
-  deviceId = prefs.getString("DeviceID") ?? "undifined";
-
-  return _searchController.getNewsChartData(
-      keyword, firstDate, lastDate, token, deviceId);
-}
 
 class DashboardPage extends StatefulWidget {
+  String keyword;
+  DashboardPage(this.keyword);
   @override
-  _DashboardPageState createState() => _DashboardPageState();
+  _DashboardPageState createState() => _DashboardPageState(this.keyword);
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  String keyword;
+  _DashboardPageState(this.keyword);
+
   @override
   Widget build(BuildContext context) {
-    fill();
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -55,7 +36,7 @@ class _DashboardPageState extends State<DashboardPage> {
         children: [
           Expanded(
               child: FutureBuilder(
-                  future: getChart(),
+                  future: _searchController.getChart(keyword),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<NewsChartModel>> snapshot) {
                     if (snapshot.hasData) {
@@ -67,7 +48,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   })),
           Expanded(
             child: FutureBuilder(
-              future: _searchController.getPublisher(keyword, token, deviceId),
+              future: _searchController.getListPublisher(keyword),
               builder: (BuildContext context,
                   AsyncSnapshot<List<PublisherModel>> snapshot) {
                 if (snapshot.hasData) {

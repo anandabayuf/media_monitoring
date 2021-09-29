@@ -73,7 +73,7 @@ class ContainerDeleteAcc extends StatelessWidget {
                               SharedPreferences pref =
                                   await SharedPreferences.getInstance();
                               token = (await pref.getString("api_token"))!;
-                              deviceId = (await pref.getString("DeviceID"))!;
+                              deviceId = (await pref.getString("deviceID"))!;
 
                               api.deleteUser(2, "notYet", token, deviceId);
                               Navigator.pop(context, 'Ya, Hapus');
