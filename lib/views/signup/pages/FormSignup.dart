@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 import 'package:web_media_monitoring/Controller/signupController.dart';
@@ -203,11 +202,4 @@ class FormSignupState extends State<FormSignup> {
       ]),
     );
   }
-
-  @override
-  @override
-  void finish() => Navigator.of(context).pushReplacementNamed('/loginPage');
-
-  @override
-  void toast(String message) => Fluttertoast.showToast(msg: message);
 }

@@ -10,26 +10,20 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              HexColor("#616161"),
-              Colors.black
-            ]
-          )
-        ),
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            if (constraints.maxWidth > 800) {
-              return ContainerWidgetWeb();
-            } else {
-              return ContainerWidgetMobile();
-            }
-          },
-        ),
-      )
-    );
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [HexColor("#616161"), Colors.black])),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              if (constraints.maxWidth > 800) {
+                return ContainerWidgetWeb();
+              } else {
+                return ContainerWidgetMobile();
+              }
+            },
+          ),
+        ));
   }
 }

@@ -60,11 +60,12 @@ class SearchController extends GetxController {
     return news;
   }
 
-  Future<List<NewsChartModel>> getChart(String keyword) async {
+  Future<List<NewsChartModel>> getChart() async {
     String firstDate;
     String lastDate;
     String token;
     String deviceId;
+    String keyword;
     DateTime now = DateTime.now();
     DateTime sevenDaysAgo = now.subtract(Duration(days: 6));
     firstDate = DateFormat('yyyy-mm-dd').format(now);
@@ -72,17 +73,22 @@ class SearchController extends GetxController {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = "Bearer ${prefs.getString("api_token") ?? "undifined"}";
-    deviceId = prefs.getString("DeviceID") ?? "undifined";
-
+    deviceId = prefs.getString("deviceID") ?? "undifined";
+    keyword = prefs.getString("keyword") ?? "undifined";
+    print("token: $token");
+    print("deviceID: $deviceId");
+    print("keyword: $keyword");
     return getNewsChartData(keyword, firstDate, lastDate, token, deviceId);
   }
 
-  Future<List<PublisherModel>> getListPublisher(String keyword) async {
+  Future<List<PublisherModel>> getListPublisher() async {
     String token;
     String deviceId;
+    String keyword;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = "Bearer ${prefs.getString("api_token") ?? "undifined"}";
     deviceId = prefs.getString("DeviceID") ?? "undifined";
+    keyword = prefs.getString("keyword") ?? "undifined";
 
     return getPublisher(keyword, token, deviceId);
   }

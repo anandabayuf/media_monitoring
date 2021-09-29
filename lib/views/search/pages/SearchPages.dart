@@ -1,17 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:web_media_monitoring/views/akunsaya/pages/AkunSayaPages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:web_media_monitoring/views/dashboard/dashboardPage.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:web_media_monitoring/controller/authentication.dart';
-// import 'package:web_media_monitoring/controller/searchController.dart';
-//
-// void _logout() async {
-//   SharedPreferences prefs = await SharedPreferences.getInstance();
-//   prefs.clear();
-// }
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -19,11 +9,6 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  // late SearchController searchController;
-  // late String keyword;
-  // late String deviceID;
-  // late String token;
-  // late Authentication authentication;
   late TextEditingController _keyword;
   final _formKey = GlobalKey<FormState>();
 
@@ -124,7 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   onTap: () {
                     // Update the state of the app
-                    Navigator.of(context).pushReplacementNamed('/myAccount');
+                    Navigator.of(context).pushReplacementNamed('/myaccount');
                     // Then close the drawer
                     //Navigator.pop(context);
                   },
@@ -145,11 +130,18 @@ class _SearchScreenState extends State<SearchScreen> {
                         'Keluar',
                         style: TextStyle(fontSize: 15.0, color: Colors.red),
                       ),
-                      onTap: () {
+                      onTap: () async {
                         // Update the state of the app
                         // ...
                         // Then close the drawer
                         Navigator.pop(context);
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.clear();
+                        // Then close the drawer
+                        // Navigator.pop(context);
+                        Navigator.of(context)
+                            .pushReplacementNamed("/loginPage");
                       },
                     ),
                   ),
@@ -207,15 +199,16 @@ class _SearchScreenState extends State<SearchScreen> {
                             elevation: 10,
                             primary: HexColor("#76767A"),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               //buat test masuk atau engga
                               print("Cari " + this._keyword.text);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          DashboardPage(this._keyword.text)));
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setString(
+                                  "keyword", this._keyword.text.trim());
+                              Navigator.of(context)
+                                  .pushReplacementNamed("/dashboard");
                             }
                           },
                           child: const Text(

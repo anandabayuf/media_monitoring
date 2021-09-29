@@ -1,9 +1,9 @@
-import 'package:dio/dio.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:web_media_monitoring/Services/apiService.dart';
+
 import 'package:web_media_monitoring/views/akunsaya/widgets/web/ContainerProfile.dart';
 import 'package:web_media_monitoring/views/akunsaya/widgets/web/ContainerDeleteAcc.dart';
 
@@ -11,7 +11,7 @@ class MyAccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    RestClient api = RestClient(Dio());
+    
 
     return Scaffold(
       appBar: AppBar(

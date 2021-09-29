@@ -21,7 +21,7 @@ class FormLoginState extends State<FormLogin> {
   late TextEditingController _email;
   late TextEditingController _password;
   final _formKey = GlobalKey<FormState>();
-  late String deviceID;
+  late String deviceID = "";
   late String browserID;
   var id = nanoid();
   var customLengthId = nanoid(16);
@@ -111,6 +111,8 @@ class FormLoginState extends State<FormLogin> {
               primary: HexColor("#76767A"),
             ),
             onPressed: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              deviceID = prefs.getString("deviceID") ?? "undifined";
               if (deviceID.contains("Mozilla")) {
                 String now = DateTime.now().toString();
                 String hash = md5.convert(utf8.encode(now)).toString();
@@ -132,8 +134,6 @@ class FormLoginState extends State<FormLogin> {
       ]),
     );
   }
-
-  
 
   void toast(String message) => Fluttertoast.showToast(msg: message);
 }

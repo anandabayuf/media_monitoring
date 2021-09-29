@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Services/apiService.dart';
-import 'package:web_media_monitoring/views/dashboard/dashboardPage.dart';
+
 
 class ContainerDeleteAcc extends StatelessWidget {
   @override
@@ -72,8 +72,8 @@ class ContainerDeleteAcc extends StatelessWidget {
                               //...
                               SharedPreferences pref =
                                   await SharedPreferences.getInstance();
-                              token = (await pref.getString("api_token"))!;
-                              deviceId = (await pref.getString("deviceID"))!;
+                              token = ( pref.getString("api_token"))!;
+                              deviceId = ( pref.getString("deviceID"))!;
 
                               api.deleteUser(2, "notYet", token, deviceId);
                               Navigator.pop(context, 'Ya, Hapus');
