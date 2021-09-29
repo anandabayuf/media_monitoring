@@ -8,7 +8,7 @@ import 'package:nanoid/nanoid.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Controller/loginController.dart';
-import 'package:web_media_monitoring/Controller/loginInterface.dart';
+
 import 'package:crypto/crypto.dart';
 
 class FormLogin extends StatefulWidget {
@@ -16,7 +16,7 @@ class FormLogin extends StatefulWidget {
   FormLoginState createState() => FormLoginState();
 }
 
-class FormLoginState extends State<FormLogin> implements LoginViewModel {
+class FormLoginState extends State<FormLogin> {
   late LoginController presenter;
   late TextEditingController _email;
   late TextEditingController _password;
@@ -31,7 +31,7 @@ class FormLoginState extends State<FormLogin> implements LoginViewModel {
     super.initState();
     _email = TextEditingController();
     _password = TextEditingController();
-    presenter = LoginController(this);
+    presenter = LoginController(context);
   }
 
   @override
@@ -111,9 +111,6 @@ class FormLoginState extends State<FormLogin> implements LoginViewModel {
               primary: HexColor("#76767A"),
             ),
             onPressed: () async {
-              late String _passwordEncode =
-                  md5.convert(utf8.encode(_password.text.trim())).toString();
-              deviceID = (await PlatformDeviceId.getDeviceId)!;
               if (deviceID.contains("Mozilla")) {
                 String now = DateTime.now().toString();
                 String hash = md5.convert(utf8.encode(now)).toString();
@@ -122,7 +119,8 @@ class FormLoginState extends State<FormLogin> implements LoginViewModel {
                 deviceID = (await PlatformDeviceId.getDeviceId)!;
               }
               if (_formKey.currentState!.validate()) {
-                presenter.login(_email.text.trim(), _passwordEncode, deviceID);
+                presenter.login(
+                    _email.text.trim(), _password.text.trim(), deviceID);
               }
             },
             child: const Text(
@@ -135,19 +133,7 @@ class FormLoginState extends State<FormLogin> implements LoginViewModel {
     );
   }
 
-  @override
-  Future<void> finish() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? role = prefs.getString('role');
-    if (role == 'admin') {
-      Navigator.of(context).pushReplacementNamed('/adminPage');
-    } else if (role == 'operator') {
-      Navigator.of(context).pushReplacementNamed('/operatorPage');
-    } else {
-      Navigator.of(context).pushReplacementNamed('/clientPage');
-    }
-  }
+  
 
-  @override
   void toast(String message) => Fluttertoast.showToast(msg: message);
 }

@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 import 'package:web_media_monitoring/Controller/signupController.dart';
-import 'package:web_media_monitoring/Controller/signupInterface.dart';
+
 import 'package:crypto/crypto.dart';
 
 class FormSignup extends StatefulWidget {
@@ -13,7 +13,7 @@ class FormSignup extends StatefulWidget {
   FormSignupState createState() => FormSignupState();
 }
 
-class FormSignupState extends State<FormSignup> implements SignupViewModel {
+class FormSignupState extends State<FormSignup> {
   late SignupController signupController;
   late TextEditingController _nama;
   late TextEditingController _email;
@@ -29,7 +29,7 @@ class FormSignupState extends State<FormSignup> implements SignupViewModel {
     _email = TextEditingController();
     _password = TextEditingController();
     _konfirmasiPassword = TextEditingController();
-    signupController = SignupController(this);
+    signupController = SignupController(context);
   }
 
   @override

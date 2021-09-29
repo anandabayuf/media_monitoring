@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/model/newsChartModel.dart';
 
@@ -35,12 +36,8 @@ class SearchController extends GetxController {
     return publisher;
   }
 
-  Future<List<NewsChartModel>> getNewsChartData(
-      String keyword,
-      String firstDate,
-      String lastDate,
-      String token,
-      String deviceID) async {
+  Future<List<NewsChartModel>> getNewsChartData(String keyword,
+      String firstDate, String lastDate, String token, String deviceID) async {
     await api
         .getDataChart(keyword, firstDate, lastDate, token, deviceID)
         .then((response) {
@@ -56,11 +53,37 @@ class SearchController extends GetxController {
           String newToken = token.token;
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setString("api_token", newToken);
-          getNewsChartData(
-              keyword, firstDate, lastDate, newToken, deviceID);
+          getNewsChartData(keyword, firstDate, lastDate, newToken, deviceID);
         });
       }
     });
     return news;
+  }
+
+  Future<List<NewsChartModel>> getChart(String keyword) async {
+    String firstDate;
+    String lastDate;
+    String token;
+    String deviceId;
+    DateTime now = DateTime.now();
+    DateTime sevenDaysAgo = now.subtract(Duration(days: 6));
+    firstDate = DateFormat('yyyy-mm-dd').format(now);
+    lastDate = DateFormat('yyyy-mm-dd').format(sevenDaysAgo);
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = "Bearer ${prefs.getString("api_token") ?? "undifined"}";
+    deviceId = prefs.getString("DeviceID") ?? "undifined";
+
+    return getNewsChartData(keyword, firstDate, lastDate, token, deviceId);
+  }
+
+  Future<List<PublisherModel>> getListPublisher(String keyword) async {
+    String token;
+    String deviceId;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = "Bearer ${prefs.getString("api_token") ?? "undifined"}";
+    deviceId = prefs.getString("DeviceID") ?? "undifined";
+
+    return getPublisher(keyword, token, deviceId);
   }
 }
