@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
         '/loginPage': (context) => LoginScreen(),
         '/signupPage': (context) => SignupScreen(),
         '/search': (context) => SearchScreen(),
-        '/myAccount': (context) => MyAccountScreen()
+        '/dashboard': (context) => DashboardPage(),
+        '/myaccount': (context) => MyAccountScreen()
       },
       title: 'Media Monitoring',
     );
