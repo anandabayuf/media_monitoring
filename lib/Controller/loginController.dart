@@ -13,7 +13,7 @@ class LoginController {
   BuildContext context;
   LoginController(this.context);
   RestClient api = RestClient(Dio());
-  String? deviceID;
+  String? deviceID = "";
 
   void login(String email, String password, String deviceID) async {
     print('email: $email');
@@ -26,6 +26,7 @@ class LoginController {
     int id = 2;
     var role = "client";
     success(token, deviceID, role, id);
+    finish(role);
     
     // await api.login(email, password, deviceID).then((response) async {
     //   int status = response.status;
@@ -57,7 +58,7 @@ class LoginController {
     } else if (role == 'operator') {
       Navigator.of(context).pushReplacementNamed('/operatorPage');
     } else {
-      Navigator.of(context).pushReplacementNamed('/clientPage');
+      Navigator.of(context).pushReplacementNamed('/search');
     }
   }
 }

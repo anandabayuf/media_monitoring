@@ -21,7 +21,7 @@ class FormLoginState extends State<FormLogin> {
   late TextEditingController _email;
   late TextEditingController _password;
   final _formKey = GlobalKey<FormState>();
-  late String deviceID;
+  late String deviceID = "";
   late String browserID;
   var id = nanoid();
   var customLengthId = nanoid(16);

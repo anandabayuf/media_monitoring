@@ -124,7 +124,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   onTap: () {
                     // Update the state of the app
-                    Navigator.of(context).pushReplacementNamed('/myAccount');
+                    Navigator.of(context).pushReplacementNamed('/myaccount');
                     // Then close the drawer
                     //Navigator.pop(context);
                   },
