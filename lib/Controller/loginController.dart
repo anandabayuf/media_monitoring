@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Services/apiService.dart';
 
@@ -21,7 +23,6 @@ class LoginController {
     var role = "client";
     success(token, deviceID, role, id);
     finish(role);
-    
     // await api.login(email, password, deviceID).then((response) async {
     //   int status = response.status;
     //   print(status);
