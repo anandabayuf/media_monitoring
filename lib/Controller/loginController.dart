@@ -1,13 +1,7 @@
-import 'dart:io';
-import 'dart:js';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/route_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Services/apiService.dart';
-import 'package:web_media_monitoring/model/userModel.dart';
 
 class LoginController {
   BuildContext context;

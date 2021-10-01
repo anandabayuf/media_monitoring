@@ -2,20 +2,20 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
-class BeritaChart extends StatelessWidget {
+class TweetsChart extends StatelessWidget {
   final List<charts.Series<dynamic, String>> seriesList;
   final bool animate;
   final String keyword;
 
-  BeritaChart(this.seriesList, {required this.animate, required this.keyword});
+  TweetsChart(this.seriesList, {required this.animate, required this.keyword});
 
   /// Creates a [BarChart] with sample data and no transition.
-  factory BeritaChart.withSampleData(String keyword) {
-    return new BeritaChart(
-      _createSampleData(),
-      // Disable animations for image tests.
-      animate: true,
-      keyword: keyword
+  factory TweetsChart.withSampleData(String keyword) {
+    return new TweetsChart(
+        _createSampleData(),
+        // Disable animations for image tests.
+        animate: true,
+        keyword: keyword
     );
   }
 
@@ -27,51 +27,51 @@ class BeritaChart extends StatelessWidget {
       animate: animate,
       animationDuration: Duration(milliseconds: 600),
       domainAxis: new charts.OrdinalAxisSpec(
-        renderSpec: new charts.SmallTickRendererSpec(
-          // Tick and Label styling here.
-          labelStyle: new charts.TextStyleSpec(
-            fontSize: 10, // size in Pts.
-            color: charts.Color.fromHex(code: "#707070")
-          ),
-          // Change the line colors to match text color.
-          lineStyle: new charts.LineStyleSpec(
-            color: charts.Color.fromHex(code: "#707070")
+          renderSpec: new charts.SmallTickRendererSpec(
+            // Tick and Label styling here.
+              labelStyle: new charts.TextStyleSpec(
+                  fontSize: 10, // size in Pts.
+                  color: charts.Color.fromHex(code: "#707070")
+              ),
+              // Change the line colors to match text color.
+              lineStyle: new charts.LineStyleSpec(
+                  color: charts.Color.fromHex(code: "#707070")
+              )
           )
-        )
       ),
       /// Assign a custom style for the measure axis.
       primaryMeasureAxis: new charts.NumericAxisSpec(
-        renderSpec: new charts.GridlineRendererSpec(
-          // Tick and Label styling here.
-          labelStyle: new charts.TextStyleSpec(
-            fontSize: 10, // size in Pts.
-            color: charts.Color.fromHex(code: "#707070")
-          ),
-          // Change the line colors to match text color.
-          lineStyle: new charts.LineStyleSpec(
-            color: charts.Color.fromHex(code: "#707070")
+          renderSpec: new charts.GridlineRendererSpec(
+            // Tick and Label styling here.
+              labelStyle: new charts.TextStyleSpec(
+                  fontSize: 10, // size in Pts.
+                  color: charts.Color.fromHex(code: "#707070")
+              ),
+              // Change the line colors to match text color.
+              lineStyle: new charts.LineStyleSpec(
+                  color: charts.Color.fromHex(code: "#707070")
+              )
           )
-        )
       ),
       behaviors: [
         charts.ChartTitle(
-          "Grafik jumlah berita yang mengandung \n\"${this.keyword}\"",
-          behaviorPosition: charts.BehaviorPosition.top,
-          titleOutsideJustification: charts.OutsideJustification.start,
-          innerPadding: 18,
-          titleStyleSpec: charts.TextStyleSpec(
-            color: charts.Color.white,
-            fontSize: 12,
-          )
+            "Grafik jumlah tweets yang mengandung \n\"${this.keyword}\"",
+            behaviorPosition: charts.BehaviorPosition.top,
+            titleOutsideJustification: charts.OutsideJustification.start,
+            innerPadding: 18,
+            titleStyleSpec: charts.TextStyleSpec(
+              color: charts.Color.white,
+              fontSize: 12,
+            )
         ),
         charts.ChartTitle(
-          "Jumlah",
-          behaviorPosition: charts.BehaviorPosition.start,
-          titleOutsideJustification: charts.OutsideJustification.middle,
-          titleStyleSpec: charts.TextStyleSpec(
-            color: charts.Color.white,
-            fontSize: 10,
-          )
+            "Jumlah",
+            behaviorPosition: charts.BehaviorPosition.start,
+            titleOutsideJustification: charts.OutsideJustification.middle,
+            titleStyleSpec: charts.TextStyleSpec(
+              color: charts.Color.white,
+              fontSize: 10,
+            )
         ),
         charts.ChartTitle(
             "Tanggal",
@@ -96,7 +96,7 @@ class BeritaChart extends StatelessWidget {
       new OrdinalSales('2018', 5),
       new OrdinalSales('2019', 25),
       new OrdinalSales('2020', 100),
-      // new OrdinalSales('2021', 75),
+      new OrdinalSales('2021', 75),
     ];
 
     return [
