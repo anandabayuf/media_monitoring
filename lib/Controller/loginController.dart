@@ -1,19 +1,13 @@
-import 'dart:io';
-import 'dart:js';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/route_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Services/apiService.dart';
-import 'package:web_media_monitoring/model/userModel.dart';
 
 class LoginController {
   BuildContext context;
   LoginController(this.context);
   RestClient api = RestClient(Dio());
-  String? deviceID;
+  String? deviceID = "";
 
   void login(String email, String password, String deviceID) async {
     print('email: $email');
@@ -26,6 +20,7 @@ class LoginController {
     int id = 2;
     var role = "client";
     success(token, deviceID, role, id);
+    finish(role);
     
     // await api.login(email, password, deviceID).then((response) async {
     //   int status = response.status;
@@ -57,7 +52,7 @@ class LoginController {
     } else if (role == 'operator') {
       Navigator.of(context).pushReplacementNamed('/operatorPage');
     } else {
-      Navigator.of(context).pushReplacementNamed('/clientPage');
+      Navigator.of(context).pushReplacementNamed('/search');
     }
   }
 }
