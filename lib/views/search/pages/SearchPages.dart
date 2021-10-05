@@ -4,6 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:web_media_monitoring/views/akunsaya/pages/AkunSayaPages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/views/dashboard/dashboardPage.dart';
+import 'package:web_media_monitoring/views/dashboard/pages/DashboardPages.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:web_media_monitoring/controller/authentication.dart';
 // import 'package:web_media_monitoring/controller/searchController.dart';
@@ -195,6 +196,20 @@ class _SearchScreenState extends State<SearchScreen> {
                             }
                             return null;
                           },
+                          onFieldSubmitted: (String value) {
+                            if (_formKey.currentState!.validate()) {
+                              //buat test masuk atau engga
+                              print("Cari " + value);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                      DashboardScreen()
+                                  ),
+                              );
+                              this._keyword.clear();
+                            }
+                          },
                         ),
                       ),
                       SizedBox(height: 30),
@@ -211,11 +226,15 @@ class _SearchScreenState extends State<SearchScreen> {
                             if (_formKey.currentState!.validate()) {
                               //buat test masuk atau engga
                               print("Cari " + this._keyword.text);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          DashboardPage(this._keyword.text)));
+                              // Navigator.pushNamed(
+                              //   context,
+                              //   // MaterialPageRoute(
+                              //   //   builder: (context) =>
+                              //   //     DashboardPage(this._keyword.text)
+                              //   // ),
+                              //   DashboardScreen.routeName,
+                              //   arguments: this._keyword.text
+                              // );
                             }
                           },
                           child: const Text(

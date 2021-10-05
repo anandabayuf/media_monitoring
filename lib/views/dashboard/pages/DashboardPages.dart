@@ -253,7 +253,42 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     SizedBox(height: 10,),
                     Container(
                       width: 1280,
-                      child: Row(
+                      child: screenSize.width < 960 ?
+                      Column (
+                        children: [
+                          Container(
+                            height: 300,
+                            width: screenSize.width - 100,
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: HexColor("#707070")),
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: BeritaChart.withSampleData(this._keyword.text),
+                          ),
+                          SizedBox(height: 10,),
+                          Container(
+                              height: 300,
+                              width: screenSize.width - 100,
+                              padding: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: HexColor("#707070")),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: TweetsChart.withSampleData(this._keyword.text)
+                          ),
+                          SizedBox(height: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ContainerTotalBerita(this._keyword.text, this.newsTotal),
+                              SizedBox(width: 20.0,),
+                              ContainerTotalTweets(this._keyword.text, this.tweetsTotal),
+                            ],
+                          )
+                        ],
+                      ) :
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Flexible(
@@ -294,7 +329,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     SizedBox(height: 10,),
                     Container(
-                      child: Row(
+                      child: screenSize.width < 960 ?
+                      Column (
+                        children: [
+                          ContainerListPublisher(this._keyword.text),
+                          SizedBox(height: 10.0,),
+                          ContainerListTweets(this._keyword.text)
+                        ],
+                      ):
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ContainerListPublisher(this._keyword.text),
@@ -304,8 +347,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                     )
                   ],
-                )),
+                )
+            ),
           ),
-        ));
+        )
+    );
   }
 }

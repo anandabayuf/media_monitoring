@@ -12,99 +12,100 @@ class ContainerListPublisher extends StatelessWidget {
     this._keyword = keyword;
     this._data = Publisher("", "", 0);
     this._dataList = this._data.generateDummyPublisher();
-    print(this._dataList.length);
   }
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    return Flexible(
-      child: Container(
-        width: screenSize.width/3,
-        padding: EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-          border: Border.all(color: HexColor("#707070")),
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image.asset("assets/icons/newspaper.png", height: 32.0, width: 32.0,),
-                SizedBox(width: 10.0,),
-                Flexible(
-                  child: Text(
-                    "Daftar penerbit yang mengandung \"${this._keyword}\"",
-                    style: TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w100
-                    ),
-                    textAlign: TextAlign.center,
+    return Container(
+      width: screenSize.width < 960 ? screenSize.width - 100 : 400,
+      padding: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: HexColor("#707070")),
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Image.asset("assets/icons/newspaper.png", height: 32.0, width: 32.0,),
+              SizedBox(width: 10.0,),
+              Flexible(
+                child: Text(
+                  "Daftar penerbit yang mengandung \"${this._keyword}\"",
+                  style: TextStyle(
+                      fontSize: 15.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w100
                   ),
+                  textAlign: TextAlign.center,
                 ),
-              ],
-            ),
-            SizedBox(height: 10.0,),
-            Container(
-              height: screenSize.height/3,
-              child: SingleChildScrollView(
-                child: Container(
-                  child: SizedBox(
-                    height: screenSize.height/3,
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: this._dataList.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          color: HexColor("#415A80"),
-                          elevation: 10.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: ListTile(
-                            leading: Image.asset(
-                              this._dataList[index].iconDirectory,
-                              height: 32.0,
-                              width: 32.0,
-                            ),
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  this._dataList[index].name,
-                                  style: TextStyle(fontSize: 15.0, color: Colors.white),
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "${this._dataList[index].totalNews} berita",
-                                      style: TextStyle(fontSize: 15.0, color: Colors.white),
-                                    ),
-                                    SizedBox(width: 10.0,),
-                                    FaIcon(
-                                      FontAwesomeIcons.arrowCircleRight,
-                                      color: Colors.white,
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                            onTap: () {
-                              print("clicked publisher ke-${index}");
-                            },
-                          ),
-                        );
-                      }
-                ),
-                  ),
               ),
-            )
-            )
-          ],
-        ),
+            ],
+          ),
+          SizedBox(height: 10.0,),
+          Container(
+            height: screenSize.height/4,
+            child: SingleChildScrollView(
+              child: Container(
+                child: SizedBox(
+                  height: screenSize.height/3,
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: this._dataList.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        color: HexColor("#415A80"),
+                        elevation: 10.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: ListTile(
+                          leading: Image.asset(
+                            this._dataList[index].iconDirectory,
+                            height: 32.0,
+                            width: 32.0,
+                          ),
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                this._dataList[index].name,
+                                style: TextStyle(fontSize: 15.0, color: Colors.white),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "${this._dataList[index].totalNews} berita",
+                                    style: TextStyle(fontSize: 15.0, color: Colors.white),
+                                  ),
+                                  SizedBox(width: 10.0,),
+                                  FaIcon(
+                                    FontAwesomeIcons.arrowCircleRight,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          onTap: () {
+                            print("clicked publisher ke-${index}");
+                            Navigator.pushNamed(
+                              context,
+                              "/dashboard/listberita"
+                            );
+                          },
+                        ),
+                      );
+                    }
+              ),
+                ),
+            ),
+          )
+          )
+        ],
       ),
     );
   }

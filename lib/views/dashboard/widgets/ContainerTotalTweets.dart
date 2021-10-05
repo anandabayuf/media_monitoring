@@ -12,9 +12,11 @@ class ContainerTotalTweets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+
     return Container(
       height: 140,
-      width: 300,
+      width: screenSize.width < 960 ? (screenSize.width/3) + 50 : 300,
       padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         border: Border.all(color: HexColor("#707070")),
