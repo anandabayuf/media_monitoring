@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Media Monitoring',
       initialRoute: '/myaccount',
       routes: {
         '/login': (context) => LoginScreen(),
@@ -26,7 +27,6 @@ class MyApp extends StatelessWidget {
         '/dashboard/listtweets': (context) => ListTweetsScreen(),
         '/dashboard/listberita': (context) => ListBeritaScreen(),
       },
-      title: 'Media Monitoring',
     );
   }
 }

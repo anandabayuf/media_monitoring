@@ -45,6 +45,7 @@ class _ContainerProfileState extends State<ContainerProfile> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    bool mobile = screenSize.width < 800;
     RestClient api = RestClient(Dio());
 
     return Container(
@@ -79,14 +80,14 @@ class _ContainerProfileState extends State<ContainerProfile> {
                         child: Form(
                           key: this._formUsernameKey,
                           child: Container(
-                            width: 300,
+                            width: mobile ? 170 : 300,
                             child: TextFormField(
                               controller: this._username,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
-                                hintText: 'Masukkan nama anda...',
+                                hintText: 'masukkan nama anda...',
                                 fillColor: Colors.white,
                                 filled: true,
                               ),
@@ -96,10 +97,18 @@ class _ContainerProfileState extends State<ContainerProfile> {
                               maxLength: 25,
                               maxLines: 1,
                               validator: (String? value) {
-                                if (value == '' || value == ' ') {
+                                if (value == '' || value == ' ' || value!.trim() == '') {
                                   return 'Nama tidak boleh kosong';
                                 }
                                 return null;
+                              },
+                              onChanged: (String value) {
+                                if (_formUsernameKey.currentState!.validate()) {}
+                              },
+                              onFieldSubmitted: (String value) {
+                                if (_formUsernameKey.currentState!.validate()) {
+
+                                }
                               },
                             ),
                           ),
