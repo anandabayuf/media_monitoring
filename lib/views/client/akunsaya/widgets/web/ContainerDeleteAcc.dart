@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Services/apiService.dart';
-import 'package:web_media_monitoring/views/dashboard/dashboardPage.dart';
+import 'package:web_media_monitoring/views/client/dashboard/dashboardPage.dart';
 
 class ContainerDeleteAcc extends StatelessWidget {
   @override

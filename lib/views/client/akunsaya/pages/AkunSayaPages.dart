@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Services/apiService.dart';
-import 'package:web_media_monitoring/views/akunsaya/widgets/web/ContainerProfile.dart';
-import 'package:web_media_monitoring/views/akunsaya/widgets/web/ContainerDeleteAcc.dart';
+import 'package:web_media_monitoring/views/client/AppBarClient.dart';
+import 'package:web_media_monitoring/views/client/DrawerClient.dart';
+import 'package:web_media_monitoring/views/client/akunsaya/widgets/web/ContainerProfile.dart';
+import 'package:web_media_monitoring/views/client/akunsaya/widgets/web/ContainerDeleteAcc.dart';
 
 class MyAccountScreen extends StatelessWidget {
   @override
@@ -14,123 +16,8 @@ class MyAccountScreen extends StatelessWidget {
     RestClient api = RestClient(Dio());
 
     return Scaffold(
-      appBar: AppBar(
-        title: ListTile(
-          leading: CircleAvatar(
-            backgroundImage:
-                NetworkImage("assets/images/logo_media_monitoring.png"),
-          ),
-          title: Text(
-            "Media Monitoring",
-            style: TextStyle(
-                fontSize: 32.0,
-                fontWeight: FontWeight.w100,
-                color: Colors.white),
-          ),
-        ),
-        bottom: PreferredSize(
-            child: Container(
-              color: HexColor("#707070"),
-              height: 4.0,
-            ),
-            preferredSize: Size.fromHeight(4.0)),
-        backgroundColor: HexColor("#101010"),
-        toolbarHeight: 80.0,
-      ),
-      drawer: Drawer(
-          child: Container(
-        color: HexColor("#101010"),
-        child: Column(
-          children: [
-            Card(
-              color: HexColor("#101010"),
-              elevation: 10.0,
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: NetworkImage("https://picsum.photos/200"),
-                    radius: 50,
-                  ),
-                  SizedBox(height: screenSize.width < 1920 ? 10 : 5 * 2),
-                  Text(
-                    "John Doe",
-                    style: TextStyle(fontSize: 15.0, color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
-            Card(
-              color: HexColor("#101010"),
-              elevation: 10.0,
-              child: ListTile(
-                leading: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  'Cari Berita atau Tweets',
-                  style: TextStyle(fontSize: 15.0, color: Colors.white),
-                ),
-                onTap: () {
-                  // Update the state of the app
-                  Navigator.of(context).pushReplacementNamed('/search');
-                  // Then close the drawer
-                  //Navigator.pop(context);
-                },
-              ),
-            ),
-            Card(
-              color: HexColor("#101010"),
-              elevation: 10.0,
-              child: ListTile(
-                leading: Icon(
-                  Icons.account_circle_outlined,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  'Akun Saya',
-                  style: TextStyle(fontSize: 15.0, color: Colors.white),
-                ),
-                onTap: () {
-                  // Update the state of the app
-                  //Navigator.of(context).pushReplacementNamed('/akunsaya');
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Card(
-                  color: HexColor("#101010"),
-                  elevation: 10.0,
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.logout,
-                      color: Colors.red,
-                    ),
-                    title: Text(
-                      'Keluar',
-                      style: TextStyle(fontSize: 15.0, color: Colors.red),
-                    ),
-                    onTap: () async {
-                      // Update the state of the app
-                      // ...
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      prefs.clear();
-                      // Then close the drawer
-                      Navigator.pop(context);
-                      Navigator.of(context).pushReplacementNamed("/loginPage");
-                    },
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-      )),
+      appBar: AppBarClient(context),
+      drawer: DrawerClient(context),
       body: Container(
           width: screenSize.width,
           height: screenSize.height,

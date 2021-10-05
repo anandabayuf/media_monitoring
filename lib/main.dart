@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:web_media_monitoring/views/akunsaya/pages/AkunSayaPages.dart';
-import 'package:web_media_monitoring/views/listberita/pages/ListBeritaPages.dart';
-import 'package:web_media_monitoring/views/listtweets/pages/ListTweetsPages.dart';
+import 'package:web_media_monitoring/views/client/akunsaya/pages/AkunSayaPages.dart';
+import 'package:web_media_monitoring/views/client/listberita/pages/ListBeritaPages.dart';
+import 'package:web_media_monitoring/views/client/listtweets/pages/ListTweetsPages.dart';
 
-import 'views/dashboard/pages/DashboardPages.dart';
+import 'views/client/dashboard/pages/DashboardPages.dart';
 import 'views/login/pages/LoginPages.dart';
-import 'views/search/pages/SearchPages.dart';
+import 'views/client/search/pages/SearchPages.dart';
 import 'views/signup/pages/SignupPages.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/dashboard',
+      initialRoute: '/myaccount',
       routes: {
         '/login': (context) => LoginScreen(),
         '/signup': (context) => SignupScreen(),
