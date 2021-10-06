@@ -38,9 +38,10 @@ class ContainerListTweets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    bool isMobile = screenSize.width < 960;
 
     return Container(
-      width: screenSize.width < 960 ? screenSize.width - 100 : 500,
+      width: isMobile ? screenSize.width - 10 : 500,
       padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         border: Border.all(color: HexColor("#707070")),
@@ -70,7 +71,6 @@ class ContainerListTweets extends StatelessWidget {
           ),
           SizedBox(height: 10.0,),
           Container(
-              height: screenSize.height/4,
               child: SingleChildScrollView(
                 child: Container(
                   child: Column(
@@ -161,7 +161,7 @@ class ContainerListTweets extends StatelessWidget {
                                                                   seconds: DateTime.now().difference(this._dataList[index].publishedDate).inSeconds
                                                               )
                                                           ),
-                                                          locale: 'id'
+                                                          locale: isMobile ? 'en_short':'id'
                                                       )}",
                                                       style: TextStyle(
                                                           fontSize: 12.0,
@@ -295,8 +295,9 @@ class ContainerListTweets extends StatelessWidget {
                           onPressed: () {
                             print("Clicked tampilkan lebih banyak");
                             Navigator.pushNamed(
-                                context,
-                                "/dashboard/listtweets",
+                              context,
+                              "/dashboard/listtweets",
+                              arguments: this._keyword
                             );
                           },
                         ),

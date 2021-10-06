@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class ContainerTitle extends StatelessWidget{
   late String keyword;
   late String publisher;
+  late String iconDirectory;
 
-  ContainerTitle(String keyword, String publisher){
+  ContainerTitle(String keyword, String publisher, String iconDirectory){
     this.keyword = keyword;
     this.publisher = publisher;
+    this.iconDirectory = iconDirectory;
   }
 
   @override
@@ -42,7 +44,7 @@ class ContainerTitle extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                "assets/images/publisher/liputan6-logo.png",
+                iconDirectory,
                 width: 32.0,
                 height: 32.0,
               ),

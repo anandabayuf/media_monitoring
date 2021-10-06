@@ -79,7 +79,7 @@ class _DialogConfirmationOnDeleteAccState extends State<DialogConfirmationOnDele
                   text: "Mohon ketik "
                 ),
                 TextSpan(
-                  text: "${email} ",
+                  text: "${email}",
                   style: TextStyle(
                     fontSize: 15.0,
                     color: Colors.black,
@@ -101,7 +101,6 @@ class _DialogConfirmationOnDeleteAccState extends State<DialogConfirmationOnDele
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
                 ),
-                hintText: 'masukkan email anda...',
                 fillColor: Colors.white,
                 filled: true,
               ),
