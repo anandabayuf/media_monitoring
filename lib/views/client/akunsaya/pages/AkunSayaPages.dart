@@ -6,6 +6,7 @@ import 'package:web_media_monitoring/views/client/AppBarClient.dart';
 import 'package:web_media_monitoring/views/client/DrawerClient.dart';
 import 'package:web_media_monitoring/views/client/akunsaya/widgets/ContainerProfile.dart';
 import 'package:web_media_monitoring/views/client/akunsaya/widgets/ContainerDeleteAcc.dart';
+import 'package:web_media_monitoring/views/client/akunsaya/widgets/DialogEditAvatar.dart';
 
 class MyAccountScreen extends StatelessWidget {
   @override
@@ -34,11 +35,11 @@ class MyAccountScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     mobile ?
-                    SizedBox.shrink() :
-                    Text(
-                      "Akun Saya",
-                      style: TextStyle(fontSize: mobile ? 24.0 : 32.0, color: Colors.white),
-                    ),
+                      SizedBox.shrink() :
+                      Text(
+                        "Akun Saya",
+                        style: TextStyle(fontSize: mobile ? 24.0 : 32.0, color: Colors.white),
+                      ),
                     SizedBox(height: mobile ? 0: 30),
                     Align(
                       alignment: Alignment.center,
@@ -63,116 +64,17 @@ class MyAccountScreen extends StatelessWidget {
                                   shape: BoxShape.circle,
                                 ),
                                 child: IconButton(
-                                    icon: const Icon(Icons.edit),
-                                    color: Colors.white,
-                                    onPressed: () {
-                                      showDialog<String>(
-                                        barrierDismissible: false,
-                                        context: context,
-                                        builder: (BuildContext context) =>
-                                            AlertDialog(
-                                              backgroundColor: Colors.white.withOpacity(0.70),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(32.0)),
-                                              ),
-                                              title: Column(
-                                                children: [
-                                                  CircleAvatar(
-                                                    backgroundImage: NetworkImage(
-                                                        "https://picsum.photos/200"),
-                                                    radius: 100,
-                                                  ),
-                                                  SizedBox(height: 10),
-                                                  ElevatedButton(
-                                                    style: ElevatedButton.styleFrom(
-                                                        elevation: 10.0,
-                                                        primary: Colors.blue),
-                                                    onPressed: () => Navigator.pop(
-                                                        context, 'Unggah Foto'),
-                                                    child: const Text(
-                                                      'Unggah Foto',
-                                                      style: TextStyle(
-                                                          fontSize: 15.0,
-                                                          color: Colors.white),
-                                                    ),
-                                                  ),
-                                                  SizedBox(height: 10),
-                                                  ElevatedButton(
-                                                    style: ElevatedButton.styleFrom(
-                                                        elevation: 10.0,
-                                                        primary: Colors.red),
-                                                    onPressed: () => Navigator.pop(
-                                                        context, 'Hapus Foto'),
-                                                    child: const Text(
-                                                      'Hapus Foto',
-                                                      style: TextStyle(
-                                                          fontSize: 15.0,
-                                                          color: Colors.white),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            actions: <Widget>[
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  ElevatedButton(
-                                                    style: ElevatedButton.styleFrom(
-                                                        elevation: 10.0,
-                                                        primary: HexColor(
-                                                            "#76767A"
-                                                        )
-                                                    ),
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            context, 'Batal'
-                                                        ),
-                                                    child: const Text(
-                                                      'Batal',
-                                                      style: TextStyle(
-                                                          fontSize: 15.0,
-                                                          color: Colors.white
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(width: 10),
-                                                  ElevatedButton(
-                                                    style:
-                                                        ElevatedButton.styleFrom(
-                                                            elevation: 10.0,
-                                                            primary:
-                                                                Colors.green),
-                                                    onPressed: () async {
-                                                      String token = "";
-                                                      String deviceId = "";
-                                                      int id = -1;
-                                                      SharedPreferences prefs =
-                                                          await SharedPreferences
-                                                              .getInstance();
-                                                      token = prefs.getString(
-                                                          "api_token")!;
-                                                      deviceId = prefs
-                                                          .getString("DeviceID")!;
-                                                      id = prefs.getInt("id")!;
-                                                      //API integration
-
-                                                      Navigator.pop(
-                                                          context, 'Simpan');
-                                                    },
-                                                    child: const Text(
-                                                      'Simpan',
-                                                      style: TextStyle(
-                                                          fontSize: 15.0,
-                                                          color: Colors.white),
-                                                    ),
-                                                  ),
-                                                ],
-                                              )
-                                          ],
-                                        ),
-                                      );
-                                    }),
+                                  icon: const Icon(Icons.edit),
+                                  color: Colors.white,
+                                  onPressed: () {
+                                    showDialog<String>(
+                                      barrierDismissible: false,
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          DialogEditAvatar(context)
+                                    );
+                                  }
+                                ),
                               ),
                             ),
                           ],
