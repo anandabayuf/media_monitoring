@@ -85,10 +85,10 @@ class MyAccountScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: mobile ? 10.0 : 30),
                     ContainerProfile(this.username, this.email, this.password,
                     this.passwordOpen),
-                    SizedBox(height: 30),
+                    SizedBox(height: mobile ? 10.0 : 30),
                     ContainerDeleteAcc(this.email)
                   ],
                 ),
