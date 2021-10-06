@@ -76,7 +76,7 @@ class _DialogConfirmationOnDeleteAccState extends State<DialogConfirmationOnDele
               ),
               children: [
                 TextSpan(
-                  text: "Ketik kembali email anda : "
+                  text: "Mohon ketik "
                 ),
                 TextSpan(
                   text: "${email} ",
@@ -87,7 +87,7 @@ class _DialogConfirmationOnDeleteAccState extends State<DialogConfirmationOnDele
                   ),
                 ),
                 TextSpan(
-                  text: "pada kolom di bawah ini."
+                  text: " untuk konfirmasi."
                 )
               ],
             ),

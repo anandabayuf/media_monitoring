@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/views/client/AppBarClient.dart';
 import 'package:web_media_monitoring/views/client/DrawerClient.dart';
 import 'package:web_media_monitoring/views/client/akunsaya/widgets/ContainerProfile.dart';
@@ -9,10 +8,10 @@ import 'package:web_media_monitoring/views/client/akunsaya/widgets/ContainerDele
 import 'package:web_media_monitoring/views/client/akunsaya/widgets/DialogEditAvatar.dart';
 
 class MyAccountScreen extends StatelessWidget {
-  String username = "John Doe";
-  String email = "johndoe@gmail.com";
-  String password = "••••••••";
-  String passwordOpen = "johndoe123";
+  final String username = "John Doe";
+  final String email = "johndoe@gmail.com";
+  final String password = "••••••••";
+  final String passwordOpen = "johndoe123";
 
   @override
   Widget build(BuildContext context) {

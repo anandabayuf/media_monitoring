@@ -80,8 +80,12 @@ class _ContainerProfileState extends State<ContainerProfile> {
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(
-            left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
+        padding: EdgeInsets.only(
+          left: mobile ? 5.0 : 20.0,
+          right: mobile ? 5.0 : 20.0,
+          top: 10.0,
+          bottom: 10.0
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -95,162 +99,170 @@ class _ContainerProfileState extends State<ContainerProfile> {
                 ),
               ),
             ),
+            this.isEditUsername ?
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                width: 300,
+                child: Form(
+                  key: this._formUsernameKey,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        width: 300,
+                        child: TextFormField(
+                          controller: this._username,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            hintText: 'masukkan nama anda...',
+                            fillColor: Colors.white,
+                            filled: true,
+                          ),
+                          style: TextStyle(
+                            fontSize: 15.0,
+                          ),
+                          validator: (String? value) {
+                            if (value == '' || value == ' ' || value!.trim() == '') {
+                              return 'Nama tidak boleh kosong';
+                            }
+                            return null;
+                          },
+                          onChanged: (String value) {
+                            if (_formUsernameKey.currentState!.validate()) {}
+                          },
+                          onFieldSubmitted: (String value) {
+                            if (_formUsernameKey.currentState!.validate()) {
+                              //print(this._username.text);
+                              // String token = "";
+                              // String deviceId = "";
+                              // int id = -1;
+                              this.username = this._username.text.trim();
+                              // SharedPreferences prefs =
+                              //     await SharedPreferences.getInstance();
+                              // token = prefs.getString("api_token")!;
+                              // deviceId = prefs.getString("deviceID")!;
+                              // id = prefs.getInt("id")!;
+                              // print("token: $token");
+                              // print("deviceID: $deviceId");
+                              // print("id = $id");
+                              // api.updateName(
+                              //     id, this.username, token, deviceId);
+
+                              setState(() {
+                                this.isEditUsername = !this.isEditUsername;
+                              });
+                              showDialog<String>(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (BuildContext context) => DialogSuccessOnEditName(context)
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 300,
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              textStyle: const TextStyle(fontSize: 15),
+                              elevation: 10,
+                              primary: Colors.red,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                this.isEditUsername = !this.isEditUsername;
+                              });
+                            },
+                            child: const Text(
+                              'Batal',
+                              style: TextStyle(
+                                  fontSize: 15, color: Colors.white),
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              textStyle: const TextStyle(fontSize: 15),
+                              elevation: 10,
+                              primary: Colors.green,
+                            ),
+                            onPressed: () async {
+                              if (_formUsernameKey.currentState!.validate()) {
+                                //print(this._username.text);
+                                // String token = "";
+                                // String deviceId = "";
+                                // int id = -1;
+                                this.username = this._username.text.trim();
+                                // SharedPreferences prefs =
+                                //     await SharedPreferences.getInstance();
+                                // token = prefs.getString("api_token")!;
+                                // deviceId = prefs.getString("deviceID")!;
+                                // id = prefs.getInt("id")!;
+                                // print("token: $token");
+                                // print("deviceID: $deviceId");
+                                // print("id = $id");
+                                // api.updateName(
+                                //     id, this.username, token, deviceId);
+
+                                setState(() {
+                                  this.isEditUsername = !this.isEditUsername;
+                                });
+                                showDialog<String>(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (BuildContext context) => DialogSuccessOnEditName(context)
+                                );
+                              }
+                            },
+                            child: const Text(
+                              'Simpan',
+                              style: TextStyle(
+                                  fontSize: 15, color: Colors.white),
+                            ),
+                          )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ) :
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                this.isEditUsername ?
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Form(
-                    key: this._formUsernameKey,
-                    child: Container(
-                      width: mobile ? 170 : 300,
-                      child: TextFormField(
-                        controller: this._username,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: 'masukkan nama anda...',
-                          fillColor: Colors.white,
-                          filled: true,
-                        ),
-                        style: TextStyle(
-                          fontSize: 15.0,
-                        ),
-                        maxLength: 25,
-                        maxLines: 1,
-                        validator: (String? value) {
-                          if (value == '' || value == ' ' || value!.trim() == '') {
-                            return 'Nama tidak boleh kosong';
-                          }
-                          return null;
-                        },
-                        onChanged: (String value) {
-                          if (_formUsernameKey.currentState!.validate()) {}
-                        },
-                        onFieldSubmitted: (String value) {
-                          if (_formUsernameKey.currentState!.validate()) {
-                            //print(this._username.text);
-                            // String token = "";
-                            // String deviceId = "";
-                            // int id = -1;
-                            this.username = this._username.text.trim();
-                            // SharedPreferences prefs =
-                            //     await SharedPreferences.getInstance();
-                            // token = prefs.getString("api_token")!;
-                            // deviceId = prefs.getString("deviceID")!;
-                            // id = prefs.getInt("id")!;
-                            // print("token: $token");
-                            // print("deviceID: $deviceId");
-                            // print("id = $id");
-                            // api.updateName(
-                            //     id, this.username, token, deviceId);
-
-                            setState(() {
-                              this.isEditUsername = !this.isEditUsername;
-                            });
-                            showDialog<String>(
-                                barrierDismissible: false,
-                                context: context,
-                                builder: (BuildContext context) => DialogSuccessOnEditName(context)
-                            );
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                ) : Text(
+                Text(
                   this.username,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 15.0,
                   ),
                 ),
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: this.isEditUsername ?
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          textStyle: const TextStyle(fontSize: 15),
-                          elevation: 10,
-                          primary: Colors.red,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            this.isEditUsername = !this.isEditUsername;
-                          });
-                        },
-                        child: const Text(
-                          'Batal',
-                          style: TextStyle(
-                              fontSize: 15, color: Colors.white),
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          textStyle: const TextStyle(fontSize: 15),
-                          elevation: 10,
-                          primary: Colors.green,
-                        ),
-                        onPressed: () async {
-                          if (_formUsernameKey.currentState!.validate()) {
-                            //print(this._username.text);
-                            // String token = "";
-                            // String deviceId = "";
-                            // int id = -1;
-                            this.username = this._username.text.trim();
-                            // SharedPreferences prefs =
-                            //     await SharedPreferences.getInstance();
-                            // token = prefs.getString("api_token")!;
-                            // deviceId = prefs.getString("deviceID")!;
-                            // id = prefs.getInt("id")!;
-                            // print("token: $token");
-                            // print("deviceID: $deviceId");
-                            // print("id = $id");
-                            // api.updateName(
-                            //     id, this.username, token, deviceId);
-
-                            setState(() {
-                              this.isEditUsername = !this.isEditUsername;
-                            });
-                            showDialog<String>(
-                              barrierDismissible: false,
-                              context: context,
-                              builder: (BuildContext context) => DialogSuccessOnEditName(context)
-                            );
-                          }
-                        },
-                        child: const Text(
-                          'Simpan',
-                          style: TextStyle(
-                              fontSize: 15, color: Colors.white),
-                        ),
-                      )
-                    ],
-                  ) : ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      textStyle: const TextStyle(fontSize: 15),
-                      elevation: 10,
-                      primary: HexColor("#76767A"),
-                    ),
-                    onPressed: () {
-                      _username = TextEditingController(text: this.username);
-                      setState(() {
-                        if (isEditPassword) {
-                          this.isEditPassword = !this.isEditPassword;
-                        }
-                        this.isEditUsername = !this.isEditUsername;
-                      });
-                    },
-                    child: const Text(
-                      'Ubah',
-                      style: TextStyle(fontSize: 15, color: Colors.white),
-                    ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 15),
+                    elevation: 10,
+                    primary: HexColor("#76767A"),
+                  ),
+                  onPressed: () {
+                    _username = TextEditingController(text: this.username);
+                    setState(() {
+                      if (isEditPassword) {
+                        this.isEditPassword = !this.isEditPassword;
+                      }
+                      this.isEditUsername = !this.isEditUsername;
+                    });
+                  },
+                  child: const Text(
+                    'Ubah',
+                    style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
                 ),
               ],
@@ -577,7 +589,8 @@ class _ContainerProfileState extends State<ContainerProfile> {
                   ),
                 ),
               ),
-            ) : Row(
+            ) :
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(

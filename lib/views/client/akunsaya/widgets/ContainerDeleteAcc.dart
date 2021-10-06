@@ -13,6 +13,8 @@ class ContainerDeleteAcc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    bool mobile = screenSize.width < 800;
     RestClient api = RestClient(Dio());
     String token = "";
     String deviceId = "";
@@ -25,8 +27,11 @@ class ContainerDeleteAcc extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(
-            left: 20.0, right: 20.0, top: 10.0, bottom: 10.0
+        padding: EdgeInsets.only(
+            left: mobile ? 5.0 : 20.0,
+            right: mobile ? 5.0 : 20.0,
+            top: 10.0,
+            bottom: 10.0
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
