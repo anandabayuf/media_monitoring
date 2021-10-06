@@ -3,6 +3,9 @@ import 'package:web_media_monitoring/views/client/akunsaya/pages/AkunSayaPages.d
 import 'package:web_media_monitoring/views/client/listberita/pages/ListBeritaPages.dart';
 import 'package:web_media_monitoring/views/client/listtweets/pages/ListTweetsPages.dart';
 import 'package:web_media_monitoring/views/login/pages/LoginPages.dart';
+import 'package:web_media_monitoring/views/operator/input%20link/pages/InputLinkOperatorPages.dart';
+import 'package:web_media_monitoring/views/operator/input%20manual/pages/InputManualOperatorPages.dart';
+import 'package:web_media_monitoring/views/operator/input%20rss/pages/InputRssOperatorPages.dart';
 
 import 'views/client/dashboard/pages/DashboardPages.dart';
 import 'views/login/pages/LoginPages.dart';
@@ -27,6 +30,9 @@ class MyApp extends StatelessWidget {
         '/dashboard': (context) => DashboardScreen(),
         '/dashboard/listtweets': (context) => ListTweetsScreen(),
         '/dashboard/listberita': (context) => ListBeritaScreen(),
+        '/berita/inputlink': (context) => OperatorScreenInputLink(),
+        '/berita/inputrss': (context) => OperatorScreenInputRss(),
+        '/berita/inputmanual': (context) => OperatorScreenInputManual(),
       },
     );
   }
