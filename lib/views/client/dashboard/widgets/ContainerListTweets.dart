@@ -79,7 +79,7 @@ class ContainerListTweets extends StatelessWidget {
                         height: screenSize.height/3,
                         child: ListView.builder(
                             scrollDirection: Axis.vertical,
-                            itemCount: this._dataList.length,
+                            itemCount: 3,
                             itemBuilder: (context, index) {
                               return Card(
                                 color: HexColor("#415A80"),
