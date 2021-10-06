@@ -9,6 +9,11 @@ import 'package:web_media_monitoring/views/client/akunsaya/widgets/ContainerDele
 import 'package:web_media_monitoring/views/client/akunsaya/widgets/DialogEditAvatar.dart';
 
 class MyAccountScreen extends StatelessWidget {
+  String username = "John Doe";
+  String email = "johndoe@gmail.com";
+  String password = "••••••••";
+  String passwordOpen = "johndoe123";
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -82,9 +87,10 @@ class MyAccountScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 30),
-                    ContainerProfile(),
+                    ContainerProfile(this.username, this.email, this.password,
+                    this.passwordOpen),
                     SizedBox(height: 30),
-                    ContainerDeleteAcc()
+                    ContainerDeleteAcc(this.email)
                   ],
                 ),
               ),
