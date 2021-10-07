@@ -69,10 +69,29 @@ class FormLoginState extends State<FormLogin> {
                 fillColor: Colors.white,
                 filled: true),
             validator: (String? value) {
-              if (value != null && !value.contains('@')) {
+              if(value == '' || value!.trim() == ''){
+                return 'alamat email harus diisi';
+              }else if (value != null && !value.contains('@')) {
                 return 'Masukkan alamat email yang valid';
               }
               return null;
+            },
+            onChanged: (String value) {
+              if (_formKey.currentState!.validate()) {}
+            },
+            onFieldSubmitted: (String value) async {
+              if (deviceID.contains("Mozilla")) {
+                String now = DateTime.now().toString();
+                String hash = md5.convert(utf8.encode(now)).toString();
+                deviceID = value.trim() + "$hash";
+              } else {
+                deviceID = (await PlatformDeviceId.getDeviceId)!;
+              }
+              if (_formKey.currentState!.validate()) {
+                presenter.login(
+                    value.trim(), _password.text.trim(), deviceID
+                );
+              }
             },
           ),
         ),
@@ -97,7 +116,31 @@ class FormLoginState extends State<FormLogin> {
                 ),
                 hintText: 'Masukkan Password Anda...',
                 fillColor: Colors.white,
-                filled: true),
+                filled: true
+            ),
+            validator: (String? value) {
+              if(value == '' || value!.trim() == ''){
+                return 'password harus diisi';
+              }
+              return null;
+            },
+            onChanged: (String value) {
+              if (_formKey.currentState!.validate()) {}
+            },
+            onFieldSubmitted: (String value) async {
+              if (deviceID.contains("Mozilla")) {
+                String now = DateTime.now().toString();
+                String hash = md5.convert(utf8.encode(now)).toString();
+                deviceID = _email.text.trim() + "$hash";
+              } else {
+                deviceID = (await PlatformDeviceId.getDeviceId)!;
+              }
+              if (_formKey.currentState!.validate()) {
+                presenter.login(
+                    _email.text.trim(), value.trim(), deviceID
+                );
+              }
+            },
           ),
         ),
         SizedBox(height: screenSize.width < 1920 ? 30 : 30),
@@ -120,7 +163,8 @@ class FormLoginState extends State<FormLogin> {
               }
               if (_formKey.currentState!.validate()) {
                 presenter.login(
-                    _email.text.trim(), _password.text.trim(), deviceID);
+                    _email.text.trim(), _password.text.trim(), deviceID
+                );
               }
             },
             child: const Text(

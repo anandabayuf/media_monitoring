@@ -8,14 +8,8 @@ class ContainerWidgetMobile extends StatelessWidget {
     return Center(
         child: Column(
           children: [
-            Expanded(
-              flex: 1,
-              child: TopSideWidget(),
-            ),
-            Expanded(
-              flex: 2,
-              child: BottomSideWidget(),
-            )
+            TopSideWidget(),
+            BottomSideWidget()
           ],
         )
     );

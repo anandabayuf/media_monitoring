@@ -4,10 +4,15 @@ import 'package:web_media_monitoring/views/signup/widgets/mobile/ContainerWidget
 import 'package:hexcolor/hexcolor.dart';
 
 class SignupScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
         body: Container(
+          width: screenSize.width,
+          height: screenSize.height,
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -18,14 +23,21 @@ class SignupScreen extends StatelessWidget {
                   ]
               )
           ),
-          child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              if (constraints.maxWidth > 800) {
-                return ContainerWidgetWeb();
-              } else {
-                return ContainerWidgetMobile();
-              }
-            },
+          child: SizedBox(
+            height: screenSize.height,
+            child: SingleChildScrollView(
+              child: Container(
+                child: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    if (constraints.maxWidth > 800) {
+                      return ContainerWidgetWeb();
+                    } else {
+                      return ContainerWidgetMobile();
+                    }
+                  },
+                ),
+              ),
+            ),
           ),
         )
     );

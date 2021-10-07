@@ -70,10 +70,16 @@ class FormSignupState extends State<FormSignup> {
                 fillColor: Colors.white,
                 filled: true),
             validator: (String? value) {
-              if (value == '') {
+              if (value == '' || value!.trim() == '') {
                 return 'Nama harus diisi';
               }
               return null;
+            },
+            onChanged: (String value){
+              if (_formKey.currentState!.validate()) {}
+            },
+            onFieldSubmitted: (String value){
+
             },
           ),
         ),
@@ -99,12 +105,18 @@ class FormSignupState extends State<FormSignup> {
                 fillColor: Colors.white,
                 filled: true),
             validator: (String? value) {
-              if (value == null) {
+              if (value == '' || value!.trim() == '') {
                 return 'Email harus diisi';
               } else if (!value.contains('@')) {
                 return 'Masukkan alamat email yang valid';
               }
               return null;
+            },
+            onChanged: (String value) {
+              if (_formKey.currentState!.validate()) {}
+            },
+            onFieldSubmitted: (String value){
+
             },
           ),
         ),
@@ -131,10 +143,20 @@ class FormSignupState extends State<FormSignup> {
                 fillColor: Colors.white,
                 filled: true),
             validator: (String? value) {
-              if (value == '') {
-                return 'Password Harus diisi';
+              if (value == '' || value!.trim() == '') {
+                return 'Password harus diisi';
+              } else if (value.contains(' ')) {
+                return 'Password tidak boleh mengandung spasi';
+              } else if(value.length < 8) {
+                return 'Password harus terdiri setidaknya 8 karakter';
               }
               return null;
+            },
+            onChanged: (String value) {
+              if (_formKey.currentState!.validate()) {}
+            },
+            onFieldSubmitted: (String value){
+
             },
           ),
         ),
@@ -165,6 +187,25 @@ class FormSignupState extends State<FormSignup> {
                 return 'Password tidak sama';
               }
               return null;
+            },
+            onChanged: (String value) {
+              if (_formKey.currentState!.validate()) {}
+            },
+            onFieldSubmitted: (String value) async {
+              late String _konfirmasiPasswordEncode =
+              md5.convert(utf8.encode(_password.text.trim())).toString();
+              deviceID = (await PlatformDeviceId.getDeviceId)!;
+              if (deviceID.contains("Mozilla")) {
+                String now = DateTime.now().toString();
+                String hash = md5.convert(utf8.encode(now)).toString();
+                deviceID = _email.text.trim() + "$hash";
+              } else {
+                deviceID = (await PlatformDeviceId.getDeviceId)!;
+              }
+              if (_formKey.currentState!.validate()) {
+                signupController.signup(_nama.text.trim(), _email.text.trim(),
+                    _konfirmasiPasswordEncode, deviceID);
+              }
             },
           ),
         ),
@@ -206,7 +247,7 @@ class FormSignupState extends State<FormSignup> {
 
   @override
   @override
-  void finish() => Navigator.of(context).pushReplacementNamed('/loginPage');
+  void finish() => Navigator.of(context).pushReplacementNamed('/login');
 
   @override
   void toast(String message) => Fluttertoast.showToast(msg: message);

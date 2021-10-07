@@ -7,29 +7,38 @@ import 'package:hexcolor/hexcolor.dart';
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              HexColor("#616161"),
-              Colors.black
-            ]
-          )
-        ),
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            if (constraints.maxWidth > 800) {
-              return ContainerWidgetWeb();
-            } else {
-              return ContainerWidgetMobile();
-            }
-          },
-        ),
-      )
+          width: screenSize.width,
+          height: screenSize.height,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    HexColor("#616161"),
+                    Colors.black
+                  ]
+              )
+          ),
+
+          child: SingleChildScrollView(
+            child: Container(
+              child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  if (constraints.maxWidth > 800) {
+                    return ContainerWidgetWeb();
+                  } else {
+                    return ContainerWidgetMobile();
+                  }
+                },
+              ),
+      ),
+          ),
+        )
     );
   }
 }
