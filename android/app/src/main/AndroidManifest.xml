@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.company.web_media_monitoring">
    <application
-        android:label="web_media_monitoring"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Media Monitoring"
+        android:icon="@mipmap/media_monitoring_launcher">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
