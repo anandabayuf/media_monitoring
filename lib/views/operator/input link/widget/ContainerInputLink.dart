@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:web_media_monitoring/views/operator/input%20link/widget/DialogSuccesInputLink.dart';
 
 class InputLink extends StatelessWidget {
   late TextEditingController _keyword = TextEditingController();
@@ -62,8 +63,11 @@ class InputLink extends StatelessWidget {
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            //buat test masuk atau engga
-                            print("Cari " + this._keyword.text);
+                            showDialog<String>(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    DialogSuccessInputLink(context));
                           }
                         },
                         child: const Text(

@@ -1,8 +1,7 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
+import 'package:web_media_monitoring/views/operator/input%20manual/widget/DialogSuccesInputManual.dart';
 
 class InputManual extends StatefulWidget {
   @override
@@ -10,7 +9,6 @@ class InputManual extends StatefulWidget {
 }
 
 class _InputManualState extends State<InputManual> {
-  late TextEditingController _keyword = TextEditingController();
 
   String? _valCategory;
   List _listCategory = ["Politik", "Olahraga", "Kuliner"];
@@ -951,6 +949,11 @@ class _InputManualState extends State<InputManual> {
                 onPressed: () {
                   //buat test masuk atau engga
                   if (_formKey.currentState!.validate()) {
+                    showDialog<String>(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    DialogSuccessInputManual(context));
                     print(
                         "kategori: ${_valCategory}\ntanggal: ${_date.text}\njudul: ${_title.text}\npenulis: ${_writer.text}\nkonten: ${_content.text}\nlink: ${_link.text}\npenerbit: ${_publisher.text}\nmedia: ${_valMedia} ");
                   }

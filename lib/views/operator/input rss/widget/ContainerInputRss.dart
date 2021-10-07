@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:web_media_monitoring/views/operator/input%20rss/widget/DialogSuccesInputRss.dart';
 
-class InputRss extends StatelessWidget {
+class InputRss extends StatefulWidget {
+  @override
+  _InputRssState createState() => _InputRssState();
+}
+
+class _InputRssState extends State<InputRss> {
   late TextEditingController _keyword = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
+  String? _valMedia;
+
+  List _listMedia = [
+    "detik",
+    "liputan 6",
+    "kumparan",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -27,29 +42,67 @@ class InputRss extends StatelessWidget {
                     SizedBox(height: 90),
                     Container(
                       width: 600,
-                      child: TextFormField(
-                        controller: _keyword,
-                        decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.rss_feed,
-                            color: Colors.white,
-                            size: 32.0,
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButtonFormField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                            fillColor: Colors.white,
+                            filled: true,
                           ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12.0),
+                          validator: (value) {
+                            if (value == null) {
+                              return "media harus diisi";
+                            }
+                            return null;
+                          },
+                          isExpanded: true,
+                          style: TextStyle(color: Colors.black),
+                          value: _valMedia,
+                          items: _listMedia.map((value) {
+                            return DropdownMenuItem(
+                                child:
+                                    Text(value, style: TextStyle(fontSize: 15)),
+                                value: value);
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              _valMedia = value.toString();
+                            });
+                          },
+                          hint: Text(
+                            "pilih media",
+                            style: TextStyle(fontSize: 15),
                           ),
-                          hintText: 'Masukkan RSS',
-                          fillColor: Colors.white,
-                          filled: true,
                         ),
-                        validator: (String? value) {
-                          if (value == '' || value == ' ') {
-                            return 'Keyword tidak sesuai';
-                          }
-                          return null;
-                        },
                       ),
                     ),
+                    // Container(
+                    //   padding: EdgeInsets.only(top: 20),
+                    //   width: 600,
+                    //   child: TextFormField(
+                    //     controller: _keyword,
+                    //     decoration: InputDecoration(
+                    //       icon: Icon(
+                    //         Icons.rss_feed,
+                    //         color: Colors.white,
+                    //         size: 32.0,
+                    //       ),
+                    //       border: OutlineInputBorder(
+                    //         borderRadius: BorderRadius.circular(12.0),
+                    //       ),
+                    //       hintText: 'Masukkan RSS',
+                    //       fillColor: Colors.white,
+                    //       filled: true,
+                    //     ),
+                    //     validator: (String? value) {
+                    //       if (value == '' || value == ' ') {
+                    //         return 'Keyword tidak sesuai';
+                    //       }
+                    //       return null;
+                    //     },
+                    //   ),
+                    // ),
                     SizedBox(height: 30),
                     Container(
                       width: 200,
@@ -62,8 +115,11 @@ class InputRss extends StatelessWidget {
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            //buat test masuk atau engga
-                            print("Cari " + this._keyword.text);
+                            showDialog<String>(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    DialogSuccessInputRss(context));
                           }
                         },
                         child: const Text(
