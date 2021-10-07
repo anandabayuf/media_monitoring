@@ -5,23 +5,24 @@ import 'package:web_media_monitoring/views/Home.dart';
 class AppBarOperator extends AppBar {
   AppBarOperator(BuildContext context)
       : super(
-          title: ListTile(
-            leading: CircleAvatar(
-              backgroundImage:
-                  NetworkImage("assets/images/logo_media_monitoring.png"),
-            ),
-            title: Text(
-              "Media Monitoring",
-              style: MediaQuery.of(context).size.width > 320
-                  ? TextStyle(
-                      fontSize: 32.0,
-                      fontWeight: FontWeight.w100,
-                      color: Colors.white)
-                  : TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w100,
-                      color: Colors.white,
-                    ),
+          title: Container(
+            width: MediaQuery.of(context).size.width < 800 ? 280 : 350,
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage: AssetImage("assets/images/logo_media_monitoring.png"),
+              ),
+              title: Text(
+                "Media Monitoring",
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width < 800 ? 24.0 : 32.0,
+                    fontWeight: FontWeight.w100,
+                    color: Colors.white),
+              ),
+              onTap: () {
+                if(ModalRoute.of(context)!.settings.name != "/berita/inputrss"){
+                  Navigator.of(context).pushReplacementNamed('/berita/inputrss');
+                }
+              },
             ),
           ),
           bottom: PreferredSize(
