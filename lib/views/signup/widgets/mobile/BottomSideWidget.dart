@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:web_media_monitoring/views/signup/pages/FormSignup.dart';
+import 'package:web_media_monitoring/views/signup/widgets/FormSignup.dart';
 
 class BottomSideWidget extends StatelessWidget {
   @override
@@ -10,16 +10,10 @@ class BottomSideWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            flex: 1,
-            child: Text('Sign up',
-                style: TextStyle(fontSize: 32.0, color: HexColor("#F5EAEA"))),
-          ),
-          Expanded(
-            flex: 8,
-            child: Center(
-              child: FormSignup(),
-            ),
+          Text('Sign up',
+              style: TextStyle(fontSize: 32.0, color: HexColor("#F5EAEA"))),
+          Center(
+            child: FormSignup(),
           ),
           Center(
               child: Row(
@@ -38,7 +32,7 @@ class BottomSideWidget extends StatelessWidget {
                         decoration: TextDecoration.underline, fontSize: 15),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed('/');
+                    Navigator.of(context).pushNamed('/login');
                   },
                   child: const Text('Log in')),
             ],

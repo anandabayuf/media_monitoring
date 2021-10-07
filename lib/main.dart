@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:web_media_monitoring/views/client/akunsaya/pages/AkunSayaPages.dart';
 import 'package:web_media_monitoring/views/client/listberita/pages/ListBeritaPages.dart';
 import 'package:web_media_monitoring/views/client/listtweets/pages/ListTweetsPages.dart';
+import 'package:web_media_monitoring/views/login/pages/LoginPages.dart';
 
 import 'views/client/dashboard/pages/DashboardPages.dart';
 import 'views/login/pages/LoginPages.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Media Monitoring',
-      initialRoute: '/myaccount',
+      initialRoute: '/login',
       routes: {
         '/login': (context) => LoginScreen(),
         '/signup': (context) => SignupScreen(),

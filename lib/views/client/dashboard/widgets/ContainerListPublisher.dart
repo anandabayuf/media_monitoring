@@ -17,9 +17,10 @@ class ContainerListPublisher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    bool isMobile = screenSize.width < 960;
 
     return Container(
-      width: screenSize.width < 960 ? screenSize.width - 100 : 400,
+      width: isMobile ? screenSize.width - 10 : 400,
       padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         border: Border.all(color: HexColor("#707070")),
@@ -47,7 +48,6 @@ class ContainerListPublisher extends StatelessWidget {
           ),
           SizedBox(height: 10.0,),
           Container(
-            height: screenSize.height/4,
             child: SingleChildScrollView(
               child: Container(
                 child: SizedBox(
@@ -94,7 +94,12 @@ class ContainerListPublisher extends StatelessWidget {
                             print("clicked publisher ke-${index}");
                             Navigator.pushNamed(
                               context,
-                              "/dashboard/listberita"
+                              "/dashboard/listberita",
+                              arguments: {
+                                'keyword' : this._keyword,
+                                'publisher' : this._dataList[index].name,
+                                'iconpublisher' : this._dataList[index].iconDirectory
+                              }
                             );
                           },
                         ),

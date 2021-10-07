@@ -84,7 +84,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       if (_formKey.currentState!.validate()) {
                         Navigator.of(context).pushNamed(
                           "/dashboard",
-                          arguments: this._keyword.text
+                          arguments: this._keyword.text.trim()
                         );
                         this._keyword.clear();
                       }
@@ -105,7 +105,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       if (_formKey.currentState!.validate()) {
                         Navigator.of(context).pushNamed(
                             "/dashboard",
-                            arguments: this._keyword.text
+                            arguments: this._keyword.text.trim()
                         );
                         this._keyword.clear();
                       }

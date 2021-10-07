@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/views/client/AppBarClient.dart';
 import 'package:web_media_monitoring/views/client/DrawerClient.dart';
 import 'package:web_media_monitoring/views/client/akunsaya/widgets/ContainerProfile.dart';
@@ -9,6 +8,11 @@ import 'package:web_media_monitoring/views/client/akunsaya/widgets/ContainerDele
 import 'package:web_media_monitoring/views/client/akunsaya/widgets/DialogEditAvatar.dart';
 
 class MyAccountScreen extends StatelessWidget {
+  final String username = "John Doe";
+  final String email = "johndoe@gmail.com";
+  final String password = "••••••••";
+  final String passwordOpen = "johndoe123";
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -81,10 +85,11 @@ class MyAccountScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
-                    ContainerProfile(),
-                    SizedBox(height: 30),
-                    ContainerDeleteAcc()
+                    SizedBox(height: mobile ? 10.0 : 30),
+                    ContainerProfile(this.username, this.email, this.password,
+                    this.passwordOpen),
+                    SizedBox(height: mobile ? 10.0 : 30),
+                    ContainerDeleteAcc(this.email)
                   ],
                 ),
               ),

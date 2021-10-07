@@ -12,12 +12,11 @@ class ListBeritaScreen extends StatefulWidget {
 }
 
 class _ListBeritaScreenState extends State<ListBeritaScreen> {
-  String keyword = "Manchester United";
-  String publisher = "Liputan6.com";
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
 
     return Scaffold(
         appBar: AppBarClient(context),
@@ -32,9 +31,9 @@ class _ListBeritaScreenState extends State<ListBeritaScreen> {
                 margin: EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                    ContainerTitle(this.keyword, this.publisher),
+                    ContainerTitle(args['keyword']!, args['publisher']!, args['iconpublisher']!),
                     SizedBox(height: 10.0,),
-                    ContainerListBerita(this.keyword)
+                    ContainerListBerita(args['keyword']!)
                   ],
                 )
             ),

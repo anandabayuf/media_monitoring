@@ -28,6 +28,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    bool isMobile = screenSize.width < 960;
     this.keyword = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
@@ -44,7 +45,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 child: Column(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 40.0),
+                      margin: EdgeInsets.only(left: isMobile ? 0 : 40.0),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -59,12 +60,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     SizedBox(height: 10,),
                     Container(
                       width: 1280,
-                      child: screenSize.width < 960 ?
+                      child: isMobile ?
                       Column (
                         children: [
                           Container(
                             height: 300,
-                            width: screenSize.width - 100,
+                            width: screenSize.width - 10,
                             padding: EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
                               border: Border.all(color: HexColor("#707070")),
@@ -75,7 +76,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           SizedBox(height: 10,),
                           Container(
                               height: 300,
-                              width: screenSize.width - 100,
+                              width: screenSize.width - 10,
                               padding: EdgeInsets.all(10.0),
                               decoration: BoxDecoration(
                                 border: Border.all(color: HexColor("#707070")),
@@ -109,7 +110,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               child: BeritaChart.withSampleData(this.keyword),
                             ),
                           ),
-                          SizedBox(width: 30,),
+                          SizedBox(width: screenSize.width < 1280 ? 10.0 :  30,),
                           Flexible(
                             child: Container(
                                 height: 300,
@@ -122,7 +123,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 child: TweetsChart.withSampleData(this.keyword)
                             ),
                           ),
-                          SizedBox(width: 30,),
+                          SizedBox(width: screenSize.width < 1280 ? 10.0:  30,),
                           Column(
                             children: [
                               ContainerTotalBerita(this.keyword, this.newsTotal),

@@ -20,7 +20,6 @@ class ContainerListBerita extends StatelessWidget{
     this._dataList = this._data.generateDummyBerita();
 
     timeago.setLocaleMessages('id', timeago.IdMessages());
-    timeago.setLocaleMessages('en_short', timeago.IdMessages());
 
     this.words = {
       this.keyword: HighlightedWord(
@@ -37,9 +36,10 @@ class ContainerListBerita extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    bool isMobile = screenSize.width < 960;
 
     return SizedBox(
-      height: screenSize.height - 200,
+      height: isMobile ? screenSize.height - 220 : screenSize.height - 200,
       width: 800,
       child: ListView.builder(
           scrollDirection: Axis.vertical,
@@ -88,7 +88,7 @@ class ContainerListBerita extends StatelessWidget{
                                               seconds: DateTime.now().difference(this._dataList[index].publishedDate).inSeconds
                                           )
                                       ),
-                                      locale: screenSize.width < 500 ? 'en_short' : 'id'
+                                      locale: 'id'
                                   )}",
                                   style: TextStyle(
                                       fontSize: 12.0,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:web_media_monitoring/views/login/pages/FormLogin.dart';
+import 'package:web_media_monitoring/views/login/widgets/FormLogin.dart';
 
 class BottomSideWidget extends StatelessWidget {
   @override
@@ -15,12 +15,10 @@ class BottomSideWidget extends StatelessWidget {
         children: [
           Text('Log in',
               style: TextStyle(fontSize: 32.0, color: HexColor("#F5EAEA"))),
-          Expanded(
-            flex: 8,
-            child: Center(
-              child: FormLogin(),
-            ),
+          Center(
+            child: FormLogin(),
           ),
+          SizedBox(height: 15),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -109,7 +107,7 @@ class BottomSideWidget extends StatelessWidget {
                         decoration: TextDecoration.underline, fontSize: 15),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed('/signupPage');
+                    Navigator.of(context).pushNamed('/signup');
                   },
                   child: const Text('Sign Up')),
             ],

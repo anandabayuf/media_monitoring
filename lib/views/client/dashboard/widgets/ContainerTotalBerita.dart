@@ -13,10 +13,11 @@ class ContainerTotalBerita extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    bool isMobile = screenSize.width < 960;
 
     return Container(
-      height: 140,
-      width: screenSize.width < 960 ? (screenSize.width/3) + 50 : 300,
+      height: isMobile ? 100 : 140,
+      width: isMobile ? (screenSize.width/2) - 20 : 300,
       padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         border: Border.all(color: HexColor("#707070")),
@@ -25,14 +26,18 @@ class ContainerTotalBerita extends StatelessWidget {
       child: Column(
         children: [
           Image.asset("assets/icons/newspaper.png", height: 32.0, width: 32.0,),
-          Text(
-            "Jumlah berita yang mengandung \"${this._keyword}\"",
-            style: TextStyle(
-              fontSize: 15.0,
-              color: Colors.white,
-              fontWeight: FontWeight.w100
+          isMobile ?
+          SizedBox.shrink() :
+          Flexible(
+            child: Text(
+              "Jumlah berita yang mengandung \"${this._keyword}\"",
+              style: TextStyle(
+                fontSize: 15.0,
+                color: Colors.white,
+                fontWeight: FontWeight.w100
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
           SizedBox(height: 20.0,),
           RichText(
