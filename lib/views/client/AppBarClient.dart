@@ -7,7 +7,7 @@ class AppBarClient extends AppBar{
       width: MediaQuery.of(context).size.width < 800 ? 280 : 350,
       child: ListTile(
         leading: CircleAvatar(
-          backgroundImage: NetworkImage("assets/images/logo_media_monitoring.png"),
+          backgroundImage: AssetImage("assets/images/logo_media_monitoring.png"),
         ),
         title: Text(
           "Media Monitoring",

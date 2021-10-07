@@ -11,7 +11,9 @@ class BottomSideWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Sign up',
-              style: TextStyle(fontSize: 32.0, color: HexColor("#F5EAEA"))),
+              style: TextStyle(fontSize: 32.0, color: HexColor("#F5EAEA"))
+          ),
+          SizedBox(height: 10.0,),
           Center(
             child: FormSignup(),
           ),
