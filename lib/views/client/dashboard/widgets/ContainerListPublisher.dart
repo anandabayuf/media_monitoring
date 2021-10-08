@@ -2,11 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:web_media_monitoring/model/publisherModel.dart';
 
 class ContainerListPublisher extends StatelessWidget {
   late String _keyword;
   late Publisher _data;
-  late List<Publisher> _dataList;
+  late List<PublisherModel> _dataList;
 
   ContainerListPublisher(
       BuildContext context, AsyncSnapshot snapshot, String keyword) {
@@ -71,7 +72,7 @@ class ContainerListPublisher extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: ListTile(
-                          leading: Image.asset(
+                          leading: Image.network(
                             this._dataList[index].iconDirectory,
                             height: 32.0,
                             width: 32.0,
@@ -80,14 +81,14 @@ class ContainerListPublisher extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                this._dataList[index].name,
+                                this._dataList[index].publisher,
                                 style: TextStyle(
                                     fontSize: 15.0, color: Colors.white),
                               ),
                               Row(
                                 children: [
                                   Text(
-                                    "${this._dataList[index].totalNews} berita",
+                                    "${this._dataList[index].total} berita",
                                     style: TextStyle(
                                         fontSize: 15.0, color: Colors.white),
                                   ),
@@ -108,7 +109,7 @@ class ContainerListPublisher extends StatelessWidget {
                                 context, "/dashboard/listberita",
                                 arguments: {
                                   'keyword': this._keyword,
-                                  'publisher': this._dataList[index].name,
+                                  'publisher': this._dataList[index].publisher,
                                   'iconpublisher':
                                       this._dataList[index].iconDirectory
                                 });

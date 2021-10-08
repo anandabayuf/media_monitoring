@@ -60,7 +60,7 @@ class _RestClient implements RestClient {
         _setStreamType<SignupApiResponse>(Options(
                 method: 'DELETE',
                 headers: <String, dynamic>{
-                  r'token': token,
+                  r'Authoriaztion': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -81,7 +81,7 @@ class _RestClient implements RestClient {
         _setStreamType<ApiResponse>(Options(
                 method: 'GET',
                 headers: <String, dynamic>{
-                  r'token': token,
+                  r'Authoriaztion': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -102,7 +102,7 @@ class _RestClient implements RestClient {
         _setStreamType<AuthResponse>(Options(
                 method: 'GET',
                 headers: <String, dynamic>{
-                  r'token': token,
+                  r'Authoriaztion': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -123,7 +123,7 @@ class _RestClient implements RestClient {
         _setStreamType<ApiResponse>(Options(
                 method: 'GET',
                 headers: <String, dynamic>{
-                  r'token': token,
+                  r'Authoriaztion': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -139,13 +139,17 @@ class _RestClient implements RestClient {
   Future<ApiResponse> getDataChart(
       keyword, firstDate, lastDate, token, deviceID) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'q': keyword};
-    final _data = {'firstDate': firstDate, 'lastDate': lastDate};
+    final queryParameters = <String, dynamic>{
+      r'q': keyword,
+      r'firstDate': firstDate,
+      r'lastDate': lastDate
+    };
+    final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ApiResponse>(Options(
                 method: 'GET',
                 headers: <String, dynamic>{
-                  r'token': token,
+                  r'Authoriaztion': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -166,12 +170,12 @@ class _RestClient implements RestClient {
         _setStreamType<SignupApiResponse>(Options(
                 method: 'PUT',
                 headers: <String, dynamic>{
-                  r'token': token,
+                  r'Authoriaztion': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
-            .compose(_dio.options, 'user/update/name',
+            .compose(_dio.options, 'user/update/profile/name',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = SignupApiResponse.fromJson(_result.data!);
@@ -192,12 +196,33 @@ class _RestClient implements RestClient {
         _setStreamType<SignupApiResponse>(Options(
                 method: 'PUT',
                 headers: <String, dynamic>{
-                  r'token': token,
+                  r'Authoriaztion': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
-            .compose(_dio.options, 'user/update/password',
+            .compose(_dio.options, 'user/update/profile/password',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SignupApiResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SignupApiResponse> updateImage(id, file, token, deviceID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = {'id': id};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SignupApiResponse>(Options(
+                method: 'PUT',
+                headers: <String, dynamic>{
+                  r'Authoriaztion': token,
+                  r'DeviceID': deviceID
+                },
+                extra: _extra,
+                contentType: 'application/x-www-form-urlencoded')
+            .compose(_dio.options, 'user/update/profile/image',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = SignupApiResponse.fromJson(_result.data!);

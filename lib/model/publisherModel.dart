@@ -6,6 +6,8 @@ class PublisherModel {
   @JsonKey()
   late String publisher;
   @JsonKey()
+  late String iconDirectory;
+  @JsonKey()
   late int total;
 
   PublisherModel();

@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Services/apiService.dart';
 import 'package:web_media_monitoring/views/client/akunsaya/widgets/DialogConfirmationOnDeleteAcc.dart';
 
 class ContainerDeleteAcc extends StatelessWidget {
   late String email;
 
-  ContainerDeleteAcc(String email){
+  ContainerDeleteAcc(String email) {
     this.email = email;
   }
 
@@ -18,6 +19,7 @@ class ContainerDeleteAcc extends StatelessWidget {
     RestClient api = RestClient(Dio());
     String token = "";
     String deviceId = "";
+    int id = -1;
 
     return Container(
       padding: EdgeInsets.all(10.0),
@@ -31,8 +33,7 @@ class ContainerDeleteAcc extends StatelessWidget {
             left: mobile ? 5.0 : 20.0,
             right: mobile ? 5.0 : 20.0,
             top: 10.0,
-            bottom: 10.0
-        ),
+            bottom: 10.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -49,13 +50,12 @@ class ContainerDeleteAcc extends StatelessWidget {
                 elevation: 10,
                 primary: Colors.red,
               ),
-              onPressed: () {
-                
+              onPressed: () async {
                 showDialog<String>(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (BuildContext context) => DialogConfirmationOnDeleteAcc(this.email)
-                );
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (BuildContext context) =>
+                        DialogConfirmationOnDeleteAcc(this.email));
               },
               child: const Text(
                 'Hapus Akun',

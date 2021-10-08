@@ -76,7 +76,7 @@ class FormSignupState extends State<FormSignup> {
               }
               return null;
             },
-            onChanged: (String value){
+            onChanged: (String value) {
               if (_formKey.currentState!.validate()) {}
             },
           ),
@@ -144,7 +144,7 @@ class FormSignupState extends State<FormSignup> {
                 return 'Password harus diisi';
               } else if (value.contains(' ')) {
                 return 'Password tidak boleh mengandung spasi';
-              } else if(value.length < 8) {
+              } else if (value.length < 8) {
                 return 'Password harus terdiri setidaknya 8 karakter';
               }
               return null;
@@ -188,7 +188,7 @@ class FormSignupState extends State<FormSignup> {
             },
             onFieldSubmitted: (String value) async {
               late String _konfirmasiPasswordEncode =
-              md5.convert(utf8.encode(_password.text.trim())).toString();
+                  md5.convert(utf8.encode(_password.text.trim())).toString();
               deviceID = (await PlatformDeviceId.getDeviceId)!;
               if (deviceID.contains("Mozilla")) {
                 String now = DateTime.now().toString();
@@ -240,10 +240,7 @@ class FormSignupState extends State<FormSignup> {
     );
   }
 
-  @override
-  @override
   void finish() => Navigator.of(context).pushReplacementNamed('/login');
 
-  @override
   void toast(String message) => Fluttertoast.showToast(msg: message);
 }

@@ -1,27 +1,30 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/Services/apiService.dart';
 import 'package:web_media_monitoring/views/client/akunsaya/widgets/DialogSuccessOnDeleteAcc.dart';
 
-class DialogConfirmationOnDeleteAcc extends StatefulWidget{
+class DialogConfirmationOnDeleteAcc extends StatefulWidget {
   late String email;
 
-  DialogConfirmationOnDeleteAcc(String email){
+  DialogConfirmationOnDeleteAcc(String email) {
     this.email = email;
   }
 
   @override
-  _DialogConfirmationOnDeleteAccState createState() => _DialogConfirmationOnDeleteAccState(this.email);
+  _DialogConfirmationOnDeleteAccState createState() =>
+      _DialogConfirmationOnDeleteAccState(this.email);
 }
 
-class _DialogConfirmationOnDeleteAccState extends State<DialogConfirmationOnDeleteAcc>{
+class _DialogConfirmationOnDeleteAccState
+    extends State<DialogConfirmationOnDeleteAcc> {
   late TextEditingController _email;
   final _formEmailKey = GlobalKey<FormState>();
   late String email;
   late bool isButtonDisabled;
 
-  _DialogConfirmationOnDeleteAccState(String email){
+  _DialogConfirmationOnDeleteAccState(String email) {
     this.email = email;
   }
 
@@ -38,7 +41,7 @@ class _DialogConfirmationOnDeleteAccState extends State<DialogConfirmationOnDele
     super.dispose();
   }
 
-  void _changeStateButton(){
+  void _changeStateButton() {
     setState(() {
       this.isButtonDisabled = !this.isButtonDisabled;
     });
@@ -46,6 +49,10 @@ class _DialogConfirmationOnDeleteAccState extends State<DialogConfirmationOnDele
 
   @override
   Widget build(BuildContext context) {
+    String token = "";
+    String deviceId = "";
+    int id = -1;
+    RestClient api = RestClient(Dio());
     return AlertDialog(
       backgroundColor: Colors.white.withOpacity(0.70),
       shape: RoundedRectangleBorder(
@@ -57,7 +64,9 @@ class _DialogConfirmationOnDeleteAccState extends State<DialogConfirmationOnDele
             color: Colors.black,
             size: 48.0,
           ),
-          SizedBox(height: 30.0,),
+          SizedBox(
+            height: 30.0,
+          ),
           Text(
             "Apakah anda yakin ingin menghapus akun anda?",
             style: TextStyle(
@@ -66,7 +75,9 @@ class _DialogConfirmationOnDeleteAccState extends State<DialogConfirmationOnDele
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 10.0,),
+          SizedBox(
+            height: 10.0,
+          ),
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
@@ -75,24 +86,21 @@ class _DialogConfirmationOnDeleteAccState extends State<DialogConfirmationOnDele
                 color: Colors.black,
               ),
               children: [
-                TextSpan(
-                  text: "Mohon ketik "
-                ),
+                TextSpan(text: "Mohon ketik "),
                 TextSpan(
                   text: "${email}",
                   style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w900
-                  ),
+                      fontSize: 15.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w900),
                 ),
-                TextSpan(
-                  text: " untuk konfirmasi."
-                )
+                TextSpan(text: " untuk konfirmasi.")
               ],
             ),
           ),
-          SizedBox(height: 10.0,),
+          SizedBox(
+            height: 10.0,
+          ),
           Form(
             key: this._formEmailKey,
             child: TextFormField(
@@ -114,30 +122,34 @@ class _DialogConfirmationOnDeleteAccState extends State<DialogConfirmationOnDele
                 return null;
               },
               onChanged: (String value) {
-                if (this._formEmailKey.currentState!.validate() && this.isButtonDisabled) {
+                if (this._formEmailKey.currentState!.validate() &&
+                    this.isButtonDisabled) {
                   this._changeStateButton();
-                } else if(!this._formEmailKey.currentState!.validate() && !this.isButtonDisabled){
+                } else if (!this._formEmailKey.currentState!.validate() &&
+                    !this.isButtonDisabled) {
                   this._changeStateButton();
                 }
               },
-              onFieldSubmitted: (String value) {
+              onFieldSubmitted: (String value) async {
                 if (this._formEmailKey.currentState!.validate()) {
                   //logika hapus akun
                   //...
-                  // SharedPreferences pref =
-                  // await SharedPreferences.getInstance();
-                  // token = (await pref.getString("api_token"))!;
-                  // deviceId = (await pref.getString("deviceID"))!;
-                  //
-                  // api.deleteUser(2, "notYet", token, deviceId);
+
                   Navigator.pop(context, 'Ya, Hapus');
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  token =
+                      "Bearer ${prefs.getString("api_token") ?? "undefined"}";
+                  deviceId = prefs.getString("deviceID") ?? "undefined";
+                  id = prefs.getInt("id") ?? -1;
+                  api.deleteUser(id, this.email, token, deviceId);
 
                   //dialog sukses hapus akun
                   showDialog<String>(
                       barrierDismissible: false,
                       context: context,
-                      builder: (BuildContext context) => DialogSuccessOnDeleteAcc(context)
-                  );
+                      builder: (BuildContext context) =>
+                          DialogSuccessOnDeleteAcc(context));
 
                   //logika setelah memencet tombol OK -> berarti otomatis
                   //sesi abis dan keluar -> ke halaman homepage
@@ -153,46 +165,50 @@ class _DialogConfirmationOnDeleteAccState extends State<DialogConfirmationOnDele
           children: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  elevation: 10.0,
-                  primary: Colors.red
-              ),
-              onPressed: isButtonDisabled ? null : () async {
-                //logika hapus akun
-                //...
-                // SharedPreferences pref =
-                // await SharedPreferences.getInstance();
-                // token = (await pref.getString("api_token"))!;
-                // deviceId = (await pref.getString("deviceID"))!;
-                //
-                // api.deleteUser(2, "notYet", token, deviceId);
-                Navigator.pop(context, 'Ya, Hapus');
+                  elevation: 10.0, primary: Colors.red),
+              onPressed: isButtonDisabled
+                  ? null
+                  : () async {
+                      //logika hapus akun
+                      //...
+                      // SharedPreferences pref =
+                      // await SharedPreferences.getInstance();
+                      // token = (await pref.getString("api_token"))!;
+                      // deviceId = (await pref.getString("deviceID"))!;
+                      //
+                      // api.deleteUser(2, "notYet", token, deviceId);
+                      Navigator.pop(context, 'Ya, Hapus');
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      token =
+                          "Bearer ${prefs.getString("api_token") ?? "undefined"}";
+                      deviceId = prefs.getString("deviceID") ?? "undefined";
+                      id = prefs.getInt("id") ?? -1;
+                      api.deleteUser(id, this.email, token, deviceId);
 
-                //dialog sukses hapus akun
-                showDialog<String>(
-                    barrierDismissible: false,
-                    context: context,
-                    builder: (BuildContext context) => DialogSuccessOnDeleteAcc(context)
-                );
+                      //dialog sukses hapus akun
+                      showDialog<String>(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (BuildContext context) =>
+                              DialogSuccessOnDeleteAcc(context));
 
-                //logika setelah memencet tombol OK -> berarti otomatis
-                //sesi abis dan keluar -> ke halaman homepage
-              },
+                      //logika setelah memencet tombol OK -> berarti otomatis
+                      //sesi abis dan keluar -> ke halaman homepage
+                    },
               child: const Text(
                 'Ya, Hapus',
-                style: TextStyle(
-                    fontSize: 15.0, color: Colors.white),
+                style: TextStyle(fontSize: 15.0, color: Colors.white),
               ),
             ),
             SizedBox(width: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                   elevation: 10.0, primary: HexColor("#707070")),
-              onPressed: () =>
-                  Navigator.pop(context, 'Tidak, Kembali'),
+              onPressed: () => Navigator.pop(context, 'Tidak, Kembali'),
               child: const Text(
                 'Tidak, Kembali',
-                style: TextStyle(
-                    fontSize: 15.0, color: Colors.white),
+                style: TextStyle(fontSize: 15.0, color: Colors.white),
               ),
             ),
           ],
