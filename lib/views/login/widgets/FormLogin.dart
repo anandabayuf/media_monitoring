@@ -76,9 +76,9 @@ class FormLoginState extends State<FormLogin> {
                 fillColor: Colors.white,
                 filled: true),
             validator: (String? value) {
-              if(value == '' || value!.trim() == ''){
+              if (value == '' || value!.trim() == '') {
                 return 'alamat email harus diisi';
-              }else if (value != null && !value.contains('@')) {
+              } else if (value != null && !value.contains('@')) {
                 return 'Masukkan alamat email yang valid';
               }
               return null;
@@ -110,10 +110,9 @@ class FormLoginState extends State<FormLogin> {
                 ),
                 hintText: 'Masukkan Password Anda...',
                 fillColor: Colors.white,
-                filled: true
-            ),
+                filled: true),
             validator: (String? value) {
-              if(value == '' || value!.trim() == ''){
+              if (value == '' || value!.trim() == '') {
                 return 'password harus diisi';
               }
               return null;
@@ -122,6 +121,7 @@ class FormLoginState extends State<FormLogin> {
               if (_formKey.currentState!.validate()) {}
             },
             onFieldSubmitted: (String value) async {
+              deviceID = (await PlatformDeviceId.getDeviceId)!;
               if (deviceID.contains("Mozilla")) {
                 String now = DateTime.now().toString();
                 String hash = md5.convert(utf8.encode(now)).toString();
@@ -130,9 +130,7 @@ class FormLoginState extends State<FormLogin> {
                 deviceID = (await PlatformDeviceId.getDeviceId)!;
               }
               if (_formKey.currentState!.validate()) {
-                presenter.login(
-                    _email.text.trim(), value.trim(), deviceID
-                );
+                presenter.login(_email.text.trim(), value.trim(), deviceID);
               }
             },
           ),
@@ -148,6 +146,7 @@ class FormLoginState extends State<FormLogin> {
               primary: HexColor("#76767A"),
             ),
             onPressed: () async {
+              deviceID = (await PlatformDeviceId.getDeviceId)!;
               if (deviceID.contains("Mozilla")) {
                 String now = DateTime.now().toString();
                 String hash = md5.convert(utf8.encode(now)).toString();
@@ -157,8 +156,7 @@ class FormLoginState extends State<FormLogin> {
               }
               if (_formKey.currentState!.validate()) {
                 presenter.login(
-                    _email.text.trim(), _password.text.trim(), deviceID
-                );
+                    _email.text.trim(), _password.text.trim(), deviceID);
               }
             },
             child: const Text(

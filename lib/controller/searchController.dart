@@ -16,7 +16,7 @@ class SearchController extends GetxController {
 
   Future<List<PublisherModel>> getPublisher(
       String keyword, String token, String deviceID) async {
-    await api.publisher(keyword, token, deviceID).then((response) {
+    await api.publisher(keyword, token, deviceID).then((response) async {
       int status = response.status;
       if (status == 1) {
         var temps = response.data;
@@ -24,12 +24,15 @@ class SearchController extends GetxController {
           publisher.add(PublisherModel.fromJson(t));
         }
       } else {
-        api.auth(token, deviceID).then((response) async {
-          TokenModel token = TokenModel.fromJson(response.data);
-          String newToken = token.token;
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setString("api_token", newToken);
-          getPublisher(keyword, newToken, deviceID);
+        await api.auth(token, deviceID).then((response) async {
+          int status = response.status;
+          if (status == 1) {
+            TokenModel token = TokenModel.fromJson(response.data);
+            String newToken = token.token;
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setString("api_token", newToken);
+            getPublisher(keyword, newToken, deviceID);
+          }
         });
       }
     });
@@ -40,7 +43,7 @@ class SearchController extends GetxController {
       String firstDate, String lastDate, String token, String deviceID) async {
     await api
         .getDataChart(keyword, firstDate, lastDate, token, deviceID)
-        .then((response) {
+        .then((response) async {
       int status = response.status;
       if (status == 1) {
         var temps = response.data;
@@ -48,12 +51,15 @@ class SearchController extends GetxController {
           news.add(NewsChartModel.fromJson(t));
         }
       } else {
-        api.auth(token, deviceID).then((response) async {
-          TokenModel token = TokenModel.fromJson(response.data);
-          String newToken = token.token;
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setString("api_token", newToken);
-          getNewsChartData(keyword, firstDate, lastDate, newToken, deviceID);
+        await api.auth(token, deviceID).then((response) async {
+          int status = response.status;
+          if (status == 1) {
+            TokenModel token = TokenModel.fromJson(response.data);
+            String newToken = token.token;
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setString("api_token", newToken);
+            getNewsChartData(keyword, firstDate, lastDate, newToken, deviceID);
+          }
         });
       }
     });
