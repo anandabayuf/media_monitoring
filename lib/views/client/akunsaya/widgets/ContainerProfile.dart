@@ -12,8 +12,8 @@ class ContainerProfile extends StatefulWidget {
   late String password;
   late String passwordOpen;
 
-  ContainerProfile(String username, String email, String password,
-      String passwordOpen){
+  ContainerProfile(
+      String username, String email, String password, String passwordOpen) {
     this.username = username;
     this.email = email;
     this.password = password;
@@ -21,8 +21,8 @@ class ContainerProfile extends StatefulWidget {
   }
 
   @override
-  _ContainerProfileState createState() => _ContainerProfileState(this.username,
-  this.email, this.password, this.passwordOpen);
+  _ContainerProfileState createState() => _ContainerProfileState(
+      this.username, this.email, this.password, this.passwordOpen);
 }
 
 class _ContainerProfileState extends State<ContainerProfile> {
@@ -40,8 +40,8 @@ class _ContainerProfileState extends State<ContainerProfile> {
   final _formUsernameKey = GlobalKey<FormState>();
   final _formPasswordKey = GlobalKey<FormState>();
 
-  _ContainerProfileState(String username, String email, String password,
-      String passwordOpen){
+  _ContainerProfileState(
+      String username, String email, String password, String passwordOpen) {
     this.username = username;
     this.email = email;
     this.password = password;
@@ -71,6 +71,9 @@ class _ContainerProfileState extends State<ContainerProfile> {
     Size screenSize = MediaQuery.of(context).size;
     bool mobile = screenSize.width < 800;
     RestClient api = RestClient(Dio());
+    String token = "";
+    String deviceId = "";
+    int id = -1;
 
     return Container(
       padding: EdgeInsets.all(10.0),
@@ -81,11 +84,10 @@ class _ContainerProfileState extends State<ContainerProfile> {
       ),
       child: Padding(
         padding: EdgeInsets.only(
-          left: mobile ? 5.0 : 20.0,
-          right: mobile ? 5.0 : 20.0,
-          top: 10.0,
-          bottom: 10.0
-        ),
+            left: mobile ? 5.0 : 20.0,
+            right: mobile ? 5.0 : 20.0,
+            top: 10.0,
+            bottom: 10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -99,174 +101,184 @@ class _ContainerProfileState extends State<ContainerProfile> {
                 ),
               ),
             ),
-            this.isEditUsername ?
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                width: 300,
-                child: Form(
-                  key: this._formUsernameKey,
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(top: 5.0),
-                        width: 300,
-                        child: TextFormField(
-                          controller: this._username,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                            hintText: 'masukkan nama anda...',
-                            fillColor: Colors.white,
-                            filled: true,
-                          ),
-                          style: TextStyle(
-                            fontSize: 15.0,
-                          ),
-                          validator: (String? value) {
-                            if (value == '' || value == ' ' || value!.trim() == '') {
-                              return 'Nama tidak boleh kosong';
-                            }
-                            return null;
-                          },
-                          onChanged: (String value) {
-                            if (_formUsernameKey.currentState!.validate()) {}
-                          },
-                          onFieldSubmitted: (String value) {
-                            if (_formUsernameKey.currentState!.validate()) {
-                              //print(this._username.text);
-                              // String token = "";
-                              // String deviceId = "";
-                              // int id = -1;
-                              this.username = this._username.text.trim();
-                              // SharedPreferences prefs =
-                              //     await SharedPreferences.getInstance();
-                              // token = prefs.getString("api_token")!;
-                              // deviceId = prefs.getString("deviceID")!;
-                              // id = prefs.getInt("id")!;
-                              // print("token: $token");
-                              // print("deviceID: $deviceId");
-                              // print("id = $id");
-                              // api.updateName(
-                              //     id, this.username, token, deviceId);
-
-                              setState(() {
-                                this.isEditUsername = !this.isEditUsername;
-                              });
-                              showDialog<String>(
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (BuildContext context) => DialogSuccessOnEditName(context)
-                              );
-                            }
-                          },
-                        ),
-                      ),
-                      Container(
-                        width: 300,
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+            this.isEditUsername
+                ? Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      width: 300,
+                      child: Form(
+                        key: this._formUsernameKey,
+                        child: Column(
                           children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              textStyle: const TextStyle(fontSize: 15),
-                              elevation: 10,
-                              primary: Colors.red,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                this.isEditUsername = !this.isEditUsername;
-                              });
-                            },
-                            child: const Text(
-                              'Batal',
-                              style: TextStyle(
-                                  fontSize: 15, color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              textStyle: const TextStyle(fontSize: 15),
-                              elevation: 10,
-                              primary: Colors.green,
-                            ),
-                            onPressed: () async {
-                              if (_formUsernameKey.currentState!.validate()) {
-                                //print(this._username.text);
-                                // String token = "";
-                                // String deviceId = "";
-                                // int id = -1;
-                                this.username = this._username.text.trim();
-                                // SharedPreferences prefs =
-                                //     await SharedPreferences.getInstance();
-                                // token = prefs.getString("api_token")!;
-                                // deviceId = prefs.getString("deviceID")!;
-                                // id = prefs.getInt("id")!;
-                                // print("token: $token");
-                                // print("deviceID: $deviceId");
-                                // print("id = $id");
-                                // api.updateName(
-                                //     id, this.username, token, deviceId);
+                            Container(
+                              padding: const EdgeInsets.only(top: 5.0),
+                              width: 300,
+                              child: TextFormField(
+                                controller: this._username,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                  hintText: 'masukkan nama anda...',
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                ),
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                ),
+                                validator: (String? value) {
+                                  if (value == '' ||
+                                      value == ' ' ||
+                                      value!.trim() == '') {
+                                    return 'Nama tidak boleh kosong';
+                                  }
+                                  return null;
+                                },
+                                onChanged: (String value) {
+                                  if (_formUsernameKey.currentState!
+                                      .validate()) {}
+                                },
+                                onFieldSubmitted: (String value) async {
+                                  if (_formUsernameKey.currentState!
+                                      .validate()) {
+                                    this.username = this._username.text.trim();
+                                    SharedPreferences prefs =
+                                        await SharedPreferences.getInstance();
+                                    token =
+                                        "Bearer ${prefs.getString("api_token") ?? "undefined"}";
+                                    deviceId = prefs.getString("deviceID") ??
+                                        "undefined";
+                                    id = prefs.getInt("id") ?? -1;
+                                    print("token: $token");
+                                    print("deviceID: $deviceId");
+                                    print("id = $id");
+                                    api.updateName(
+                                        id, this.username, token, deviceId);
 
-                                setState(() {
-                                  this.isEditUsername = !this.isEditUsername;
-                                });
-                                showDialog<String>(
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (BuildContext context) => DialogSuccessOnEditName(context)
-                                );
-                              }
-                            },
-                            child: const Text(
-                              'Simpan',
-                              style: TextStyle(
-                                  fontSize: 15, color: Colors.white),
+                                    setState(() {
+                                      this.isEditUsername =
+                                          !this.isEditUsername;
+                                    });
+                                    showDialog<String>(
+                                        barrierDismissible: false,
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            DialogSuccessOnEditName(context));
+                                  }
+                                },
+                              ),
                             ),
-                          )
+                            Container(
+                              width: 300,
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      textStyle: const TextStyle(fontSize: 15),
+                                      elevation: 10,
+                                      primary: Colors.red,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        this.isEditUsername =
+                                            !this.isEditUsername;
+                                      });
+                                    },
+                                    child: const Text(
+                                      'Batal',
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.white),
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      textStyle: const TextStyle(fontSize: 15),
+                                      elevation: 10,
+                                      primary: Colors.green,
+                                    ),
+                                    onPressed: () async {
+                                      if (_formUsernameKey.currentState!
+                                          .validate()) {
+                                        this.username =
+                                            this._username.text.trim();
+                                        SharedPreferences prefs =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        token =
+                                            "Bearer ${prefs.getString("api_token") ?? "undefined"}";
+                                        deviceId =
+                                            prefs.getString("deviceID") ??
+                                                "undefined";
+                                        id = prefs.getInt("id") ?? -1;
+
+                                        api.updateName(
+                                            id,
+                                            this._username.text.trim(),
+                                            token,
+                                            deviceId);
+
+                                        setState(() {
+                                          this.isEditUsername =
+                                              !this.isEditUsername;
+                                        });
+                                        showDialog<String>(
+                                            barrierDismissible: false,
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                DialogSuccessOnEditName(
+                                                    context));
+                                      }
+                                    },
+                                    child: const Text(
+                                      'Simpan',
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
                           ],
                         ),
-                      )
+                      ),
+                    ),
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        this.username,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          textStyle: const TextStyle(fontSize: 15),
+                          elevation: 10,
+                          primary: HexColor("#76767A"),
+                        ),
+                        onPressed: () {
+                          _username =
+                              TextEditingController(text: this.username);
+                          setState(() {
+                            if (isEditPassword) {
+                              this.isEditPassword = !this.isEditPassword;
+                            }
+                            this.isEditUsername = !this.isEditUsername;
+                          });
+                        },
+                        child: const Text(
+                          'Ubah',
+                          style: TextStyle(fontSize: 15, color: Colors.white),
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ),
-            ) :
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  this.username,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15.0,
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 15),
-                    elevation: 10,
-                    primary: HexColor("#76767A"),
-                  ),
-                  onPressed: () {
-                    _username = TextEditingController(text: this.username);
-                    setState(() {
-                      if (isEditPassword) {
-                        this.isEditPassword = !this.isEditPassword;
-                      }
-                      this.isEditUsername = !this.isEditUsername;
-                    });
-                  },
-                  child: const Text(
-                    'Ubah',
-                    style: TextStyle(fontSize: 15, color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child: Container(
@@ -306,267 +318,263 @@ class _ContainerProfileState extends State<ContainerProfile> {
                 ),
               ),
             ),
-            this.isEditPassword ?
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                width: 300,
-                child: Form(
-                  key: this._formPasswordKey,
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(top: 5.0),
-                        width: 300,
-                        child: TextFormField(
-                          controller: this._oldPassword,
-                          textInputAction: TextInputAction.next,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                            hintText: 'Masukkan password lama anda...',
-                            fillColor: Colors.white,
-                            filled: true
-                          ),
-                          validator: (String? value) {
-                            if (value == '' || value!.trim() == '') {
-                              return 'Password lama harus diisi';
-                            }
-                            else if (value != this.passwordOpen) {
-                              return 'Password salah';
-                            }
-                            return null;
-                          },
-                          onChanged: (String value) {
-                            if (_formPasswordKey.currentState!.validate()) {}
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Password Baru",
-                            style: TextStyle(
-                              color: HexColor("#999999"),
-                              fontSize: 15.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 300,
-                        padding: const EdgeInsets.only(top: 5.0),
-                        child: TextFormField(
-                          controller: this._newPassword,
-                          obscureText: true,
-                          textInputAction: TextInputAction.next,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                            hintText: 'Masukkan password baru anda...',
-                            fillColor: Colors.white,
-                            filled: true
-                          ),
-                          validator: (String? value) {
-                            if (value == '' || value!.trim() == '') {
-                              return 'Password baru harus diisi';
-                            } else if (value.contains(' ')) {
-                              return 'Password tidak boleh mengandung spasi';
-                            } else if(value.length < 8) {
-                              return 'Password harus terdiri setidaknya 8 karakter';
-                            }
-                            return null;
-                          },
-                          onChanged: (String value) {
-                            if (_formPasswordKey.currentState!.validate()) {}
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Konfirmasi Password Baru",
-                            style: TextStyle(
-                              color: HexColor("#999999"),
-                              fontSize: 15.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 5.0),
-                        width: 300,
-                        child: TextFormField(
-                          controller: this._confirmationPassword,
-                          obscureText: true,
-                          textInputAction: TextInputAction.done,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              hintText:
-                                  'Masukkan kembali password baru anda...',
-                              fillColor: Colors.white,
-                              filled: true),
-                          validator: (String? value) {
-                            if (value == '' || value!.trim() == '') {
-                              return 'Konfirmasi password harus diisi';
-                            } else if (value != this._newPassword.text) {
-                              return 'Password tidak sama';
-                            }
-                            return null;
-                          },
-                          onChanged: (String value) {
-                            if (_formPasswordKey.currentState!.validate()) {}
-                          },
-                          onFieldSubmitted: (String value){
-                            if (_formPasswordKey.currentState!.validate()) {
-                              String newPassword = _newPassword.text;
-                              String oldPassword = _oldPassword.text;
-                              // String token = "";
-                              // String deviceId = "";
-                              // int id = -1;
-                              // SharedPreferences prefs =
-                              //     await SharedPreferences
-                              //         .getInstance();
-                              // token = prefs.getString("api_token")!;
-                              // deviceId = prefs.getString("deviceID")!;
-                              // id = prefs.getInt("id")!;
-                              // print("token: $token");
-                              // print("deviceID: $deviceId");
-                              // print("id = $id");
-                              //
-                              // api.updatePassword(id, oldPassword,
-                              //     newPassword, token, deviceId);
-                              setState(() {
-                                this.isEditPassword = !this.isEditPassword;
-                              });
-                              showDialog<String>(
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      DialogSuccessOnEditPassword(context)
-                              );
-                            }
-                          },
-                        ),
-                      ),
-                      Container(
-                        width: 300,
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+            this.isEditPassword
+                ? Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      width: 300,
+                      child: Form(
+                        key: this._formPasswordKey,
+                        child: Column(
                           children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                textStyle: const TextStyle(fontSize: 15),
-                                elevation: 10,
-                                primary: Colors.red,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  this.isEditPassword =
-                                      !this.isEditPassword;
-                                });
-                              },
-                              child: const Text(
-                                'Batal',
-                                style: TextStyle(
-                                    fontSize: 15, color: Colors.white),
+                            Container(
+                              padding: const EdgeInsets.only(top: 5.0),
+                              width: 300,
+                              child: TextFormField(
+                                controller: this._oldPassword,
+                                textInputAction: TextInputAction.next,
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                    hintText: 'Masukkan password lama anda...',
+                                    fillColor: Colors.white,
+                                    filled: true),
+                                validator: (String? value) {
+                                  if (value == '' || value!.trim() == '') {
+                                    return 'Password lama harus diisi';
+                                  } else if (value != this.passwordOpen) {
+                                    return 'Password salah';
+                                  }
+                                  return null;
+                                },
+                                onChanged: (String value) {
+                                  if (_formPasswordKey.currentState!
+                                      .validate()) {}
+                                },
                               ),
                             ),
-                            SizedBox(width: 10),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                textStyle: const TextStyle(fontSize: 15),
-                                elevation: 10,
-                                primary: Colors.green,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "Password Baru",
+                                  style: TextStyle(
+                                    color: HexColor("#999999"),
+                                    fontSize: 15.0,
+                                  ),
+                                ),
                               ),
-                              onPressed: () async {
-                                if (_formPasswordKey.currentState!.validate()) {
-                                  String newPassword = _newPassword.text;
-                                  String oldPassword = _oldPassword.text;
-                                  // String token = "";
-                                  // String deviceId = "";
-                                  // int id = -1;
-                                  // SharedPreferences prefs =
-                                  //     await SharedPreferences
-                                  //         .getInstance();
-                                  // token = prefs.getString("api_token")!;
-                                  // deviceId = prefs.getString("deviceID")!;
-                                  // id = prefs.getInt("id")!;
-                                  // print("token: $token");
-                                  // print("deviceID: $deviceId");
-                                  // print("id = $id");
-                                  //
-                                  // api.updatePassword(id, oldPassword,
-                                  //     newPassword, token, deviceId);
-                                  setState(() {
-                                    this.isEditPassword = !this.isEditPassword;
-                                  });
-                                  showDialog<String>(
-                                    barrierDismissible: false,
-                                    context: context,
-                                    builder: (BuildContext context) =>
-                                        DialogSuccessOnEditPassword(context)
-                                  );
-                                }
-                              },
-                              child: const Text(
-                                'Simpan',
-                                style: TextStyle(
-                                    fontSize: 15, color: Colors.white),
+                            ),
+                            Container(
+                              width: 300,
+                              padding: const EdgeInsets.only(top: 5.0),
+                              child: TextFormField(
+                                controller: this._newPassword,
+                                obscureText: true,
+                                textInputAction: TextInputAction.next,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                    hintText: 'Masukkan password baru anda...',
+                                    fillColor: Colors.white,
+                                    filled: true),
+                                validator: (String? value) {
+                                  if (value == '' || value!.trim() == '') {
+                                    return 'Password baru harus diisi';
+                                  } else if (value.contains(' ')) {
+                                    return 'Password tidak boleh mengandung spasi';
+                                  } else if (value.length < 8) {
+                                    return 'Password harus terdiri setidaknya 8 karakter';
+                                  }
+                                  return null;
+                                },
+                                onChanged: (String value) {
+                                  if (_formPasswordKey.currentState!
+                                      .validate()) {}
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "Konfirmasi Password Baru",
+                                  style: TextStyle(
+                                    color: HexColor("#999999"),
+                                    fontSize: 15.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.only(top: 5.0),
+                              width: 300,
+                              child: TextFormField(
+                                controller: this._confirmationPassword,
+                                obscureText: true,
+                                textInputAction: TextInputAction.done,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                    hintText:
+                                        'Masukkan kembali password baru anda...',
+                                    fillColor: Colors.white,
+                                    filled: true),
+                                validator: (String? value) {
+                                  if (value == '' || value!.trim() == '') {
+                                    return 'Konfirmasi password harus diisi';
+                                  } else if (value != this._newPassword.text) {
+                                    return 'Password tidak sama';
+                                  }
+                                  return null;
+                                },
+                                onChanged: (String value) {
+                                  if (_formPasswordKey.currentState!
+                                      .validate()) {}
+                                },
+                                onFieldSubmitted: (String value) async {
+                                  if (_formPasswordKey.currentState!
+                                      .validate()) {
+                                    SharedPreferences prefs =
+                                        await SharedPreferences.getInstance();
+                                    token =
+                                        "Bearer ${prefs.getString("api_token") ?? "undefined"}";
+                                    deviceId = prefs.getString("deviceID") ??
+                                        "undefined";
+                                    id = prefs.getInt("id") ?? -1;
+
+                                    api.updatePassword(id, _oldPassword.text,
+                                        _newPassword.text, token, deviceId);
+                                    setState(() {
+                                      this.isEditPassword =
+                                          !this.isEditPassword;
+                                    });
+                                    showDialog<String>(
+                                        barrierDismissible: false,
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            DialogSuccessOnEditPassword(
+                                                context));
+                                  }
+                                },
+                              ),
+                            ),
+                            Container(
+                              width: 300,
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      textStyle: const TextStyle(fontSize: 15),
+                                      elevation: 10,
+                                      primary: Colors.red,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        this.isEditPassword =
+                                            !this.isEditPassword;
+                                      });
+                                    },
+                                    child: const Text(
+                                      'Batal',
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.white),
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      textStyle: const TextStyle(fontSize: 15),
+                                      elevation: 10,
+                                      primary: Colors.green,
+                                    ),
+                                    onPressed: () async {
+                                      if (_formPasswordKey.currentState!
+                                          .validate()) {
+                                        SharedPreferences prefs =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        token =
+                                            "Bearer ${prefs.getString("api_token") ?? "undefined"}";
+                                        deviceId =
+                                            prefs.getString("deviceID") ??
+                                                "undefined";
+                                        id = prefs.getInt("id") ?? -1;
+
+                                        api.updatePassword(
+                                            id,
+                                            _oldPassword.text,
+                                            _newPassword.text,
+                                            token,
+                                            deviceId);
+                                        setState(() {
+                                          this.isEditPassword =
+                                              !this.isEditPassword;
+                                        });
+                                        showDialog<String>(
+                                            barrierDismissible: false,
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                DialogSuccessOnEditPassword(
+                                                    context));
+                                      }
+                                    },
+                                    child: const Text(
+                                      'Simpan',
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.white),
+                                    ),
+                                  )
+                                ],
                               ),
                             )
                           ],
                         ),
-                      )
+                      ),
+                    ),
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        this.password,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          textStyle: const TextStyle(fontSize: 15),
+                          elevation: 10,
+                          primary: HexColor("#76767A"),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            if (isEditUsername) {
+                              this.isEditUsername = !this.isEditUsername;
+                            }
+                            this.isEditPassword = !this.isEditPassword;
+                            this._oldPassword.clear();
+                            this._newPassword.clear();
+                            this._confirmationPassword.clear();
+                          });
+                        },
+                        child: const Text(
+                          'Ubah',
+                          style: TextStyle(fontSize: 15, color: Colors.white),
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ),
-            ) :
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  this.password,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15.0,
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 15),
-                    elevation: 10,
-                    primary: HexColor("#76767A"),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      if (isEditUsername) {
-                        this.isEditUsername = !this.isEditUsername;
-                      }
-                      this.isEditPassword = !this.isEditPassword;
-                      this._oldPassword.clear();
-                      this._newPassword.clear();
-                      this._confirmationPassword.clear();
-                    });
-                  },
-                  child: const Text(
-                    'Ubah',
-                    style: TextStyle(fontSize: 15, color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
       ),

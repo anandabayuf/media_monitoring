@@ -32,9 +32,9 @@ class MyApp extends StatelessWidget {
         '/dashboard': (context) => DashboardScreen(),
         '/dashboard/listtweets': (context) => ListTweetsScreen(),
         '/dashboard/listberita': (context) => ListBeritaScreen(),
-        '/berita/inputlink': (context) => OperatorScreenInputLink(),
-        '/berita/inputrss': (context) => OperatorScreenInputRss(),
-        '/berita/inputmanual': (context) => OperatorScreenInputManual(),
+        '/news/inputlink': (context) => OperatorScreenInputLink(),
+        '/news/inputrss': (context) => OperatorScreenInputRss(),
+        '/news/inputmanual': (context) => OperatorScreenInputManual(),
       },
     );
   }

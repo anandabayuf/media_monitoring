@@ -84,9 +84,9 @@ class SearchController extends GetxController {
     String token;
     String deviceId;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = "Bearer ${prefs.getString("api_token") ?? "undifined"}";
-    deviceId = prefs.getString("DeviceID") ?? "undifined";
-    keyword = prefs.getString("keyword") ?? "undifined";
+    token = "Bearer ${prefs.getString("api_token") ?? "undefined"}";
+    deviceId = prefs.getString("DeviceID") ?? "undefined";
+    keyword = prefs.getString("keyword") ?? "undefined";
 
     return getPublisher(keyword, token, deviceId);
   }

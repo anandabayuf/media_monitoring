@@ -9,18 +9,20 @@ class AppBarOperator extends AppBar {
             width: MediaQuery.of(context).size.width < 800 ? 280 : 350,
             child: ListTile(
               leading: CircleAvatar(
-                backgroundImage: AssetImage("assets/images/logo_media_monitoring.png"),
+                backgroundImage:
+                    AssetImage("assets/images/logo_media_monitoring.png"),
               ),
               title: Text(
                 "Media Monitoring",
                 style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width < 800 ? 24.0 : 32.0,
+                    fontSize:
+                        MediaQuery.of(context).size.width < 800 ? 24.0 : 32.0,
                     fontWeight: FontWeight.w100,
                     color: Colors.white),
               ),
               onTap: () {
-                if(ModalRoute.of(context)!.settings.name != "/berita/inputrss"){
-                  Navigator.of(context).pushReplacementNamed('/berita/inputrss');
+                if (ModalRoute.of(context)!.settings.name != "/news/inputrss") {
+                  Navigator.of(context).pushReplacementNamed('/news/inputrss');
                 }
               },
             ),

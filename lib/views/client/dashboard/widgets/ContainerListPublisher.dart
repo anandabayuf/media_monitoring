@@ -8,10 +8,11 @@ class ContainerListPublisher extends StatelessWidget {
   late Publisher _data;
   late List<Publisher> _dataList;
 
-  ContainerListPublisher(String keyword){
+  ContainerListPublisher(
+      BuildContext context, AsyncSnapshot snapshot, String keyword) {
     this._keyword = keyword;
     this._data = Publisher("", "", 0);
-    this._dataList = this._data.generateDummyPublisher();
+    this._dataList = snapshot.data;
   }
 
   @override
@@ -31,28 +32,35 @@ class ContainerListPublisher extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset("assets/icons/newspaper.png", height: 32.0, width: 32.0,),
-              SizedBox(width: 10.0,),
+              Image.asset(
+                "assets/icons/newspaper.png",
+                height: 32.0,
+                width: 32.0,
+              ),
+              SizedBox(
+                width: 10.0,
+              ),
               Flexible(
                 child: Text(
                   "Daftar penerbit yang mengandung \"${this._keyword}\"",
                   style: TextStyle(
                       fontSize: 15.0,
                       color: Colors.white,
-                      fontWeight: FontWeight.w100
-                  ),
+                      fontWeight: FontWeight.w100),
                   textAlign: TextAlign.center,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 10.0,),
+          SizedBox(
+            height: 10.0,
+          ),
           Container(
-            child: SingleChildScrollView(
-              child: Container(
-                child: SizedBox(
-                  height: screenSize.height/3,
-                  child: ListView.builder(
+              child: SingleChildScrollView(
+            child: Container(
+              child: SizedBox(
+                height: screenSize.height / 3,
+                child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     itemCount: this._dataList.length,
                     itemBuilder: (context, index) {
@@ -73,15 +81,19 @@ class ContainerListPublisher extends StatelessWidget {
                             children: [
                               Text(
                                 this._dataList[index].name,
-                                style: TextStyle(fontSize: 15.0, color: Colors.white),
+                                style: TextStyle(
+                                    fontSize: 15.0, color: Colors.white),
                               ),
                               Row(
                                 children: [
                                   Text(
                                     "${this._dataList[index].totalNews} berita",
-                                    style: TextStyle(fontSize: 15.0, color: Colors.white),
+                                    style: TextStyle(
+                                        fontSize: 15.0, color: Colors.white),
                                   ),
-                                  SizedBox(width: 10.0,),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
                                   FaIcon(
                                     FontAwesomeIcons.arrowCircleRight,
                                     color: Colors.white,
@@ -93,74 +105,50 @@ class ContainerListPublisher extends StatelessWidget {
                           onTap: () {
                             print("clicked publisher ke-${index}");
                             Navigator.pushNamed(
-                              context,
-                              "/dashboard/listberita",
-                              arguments: {
-                                'keyword' : this._keyword,
-                                'publisher' : this._dataList[index].name,
-                                'iconpublisher' : this._dataList[index].iconDirectory
-                              }
-                            );
+                                context, "/dashboard/listberita",
+                                arguments: {
+                                  'keyword': this._keyword,
+                                  'publisher': this._dataList[index].name,
+                                  'iconpublisher':
+                                      this._dataList[index].iconDirectory
+                                });
                           },
                         ),
                       );
-                    }
+                    }),
               ),
-                ),
             ),
-          )
-          )
+          ))
         ],
       ),
     );
   }
 }
 
-class Publisher{
+class Publisher {
   late String iconDirectory;
   late String name;
   late int totalNews;
 
-  Publisher(String iconDirectory, String name, int totalNews){
+  Publisher(String iconDirectory, String name, int totalNews) {
     this.iconDirectory = iconDirectory;
     this.name = name;
     this.totalNews = totalNews;
   }
 
-
-
-  List<Publisher> generateDummyPublisher(){
+  List<Publisher> generateDummyPublisher() {
     return [
       new Publisher(
-        "assets/images/publisher/liputan6-logo.png",
-        "Liputan6.com",
-        890
-      ),
+          "assets/images/publisher/liputan6-logo.png", "Liputan6.com", 890),
+      new Publisher("assets/images/publisher/detik-logo.png", "detikcom", 744),
       new Publisher(
-        "assets/images/publisher/detik-logo.png",
-        "detikcom",
-        744
-      ),
+          "assets/images/publisher/kompas-logo.png", "kompas.com", 567),
       new Publisher(
-        "assets/images/publisher/kompas-logo.png",
-        "kompas.com",
-        567
-      ),
+          "assets/images/publisher/tempoco-logo.png", "Tempo.co", 435),
       new Publisher(
-        "assets/images/publisher/tempoco-logo.png",
-        "Tempo.co",
-        435
-      ),
+          "assets/images/publisher/kumparan-logo.png", "kumparan", 760),
       new Publisher(
-        "assets/images/publisher/kumparan-logo.png",
-        "kumparan",
-        760
-      ),
-      new Publisher(
-        "assets/images/publisher/tribunnews-logo.png",
-        "Tribunnews",
-        760
-      ),
+          "assets/images/publisher/tribunnews-logo.png", "Tribunnews", 760),
     ];
   }
 }
