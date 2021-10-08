@@ -60,7 +60,7 @@ class _RestClient implements RestClient {
         _setStreamType<SignupApiResponse>(Options(
                 method: 'DELETE',
                 headers: <String, dynamic>{
-                  r'Authoriaztion': token,
+                  r'Authorization': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -81,7 +81,7 @@ class _RestClient implements RestClient {
         _setStreamType<ApiResponse>(Options(
                 method: 'GET',
                 headers: <String, dynamic>{
-                  r'Authoriaztion': token,
+                  r'Authorization': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -102,7 +102,7 @@ class _RestClient implements RestClient {
         _setStreamType<AuthResponse>(Options(
                 method: 'GET',
                 headers: <String, dynamic>{
-                  r'Authoriaztion': token,
+                  r'Authorization': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -123,7 +123,7 @@ class _RestClient implements RestClient {
         _setStreamType<ApiResponse>(Options(
                 method: 'GET',
                 headers: <String, dynamic>{
-                  r'Authoriaztion': token,
+                  r'Authorization': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -149,7 +149,7 @@ class _RestClient implements RestClient {
         _setStreamType<ApiResponse>(Options(
                 method: 'GET',
                 headers: <String, dynamic>{
-                  r'Authoriaztion': token,
+                  r'Authorization': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -170,7 +170,7 @@ class _RestClient implements RestClient {
         _setStreamType<SignupApiResponse>(Options(
                 method: 'PUT',
                 headers: <String, dynamic>{
-                  r'Authoriaztion': token,
+                  r'Authorization': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -196,7 +196,7 @@ class _RestClient implements RestClient {
         _setStreamType<SignupApiResponse>(Options(
                 method: 'PUT',
                 headers: <String, dynamic>{
-                  r'Authoriaztion': token,
+                  r'Authorization': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -217,7 +217,7 @@ class _RestClient implements RestClient {
         _setStreamType<SignupApiResponse>(Options(
                 method: 'PUT',
                 headers: <String, dynamic>{
-                  r'Authoriaztion': token,
+                  r'Authorization': token,
                   r'DeviceID': deviceID
                 },
                 extra: _extra,
@@ -263,8 +263,8 @@ class _RestClient implements RestClient {
   @override
   Future<SignupApiResponse> rssInput(id, link, deviceID, token) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'id': id, r'link': link};
-    final _data = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = {'id': id, 'link': link};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<SignupApiResponse>(Options(
                 method: 'POST',

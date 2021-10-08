@@ -35,26 +35,26 @@ abstract class RestClient {
   Future<SignupApiResponse> deleteUser(
       @Field("id") int id,
       @Field("password") String password,
-      @Header("Authoriaztion") String token,
+      @Header("Authorization") String token,
       @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
   @GET("news/search")
   Future<ApiResponse> search(
       @Query("q") String keyword,
-      @Header("Authoriaztion") String token,
+      @Header("Authorization") String token,
       @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
   @GET("user/refreshToken")
-  Future<AuthResponse> auth(@Header("Authoriaztion") String token,
+  Future<AuthResponse> auth(@Header("Authorization") String token,
       @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
   @GET("news/search/publisherNews")
   Future<ApiResponse> publisher(
       @Query("q") String keyword,
-      @Header("Authoriaztion") String token,
+      @Header("Authorization") String token,
       @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
@@ -63,7 +63,7 @@ abstract class RestClient {
       @Query("q") String keyword,
       @Query("firstDate") String firstDate,
       @Query("lastDate") String lastDate,
-      @Header("Authoriaztion") String token,
+      @Header("Authorization") String token,
       @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
@@ -71,7 +71,7 @@ abstract class RestClient {
   Future<SignupApiResponse> updateName(
       @Field("id") int id,
       @Field("name") String name,
-      @Header("Authoriaztion") String token,
+      @Header("Authorization") String token,
       @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
@@ -80,7 +80,7 @@ abstract class RestClient {
       @Field("id") int id,
       @Field("oldPassword") String oldPassword,
       @Field("newPassword") String newPassword,
-      @Header("Authoriaztion") String token,
+      @Header("Authorization") String token,
       @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
@@ -88,7 +88,7 @@ abstract class RestClient {
   Future<SignupApiResponse> updateImage(
       @Field("id") int id,
       @Part() File file,
-      @Header("Authoriaztion") String token,
+      @Header("Authorization") String token,
       @Header("DeviceID") String deviceID);
 
   @FormUrlEncoded()
