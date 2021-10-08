@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:highlight_text/highlight_text.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
 import 'package:timeago/timeago.dart' as timeago;
@@ -22,6 +23,7 @@ class ContainerListTweets extends StatelessWidget {
     this._dataList = this._data.generateDummyTweets();
 
     timeago.setLocaleMessages('id', timeago.IdMessages());
+    initializeDateFormatting();
 
     this.words = {
       this._keyword: HighlightedWord(
@@ -141,7 +143,7 @@ class ContainerListTweets extends StatelessWidget {
                                             Container(
                                               alignment: Alignment.centerRight,
                                               child: Tooltip(
-                                                message: "${DateFormat('dd-MMMM-y HH:mm:ss').format(this._dataList[index].publishedDate)}",
+                                                message: "${DateFormat('dd-MMMM-y HH:mm:ss', 'id').format(this._dataList[index].publishedDate)}",
                                                 decoration: ShapeDecoration(
                                                     color: Colors.black,
                                                     shape: StadiumBorder()
