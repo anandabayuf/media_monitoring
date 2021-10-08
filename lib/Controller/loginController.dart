@@ -31,7 +31,7 @@ class LoginController {
 
   void success(String token, String deviceID, String role, int id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString("api_token", "masuk");
+    await prefs.setString("api_token", token);
     await prefs.setString("deviceID", deviceID);
     await prefs.setString("role", role);
     await prefs.setInt("id", id);
