@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:highlight_text/highlight_text.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
@@ -20,6 +21,7 @@ class ContainerListBerita extends StatelessWidget{
     this._dataList = this._data.generateDummyBerita();
 
     timeago.setLocaleMessages('id', timeago.IdMessages());
+    initializeDateFormatting();
 
     this.words = {
       this.keyword: HighlightedWord(
@@ -68,7 +70,7 @@ class ContainerListBerita extends StatelessWidget{
                           ),
                           SizedBox(width: 10.0,),
                           Tooltip(
-                            message: "${DateFormat('dd-MMMM-y HH:mm:ss').format(this._dataList[index].publishedDate)}",
+                            message: "${DateFormat('dd-MMMM-y HH:mm:ss', 'id').format(this._dataList[index].publishedDate)}",
                             decoration: ShapeDecoration(
                                 color: Colors.black,
                                 shape: StadiumBorder()
