@@ -73,8 +73,8 @@ class SearchController {
     String keyword;
     DateTime now = DateTime.now();
     DateTime sevenDaysAgo = now.subtract(Duration(days: 6));
-    firstDate = DateFormat('yyyy-mm-dd').format(now);
-    lastDate = DateFormat('yyyy-mm-dd').format(sevenDaysAgo);
+    firstDate = DateFormat('yyyy-MM-dd').format(now);
+    lastDate = DateFormat('yyyy-MM-dd').format(sevenDaysAgo);
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = "Bearer ${prefs.getString("api_token") ?? "undifined"}";
