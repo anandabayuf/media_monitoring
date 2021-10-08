@@ -204,6 +204,58 @@ class _RestClient implements RestClient {
     return value;
   }
 
+  @override
+  Future<SignupApiResponse> manualInput(category, date, title, writer, content,
+      link, publisher, media, deviceID, token) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = {
+      'category': category,
+      'date': date,
+      'title': title,
+      'writer': writer,
+      'content': content,
+      'link': link,
+      'publisher': publisher,
+      'media': media
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SignupApiResponse>(Options(
+                method: 'POST',
+                headers: <String, dynamic>{
+                  r'DeviceID': deviceID,
+                  r'token': token
+                },
+                extra: _extra,
+                contentType: 'application/x-www-form-urlencoded')
+            .compose(_dio.options, 'news/manualInput',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SignupApiResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SignupApiResponse> rssInput(id, link, deviceID, token) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'id': id, r'link': link};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SignupApiResponse>(Options(
+                method: 'POST',
+                headers: <String, dynamic>{
+                  r'DeviceID': deviceID,
+                  r'token': token
+                },
+                extra: _extra,
+                contentType: 'application/x-www-form-urlencoded')
+            .compose(_dio.options, 'news/rssInput',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SignupApiResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

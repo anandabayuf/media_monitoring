@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:web_media_monitoring/views/operator/input%20manual/widget/DialogSuccesInputManual.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:web_media_monitoring/Controller/newsController.dart';
+import 'package:web_media_monitoring/views/client/dashboard/dashboardPage.dart';
 
 class InputManual extends StatefulWidget {
   @override
@@ -9,7 +12,6 @@ class InputManual extends StatefulWidget {
 }
 
 class _InputManualState extends State<InputManual> {
-
   String? _valCategory;
   List _listCategory = ["Politik", "Olahraga", "Kuliner"];
 
@@ -28,12 +30,14 @@ class _InputManualState extends State<InputManual> {
   late TextEditingController _link;
   late TextEditingController _publisher;
 
-  String now = DateFormat("dd-MMMM-y").format(DateTime.now());
+  late String now;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    initializeDateFormatting();
+    now = DateFormat("dd-MMMM-y", 'id').format(DateTime.now());
     _date = TextEditingController(text: now);
     _title = TextEditingController();
     _writer = TextEditingController();
@@ -57,6 +61,10 @@ class _InputManualState extends State<InputManual> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    NewsController newsController = NewsController(context);
+    String deviceID = "";
+    String token = "";
+
     return Container(
       width: screenSize.width,
       color: HexColor("#101010"),
@@ -218,7 +226,8 @@ class _InputManualState extends State<InputManual> {
                                                     if (value != null)
                                                       setState(() {
                                                         now = DateFormat(
-                                                                "dd-MMMM-y")
+                                                                "dd-MMMM-y",
+                                                                'id')
                                                             .format(value);
                                                         _date.text = now;
                                                       });
@@ -946,16 +955,38 @@ class _InputManualState extends State<InputManual> {
                   elevation: 10,
                   primary: HexColor("#76767A"),
                 ),
-                onPressed: () {
-                  //buat test masuk atau engga
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  token = prefs.getString("api_token") ?? "undifined";
+                  deviceId = prefs.getString("DeviceID") ?? "undifined";
                   if (_formKey.currentState!.validate()) {
-                    showDialog<String>(
-                                barrierDismissible: false,
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    DialogSuccessInputManual(context));
+                    newsController.inputManual(
+                      _valCategory!,
+                      _date.text.trim(),
+                      _title.text.trim(),
+                      _writer.text.trim(),
+                      _content.text.trim(),
+                      _link.text.trim(),
+                      _publisher.text.trim(),
+                      _valMedia!,
+                      deviceID,
+                      token,
+                    );
+                  
+
                     print(
                         "kategori: ${_valCategory}\ntanggal: ${_date.text}\njudul: ${_title.text}\npenulis: ${_writer.text}\nkonten: ${_content.text}\nlink: ${_link.text}\npenerbit: ${_publisher.text}\nmedia: ${_valMedia} ");
+                    setState(() {
+                      _valCategory = null;
+                      _date.text = "";
+                      _title.text = "";
+                      _writer.text = "";
+                      _content.text = "";
+                      _link.text = "";
+                      _publisher.text = "";
+                      _valMedia = null;
+                    });
                   }
                 },
                 child: const Text(

@@ -75,4 +75,28 @@ abstract class RestClient {
       @Field("newPassword") String newPassword,
       @Header("token") String token,
       @Header("DeviceID") String deviceID);
+
+  @FormUrlEncoded()
+  @POST("news/manualInput")
+  Future<SignupApiResponse> manualInput(
+    @Field("category") String category,
+    @Field("date") String date,
+    @Field("title") String title,
+    @Field("writer") String writer,
+    @Field("content") String content,
+    @Field("link") String link,
+    @Field("publisher") String publisher,
+    @Field("media") String media,
+    @Header("DeviceID") String deviceID,
+    @Header("token") String token,
+  );
+
+  @FormUrlEncoded()
+  @POST("news/rssInput")
+  Future<SignupApiResponse> rssInput(
+    @Field("id") int id,
+    @Field("link") String link,
+    @Header("DeviceID") String deviceID,
+    @Header("token") String token,
+  );
 }
