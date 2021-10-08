@@ -61,13 +61,14 @@ class InputLink extends StatelessWidget {
                           elevation: 10,
                           primary: HexColor("#76767A"),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            showDialog<String>(
+                            await showDialog<String>(
                                 barrierDismissible: false,
                                 context: context,
                                 builder: (BuildContext context) =>
                                     DialogSuccessInputLink(context));
+                            _keyword.text = "";
                           }
                         },
                         child: const Text(

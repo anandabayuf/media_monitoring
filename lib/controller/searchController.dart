@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_media_monitoring/model/newsChartModel.dart';
@@ -9,7 +8,7 @@ import 'package:web_media_monitoring/model/publisherModel.dart';
 import 'package:web_media_monitoring/model/tokenModel.dart';
 import 'package:web_media_monitoring/services/apiService.dart';
 
-class SearchController extends GetxController {
+class SearchController {
   RestClient api = RestClient(Dio());
   List<PublisherModel> publisher = <PublisherModel>[];
   List<NewsChartModel> news = <NewsChartModel>[];

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:web_media_monitoring/Controller/newsController.dart';
 import 'package:web_media_monitoring/views/operator/input%20rss/widget/DialogSuccesInputRss.dart';
 
 class InputRss extends StatefulWidget {
@@ -8,21 +10,20 @@ class InputRss extends StatefulWidget {
 }
 
 class _InputRssState extends State<InputRss> {
-  late TextEditingController _keyword = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
 
   String? _valMedia;
 
   List _listMedia = [
-    "detik",
-    "liputan 6",
     "kumparan",
   ];
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    String deviceID = "";
+    String token = "";
+
     return Container(
       child: Center(
         child: Container(
@@ -113,13 +114,16 @@ class _InputRssState extends State<InputRss> {
                           elevation: 10,
                           primary: HexColor("#76767A"),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          token = prefs.getString("api_token") ?? "undifined";
+                          deviceID = prefs.getString("DeviceID") ?? "undifined";
                           if (_formKey.currentState!.validate()) {
-                            showDialog<String>(
-                                barrierDismissible: false,
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    DialogSuccessInputRss(context));
+                            // setState(() {
+                            //   _valMedia = null;
+                            // });
+
                           }
                         },
                         child: const Text(
