@@ -61,6 +61,7 @@ class FormLoginState extends State<FormLogin> {
           width: 400,
           child: TextFormField(
             controller: _email,
+            textInputAction: TextInputAction.next,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
@@ -79,20 +80,6 @@ class FormLoginState extends State<FormLogin> {
             onChanged: (String value) {
               if (_formKey.currentState!.validate()) {}
             },
-            onFieldSubmitted: (String value) async {
-              if (deviceID.contains("Mozilla")) {
-                String now = DateTime.now().toString();
-                String hash = md5.convert(utf8.encode(now)).toString();
-                deviceID = value.trim() + "$hash";
-              } else {
-                deviceID = (await PlatformDeviceId.getDeviceId)!;
-              }
-              if (_formKey.currentState!.validate()) {
-                presenter.login(
-                    value.trim(), _password.text.trim(), deviceID
-                );
-              }
-            },
           ),
         ),
         SizedBox(height: screenSize.width < 1920 ? 10 : 10 * 2),
@@ -110,6 +97,7 @@ class FormLoginState extends State<FormLogin> {
           child: TextFormField(
             controller: _password,
             obscureText: true,
+            textInputAction: TextInputAction.done,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),

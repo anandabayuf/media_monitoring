@@ -320,6 +320,7 @@ class _ContainerProfileState extends State<ContainerProfile> {
                         width: 300,
                         child: TextFormField(
                           controller: this._oldPassword,
+                          textInputAction: TextInputAction.next,
                           obscureText: true,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -340,36 +341,6 @@ class _ContainerProfileState extends State<ContainerProfile> {
                           },
                           onChanged: (String value) {
                             if (_formPasswordKey.currentState!.validate()) {}
-                          },
-                          onFieldSubmitted: (String value){
-                            if (_formPasswordKey.currentState!.validate()) {
-                              String newPassword = _newPassword.text;
-                              String oldPassword = _oldPassword.text;
-                              // String token = "";
-                              // String deviceId = "";
-                              // int id = -1;
-                              // SharedPreferences prefs =
-                              //     await SharedPreferences
-                              //         .getInstance();
-                              // token = prefs.getString("api_token")!;
-                              // deviceId = prefs.getString("deviceID")!;
-                              // id = prefs.getInt("id")!;
-                              // print("token: $token");
-                              // print("deviceID: $deviceId");
-                              // print("id = $id");
-                              //
-                              // api.updatePassword(id, oldPassword,
-                              //     newPassword, token, deviceId);
-                              setState(() {
-                                this.isEditPassword = !this.isEditPassword;
-                              });
-                              showDialog<String>(
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      DialogSuccessOnEditPassword(context)
-                              );
-                            }
                           },
                         ),
                       ),
@@ -392,6 +363,7 @@ class _ContainerProfileState extends State<ContainerProfile> {
                         child: TextFormField(
                           controller: this._newPassword,
                           obscureText: true,
+                          textInputAction: TextInputAction.next,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0),
@@ -412,36 +384,6 @@ class _ContainerProfileState extends State<ContainerProfile> {
                           },
                           onChanged: (String value) {
                             if (_formPasswordKey.currentState!.validate()) {}
-                          },
-                          onFieldSubmitted: (String value){
-                            if (_formPasswordKey.currentState!.validate()) {
-                              String newPassword = _newPassword.text;
-                              String oldPassword = _oldPassword.text;
-                              // String token = "";
-                              // String deviceId = "";
-                              // int id = -1;
-                              // SharedPreferences prefs =
-                              //     await SharedPreferences
-                              //         .getInstance();
-                              // token = prefs.getString("api_token")!;
-                              // deviceId = prefs.getString("deviceID")!;
-                              // id = prefs.getInt("id")!;
-                              // print("token: $token");
-                              // print("deviceID: $deviceId");
-                              // print("id = $id");
-                              //
-                              // api.updatePassword(id, oldPassword,
-                              //     newPassword, token, deviceId);
-                              setState(() {
-                                this.isEditPassword = !this.isEditPassword;
-                              });
-                              showDialog<String>(
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      DialogSuccessOnEditPassword(context)
-                              );
-                            }
                           },
                         ),
                       ),
@@ -464,6 +406,7 @@ class _ContainerProfileState extends State<ContainerProfile> {
                         child: TextFormField(
                           controller: this._confirmationPassword,
                           obscureText: true,
+                          textInputAction: TextInputAction.done,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.0),

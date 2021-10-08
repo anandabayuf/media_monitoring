@@ -62,6 +62,7 @@ class FormSignupState extends State<FormSignup> {
           width: 400,
           child: TextFormField(
             controller: _nama,
+            textInputAction: TextInputAction.next,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
@@ -77,9 +78,6 @@ class FormSignupState extends State<FormSignup> {
             },
             onChanged: (String value){
               if (_formKey.currentState!.validate()) {}
-            },
-            onFieldSubmitted: (String value){
-
             },
           ),
         ),
@@ -97,6 +95,7 @@ class FormSignupState extends State<FormSignup> {
           width: 400,
           child: TextFormField(
             controller: _email,
+            textInputAction: TextInputAction.next,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
@@ -115,9 +114,6 @@ class FormSignupState extends State<FormSignup> {
             onChanged: (String value) {
               if (_formKey.currentState!.validate()) {}
             },
-            onFieldSubmitted: (String value){
-
-            },
           ),
         ),
         SizedBox(height: screenSize.width < 1920 ? 10 : 10),
@@ -134,6 +130,7 @@ class FormSignupState extends State<FormSignup> {
           width: 400,
           child: TextFormField(
             controller: _password,
+            textInputAction: TextInputAction.next,
             obscureText: true,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -155,9 +152,6 @@ class FormSignupState extends State<FormSignup> {
             onChanged: (String value) {
               if (_formKey.currentState!.validate()) {}
             },
-            onFieldSubmitted: (String value){
-
-            },
           ),
         ),
         SizedBox(height: screenSize.width < 1920 ? 10 : 10),
@@ -175,6 +169,7 @@ class FormSignupState extends State<FormSignup> {
           child: TextFormField(
             controller: _konfirmasiPassword,
             obscureText: true,
+            textInputAction: TextInputAction.done,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
