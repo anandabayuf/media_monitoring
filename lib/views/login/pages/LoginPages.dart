@@ -21,13 +21,7 @@ class LoginScreen extends StatelessWidget {
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [
-                      HexColor("#616161"),
-                      Colors.black
-                    ]
-                )
-            ),
-
+                    colors: [HexColor("#616161"), Colors.black])),
             child: SingleChildScrollView(
               child: Container(
                 child: LayoutBuilder(
@@ -39,10 +33,9 @@ class LoginScreen extends StatelessWidget {
                     }
                   },
                 ),
-      ),
+              ),
             ),
           ),
-        )
-    );
+        ));
   }
 }

@@ -16,6 +16,11 @@ class FormLogin extends StatefulWidget {
   FormLoginState createState() => FormLoginState();
 }
 
+Future<void> saveLastRoute() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString("lastRoute", "/login");
+}
+
 class FormLoginState extends State<FormLogin> {
   late LoginController presenter;
   late TextEditingController _email;
@@ -28,10 +33,11 @@ class FormLoginState extends State<FormLogin> {
 
   @override
   void initState() {
-    super.initState();
+    saveLastRoute();
     _email = TextEditingController();
     _password = TextEditingController();
     presenter = LoginController(context);
+    super.initState();
   }
 
   @override
@@ -164,8 +170,6 @@ class FormLoginState extends State<FormLogin> {
       ]),
     );
   }
-
-  
 
   void toast(String message) => Fluttertoast.showToast(msg: message);
 }

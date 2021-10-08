@@ -1,4 +1,5 @@
 import 'package:charts_flutter/flutter.dart';
+import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
@@ -17,16 +18,13 @@ String deviceId = "";
 late SearchController _searchController = new SearchController();
 
 class DashboardPage extends StatefulWidget {
-  String keyword;
-  DashboardPage(this.keyword);
+  DashboardPage();
   @override
-  _DashboardPageState createState() => _DashboardPageState(this.keyword);
+  _DashboardPageState createState() => _DashboardPageState();
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  String keyword;
-  _DashboardPageState(this.keyword);
-
+  _DashboardPageState();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +34,7 @@ class _DashboardPageState extends State<DashboardPage> {
         children: [
           Expanded(
               child: FutureBuilder(
-                  future: _searchController.getChart(keyword),
+                  future: _searchController.getChart(),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<NewsChartModel>> snapshot) {
                     if (snapshot.hasData) {
@@ -48,7 +46,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   })),
           Expanded(
             child: FutureBuilder(
-              future: _searchController.getListPublisher(keyword),
+              future: _searchController.getListPublisher(),
               builder: (BuildContext context,
                   AsyncSnapshot<List<PublisherModel>> snapshot) {
                 if (snapshot.hasData) {
