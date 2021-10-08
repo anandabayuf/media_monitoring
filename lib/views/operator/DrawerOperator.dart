@@ -1,13 +1,12 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
-import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class DrawerOperator extends Drawer {
   DrawerOperator(BuildContext context)
-      : super(
-            child: ColorfulSafeArea(
+    : super(
+        child: ColorfulSafeArea(
           color: HexColor("#101010"),
           child: Container(
             color: HexColor("#101010"),
@@ -34,8 +33,9 @@ class DrawerOperator extends Drawer {
                     ],
                   ),
                 ),
-                ExpansionCard(
-                    margin: EdgeInsets.zero,
+                ExpansionTile(
+                    collapsedIconColor: Colors.white,
+                    iconColor: Colors.white,
                     title: Card(
                       color: HexColor("#101010"),
                       elevation: 10.0,
@@ -136,8 +136,9 @@ class DrawerOperator extends Drawer {
                         ),
                       ),
                     ]),
-                ExpansionCard(
-                    margin: EdgeInsets.zero,
+                ExpansionTile(
+                    collapsedIconColor: Colors.white,
+                    iconColor: Colors.white,
                     title: Card(
                       color: HexColor("#101010"),
                       elevation: 10.0,
@@ -215,5 +216,6 @@ class DrawerOperator extends Drawer {
               ],
             ),
           ),
-        ));
+      )
+  );
 }
