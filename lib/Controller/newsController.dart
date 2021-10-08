@@ -14,6 +14,7 @@ class NewsController {
       String date,
       String title,
       String writer,
+      String description,
       String content,
       String link,
       String publisher,
@@ -21,7 +22,7 @@ class NewsController {
       String deviceID,
       String token) async {
     await api
-        .manualInput(category, date, title, writer, content, link, publisher,
+        .manualInput(category, date, title, writer,description, content, link, publisher,
             media, deviceID, token)
         .then((response) {
       if (response.status == 1) {

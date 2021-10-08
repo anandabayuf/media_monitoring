@@ -230,8 +230,8 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<SignupApiResponse> manualInput(category, date, title, writer, content,
-      link, publisher, media, deviceID, token) async {
+  Future<SignupApiResponse> manualInput(category, date, title, writer,
+      description, content, link, publisher, media, deviceID, token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = {
@@ -239,6 +239,7 @@ class _RestClient implements RestClient {
       'date': date,
       'title': title,
       'writer': writer,
+      'description': description,
       'content': content,
       'link': link,
       'publisher': publisher,

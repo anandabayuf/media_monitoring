@@ -98,6 +98,7 @@ abstract class RestClient {
     @Field("date") String date,
     @Field("title") String title,
     @Field("writer") String writer,
+    @Field("description") String description,
     @Field("content") String content,
     @Field("link") String link,
     @Field("publisher") String publisher,

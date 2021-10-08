@@ -26,6 +26,7 @@ class _InputManualState extends State<InputManual> {
   late TextEditingController _date;
   late TextEditingController _title;
   late TextEditingController _writer;
+  late TextEditingController _description;
   late TextEditingController _content;
   late TextEditingController _link;
   late TextEditingController _publisher;
@@ -41,6 +42,7 @@ class _InputManualState extends State<InputManual> {
     _date = TextEditingController(text: now);
     _title = TextEditingController();
     _writer = TextEditingController();
+    _description = TextEditingController();
     _content = TextEditingController();
     _link = TextEditingController();
     _publisher = TextEditingController();
@@ -52,6 +54,7 @@ class _InputManualState extends State<InputManual> {
     _date.dispose();
     _title.dispose();
     _writer.dispose();
+    _description.dispose();
     _content.dispose();
     _link.dispose();
     _publisher.dispose();
@@ -330,6 +333,48 @@ class _InputManualState extends State<InputManual> {
                                 height: 10,
                               ),
                               Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "Deskripsi",
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.white),
+                                    ),
+                                  ),
+                                  // SizedBox(
+                                  //   width: 10,
+                                  // ),
+                                  Expanded(
+                                    flex: 5,
+                                    child: Container(
+                                      width: 400,
+                                      child: TextFormField(
+                                        controller: _description,
+                                        style: TextStyle(fontSize: 15),
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          hintText: "masukan deskripsi berita",
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                        ),
+                                        validator: (String? value) {
+                                          if (value!.trim() == "") {
+                                            return "deskripsi harus diisi";
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Expanded(
@@ -360,12 +405,12 @@ class _InputManualState extends State<InputManual> {
                                           fillColor: Colors.white,
                                           filled: true,
                                         ),
-                                        validator: (String? value) {
-                                          if (value!.trim() == "") {
-                                            return "konten harus diisi";
-                                          }
-                                          return null;
-                                        },
+                                        // validator: (String? value) {
+                                        //   if (value!.trim() == "") {
+                                        //     return "konten harus diisi";
+                                        //   }
+                                        //   return null;
+                                        // },
                                       ),
                                     ),
                                   ),
@@ -761,6 +806,47 @@ class _InputManualState extends State<InputManual> {
                         height: 10,
                       ),
                       Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "Deskripsi",
+                              style:
+                                  TextStyle(fontSize: 15, color: Colors.white),
+                            ),
+                          ),
+                          // SizedBox(
+                          //   width: 10,
+                          // ),
+                          Expanded(
+                            flex: 5,
+                            child: Container(
+                              width: 400,
+                              child: TextFormField(
+                                controller: _description,
+                                style: TextStyle(fontSize: 15),
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  hintText: "masukan deskripsi berita",
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                ),
+                                validator: (String? value) {
+                                  if (value!.trim() == "") {
+                                    return "deskripsi harus diisi";
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
@@ -790,12 +876,12 @@ class _InputManualState extends State<InputManual> {
                                   fillColor: Colors.white,
                                   filled: true,
                                 ),
-                                validator: (String? value) {
-                                  if (value!.trim() == "") {
-                                    return "konten harus diisi";
-                                  }
-                                  return null;
-                                },
+                                // validator: (String? value) {
+                                //   if (value!.trim() == "") {
+                                //     return "konten harus diisi";
+                                //   }
+                                //   return null;
+                                // },
                               ),
                             ),
                           ),
@@ -966,6 +1052,7 @@ class _InputManualState extends State<InputManual> {
                       _date.text.trim(),
                       _title.text.trim(),
                       _writer.text.trim(),
+                      _description.text.trim(),
                       _content.text.trim(),
                       _link.text.trim(),
                       _publisher.text.trim(),
@@ -973,16 +1060,15 @@ class _InputManualState extends State<InputManual> {
                       deviceID,
                       token,
                     );
-                  
 
                     print(
-                        "kategori: ${_valCategory}\ntanggal: ${_date.text}\njudul: ${_title.text}\npenulis: ${_writer.text}\nkonten: ${_content.text}\nlink: ${_link.text}\npenerbit: ${_publisher.text}\nmedia: ${_valMedia} ");
+                        "kategori: ${_valCategory}\ntanggal: ${_date.text}\njudul: ${_title.text}\npenulis: ${_writer.text}\nkonten: ${_description.text}\nlink: ${_link.text}\npenerbit: ${_publisher.text}\nmedia: ${_valMedia} ");
                     setState(() {
                       _valCategory = null;
                       _date.text = "";
                       _title.text = "";
                       _writer.text = "";
-                      _content.text = "";
+                      _description.text = "";
                       _link.text = "";
                       _publisher.text = "";
                       _valMedia = null;
