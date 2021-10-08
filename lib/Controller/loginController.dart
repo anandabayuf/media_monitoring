@@ -18,7 +18,8 @@ class LoginController {
       print(status);
       if (response.status == 1) {
         UserModel user = UserModel.fromJson(response.data);
-        this.success(user.token, deviceID, user.role, user.id);
+        this.success(
+            user.token, deviceID, user.role, user.id, user.name, user.email);
         finish(user.role);
       } else {
         Fluttertoast.showToast(msg: "Login Gagal, Silahkan ulangi");
@@ -29,12 +30,15 @@ class LoginController {
     });
   }
 
-  void success(String token, String deviceID, String role, int id) async {
+  void success(String token, String deviceID, String role, int id, String name,
+      String email) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString("api_token", token);
     await prefs.setString("deviceID", deviceID);
     await prefs.setString("role", role);
     await prefs.setInt("id", id);
+    await prefs.setString("name", name);
+    await prefs.setString("email", email);
   }
 
   void finish(String role) {

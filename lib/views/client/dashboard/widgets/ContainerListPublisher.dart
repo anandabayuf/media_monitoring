@@ -72,11 +72,11 @@ class ContainerListPublisher extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: ListTile(
-                          leading: Image.network(
-                            this._dataList[index].iconDirectory,
-                            height: 32.0,
-                            width: 32.0,
-                          ),
+                          // leading: Image.network(
+                          //   this._dataList[index].iconDirectory,
+                          //   height: 32.0,
+                          //   width: 32.0,
+                          // ),
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

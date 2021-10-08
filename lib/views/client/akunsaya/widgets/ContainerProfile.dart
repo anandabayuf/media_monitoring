@@ -349,10 +349,6 @@ class _ContainerProfileState extends State<ContainerProfile> {
                                   }
                                   return null;
                                 },
-                                onChanged: (String value) {
-                                  if (_formPasswordKey.currentState!
-                                      .validate()) {}
-                                },
                               ),
                             ),
                             Padding(
