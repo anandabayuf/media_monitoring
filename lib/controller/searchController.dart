@@ -79,7 +79,7 @@ class SearchController extends GetxController {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = "Bearer ${prefs.getString("api_token") ?? "undifined"}";
-    deviceId = prefs.getString("DeviceID") ?? "undifined";
+    deviceId = prefs.getString("deviceID") ?? "undifined";
     keyword = prefs.getString("keyword") ?? "undifined";
 
     return getNewsChartData(keyword, firstDate, lastDate, token, deviceId);
@@ -91,7 +91,7 @@ class SearchController extends GetxController {
     String deviceId;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = "Bearer ${prefs.getString("api_token") ?? "undefined"}";
-    deviceId = prefs.getString("DeviceID") ?? "undefined";
+    deviceId = prefs.getString("deviceID") ?? "undefined";
     keyword = prefs.getString("keyword") ?? "undefined";
 
     return getPublisher(keyword, token, deviceId);
